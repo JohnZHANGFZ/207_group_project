@@ -1,0 +1,17 @@
+@startuml
+!pragma layout smetana
+'https://plantuml.com/sequence-diagram
+
+class User {
+-String userID
+-String password
+List<String> allergies
+}
+
+class Inventory {
+}
+
+class callRecipe {
+}
+
+@enduml
