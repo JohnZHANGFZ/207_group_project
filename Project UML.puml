@@ -6,12 +6,28 @@ class User {
 -String userID
 -String password
 List<String> allergies
+String cuisineRestriction
+Duration timeRestriction
+Float costRestriction
+RecipeHistory history
+}
+
+class RecipeHistory{
+
 }
 
 class Inventory {
+list ingredients
+
 }
 
 class callRecipe {
+}
+
+class QueryAPI {
+}
+
+class QueryDatabase {
 }
 
 @enduml
