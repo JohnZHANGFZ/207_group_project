@@ -9,16 +9,29 @@ List<String> allergies
 String cuisineRestriction
 Duration timeRestriction
 Float costRestriction
-RecipeHistory history
+RecipeHistory[] history
+
+void addInventory()
+
 }
 
 class RecipeHistory{
+Recipe recipeDone
+float flavorScore
+float handyScore
+boolean cookAgain
+}
 
+class Recipe{
+List<String> ingredients
+String details
 }
 
 class Inventory {
-list ingredients
-
+list veges
+list meat
+list flavoring
+list other
 }
 
 class callRecipe {
