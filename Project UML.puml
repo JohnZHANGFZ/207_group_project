@@ -3,9 +3,12 @@
 'https://plantuml.com/sequence-diagram
 
 class User {
--String userID
--String password
+String userID
+String password
 List<String> allergies
+List<String> dietRestrict
+RecipeHistory history
+void addAllergy()
 }
 
 class Inventory {
