@@ -6,20 +6,21 @@ class User {
 -String userID
 -String password
 List<String> allergies
-String cuisineRestriction
+List<String> cuisineRestriction
 Duration timeRestriction
 Float costRestriction
-RecipeHistory[] history
+RecipeHistory history
 
 void addInventory()
 void addCuisineR()
 void addTimeR()
+void addCostR()
 
 
 }
 
 class RecipeHistory{
-Recipe recipeDone
+List<Recipe> recipeDone
 float flavorScore
 float handyScore
 boolean cookAgain
