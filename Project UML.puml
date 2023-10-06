@@ -12,6 +12,9 @@ Float costRestriction
 RecipeHistory[] history
 
 void addInventory()
+void addCuisineR()
+void addTimeR()
+
 
 }
 
