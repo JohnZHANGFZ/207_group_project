@@ -3,18 +3,44 @@
 'https://plantuml.com/sequence-diagram
 
 class User {
-String userID
-String password
+-String userID
+-String password
 List<String> allergies
-List<String> dietRestrict
-RecipeHistory history
-void addAllergy()
+String cuisineRestriction
+Duration timeRestriction
+Float costRestriction
+RecipeHistory[] history
+
+void addInventory()
+
+}
+
+class RecipeHistory{
+Recipe recipeDone
+float flavorScore
+float handyScore
+boolean cookAgain
+}
+
+class Recipe{
+List<String> ingredients
+String details
 }
 
 class Inventory {
+list veges
+list meat
+list flavoring
+list other
 }
 
 class callRecipe {
+}
+
+class QueryAPI {
+}
+
+class QueryDatabase {
 }
 
 @enduml
