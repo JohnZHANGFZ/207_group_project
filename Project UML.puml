@@ -11,27 +11,29 @@ Duration timeRestriction
 Float costRestriction
 RecipeHistory[] history
 
-void addInventory()
-
+void addItem(List[String] items)
+void removeItem(List[String] items)
 }
 
 class RecipeHistory{
-Recipe recipeDone
-float flavorScore
-float handyScore
-boolean cookAgain
+List<Recipe> recipesDone
+-void addRecipe(Recipe recipe)
 }
 
 class Recipe{
 List<String> ingredients
-String details
+String instructions
+float flavourScore
+float handyScore
+int timesDone
+void doneNow(float flavourScore, float handyScore)
 }
 
 class Inventory {
-list veges
-list meat
-list flavoring
-list other
+List<String> veges
+List<String> meat
+List<String> seasonings
+List<String> other
 }
 
 class callRecipe {
@@ -42,5 +44,9 @@ class QueryAPI {
 
 class QueryDatabase {
 }
+
+RecipeHistory -- Recipe
+User *-- Inventory
+User *-- RecipeHistory
 
 @enduml
