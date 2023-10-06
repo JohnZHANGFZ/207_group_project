@@ -6,10 +6,10 @@ class User {
 -String userID
 -String password
 List<String> allergies
-String cuisineRestriction
+List<String> cuisineRestriction
 Duration timeRestriction
 Float costRestriction
-RecipeHistory[] history
+RecipeHistory history
 
 void addItem(List[String] items)
 void removeItem(List[String] items)
