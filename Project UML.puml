@@ -10,6 +10,8 @@ List<String> cuisineRestriction
 Duration timeRestriction
 Float costRestriction
 RecipeHistory history
+Inventory items
+AvailableRecipe availableReciple
 
 void addItem(List[String] items)
 void removeItem(List[String] items)
@@ -18,6 +20,7 @@ void removeItem(List[String] items)
 class RecipeHistory{
 List<Recipe> recipesDone
 -void addRecipe(Recipe recipe)
+-void removeRecipe(Recipe recipe)
 }
 
 class Recipe{
@@ -36,17 +39,28 @@ List<String> seasonings
 List<String> other
 }
 
-class callRecipe {
+class AvailableRecipe {
+List<Recipe> availableRecipe
+}
+
+class CallRecipe {
+List<Recipe> CallRecipe(Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
+Recipe StringToRecipe(String recipe)
 }
 
 class QueryAPI {
+List<String> QueryAPI(Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
 }
 
 class QueryDatabase {
+ List<String> QueryDatabase(String databaseDirectory, Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
+
 }
 
 RecipeHistory -- Recipe
 User *-- Inventory
 User *-- RecipeHistory
+QueryAPI *-- CallRecipe
+QueryDatabase *-- CallRecipe
 
 @enduml
