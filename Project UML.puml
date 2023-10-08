@@ -11,8 +11,6 @@ class User {
 +Float costRestriction
 +RecipeHistory history
 +Inventory items
-
-+List<Recipe> filter()
 }
 
 class RecipeHistory{
