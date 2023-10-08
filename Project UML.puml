@@ -11,6 +11,9 @@ class User {
 +Float costRestriction
 +RecipeHistory history
 +Inventory items
+
++ filterAllergies(List<String> allergies)
++ filterVege(boolean vege)
 }
 
 class RecipeHistory{
@@ -54,8 +57,8 @@ class QueryAPI {
 }
 
 class QueryDatabase {
--String dictionary
-+List<String> QueryDatabase(String databaseDirectory, Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
+-String databaseDirectory
++List<String> QueryDatabase(Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
 }
 
 RecipeHistory -- Recipe
