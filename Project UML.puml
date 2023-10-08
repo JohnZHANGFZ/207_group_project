@@ -5,62 +5,66 @@
 class User {
 -String userID
 -String password
-List<String> allergies
-List<String> cuisineRestriction
-Duration timeRestriction
-Float costRestriction
-RecipeHistory history
-Inventory items
-AvailableRecipe availableReciple
++List<String> allergies
++List<String> cuisineRestriction
++Duration timeRestriction
++Float costRestriction
++RecipeHistory history
++Inventory items
 
-void addItem(List[String] items)
-void removeItem(List[String] items)
++List<Recipe> filter()
 }
 
 class RecipeHistory{
-List<Recipe> recipesDone
++List<Recipe> recipesDone
+
 -void addRecipe(Recipe recipe)
 -void removeRecipe(Recipe recipe)
 }
 
 class Recipe{
-List<String> ingredients
-String instructions
-float flavourScore
-float handyScore
-int timesDone
-void doneNow(float flavourScore, float handyScore)
++List<String> ingredients
++String instructions
++float flavourScore
++float handyScore
+-int timesDone
+
++void doneNow(float flavourScore, float handyScore)
++void updateIngredients(List<String> newIngredients)
 }
 
 class Inventory {
-List<String> veges
-List<String> meat
-List<String> seasonings
-List<String> other
++List<String> veges
++List<String> meat
++List<String> seasonings
++List<String> other
+
++void addItem(List<String> items)
++void removeItem(List<String> items)
 }
 
-class AvailableRecipe {
-List<Recipe> availableRecipe
-}
+
 
 class CallRecipe {
-List<Recipe> CallRecipe(Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
-Recipe StringToRecipe(String recipe)
++List<Recipe> CallRecipe(Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
+-Recipe StringToRecipe(String recipe)
 }
 
 class QueryAPI {
-List<String> QueryAPI(Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
+-String apiKey
++List<String> QueryAPI(Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
 }
 
 class QueryDatabase {
- List<String> QueryDatabase(String databaseDirectory, Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
-
+-String dictionary
++List<String> QueryDatabase(String databaseDirectory, Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
 }
 
 RecipeHistory -- Recipe
 User *-- Inventory
 User *-- RecipeHistory
-QueryAPI *-- CallRecipe
-QueryDatabase *-- CallRecipe
+QueryAPI --* CallRecipe
+QueryDatabase --* CallRecipe
+User -- CallRecipe
 
 @enduml
