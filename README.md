@@ -1,4 +1,4 @@
-# 207_week3_project
+# 207_group_project
 
 ### Problem Domain:
 Recipe selection
