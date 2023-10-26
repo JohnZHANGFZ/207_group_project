@@ -1,4 +1,4 @@
 package entity;
 
-public class Recipe {
+public interface Recipe {
 }

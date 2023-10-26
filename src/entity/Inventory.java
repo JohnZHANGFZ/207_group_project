@@ -1,4 +1,4 @@
 package entity;
 
-public class Inventory {
+public interface Inventory {
 }
