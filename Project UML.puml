@@ -47,21 +47,24 @@ class Inventory {
 
 
 class CallRecipe {
-+List<Recipe> CallRecipe(Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
++List<Recipe> CallRecipe(Inventory inventory, List<String> cuisineRestriction,
+ Duration timeRestriction, Float costRestriction)
 -Recipe StringToRecipe(String recipe)
 }
 
 class QueryAPI {
 -String apiKey
-+List<String> QueryAPI(Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
++List<String> QueryAPI(Inventory inventory, List<String> cuisineRestriction,
+Duration timeRestriction, Float costRestriction)
 }
 
 class QueryDatabase {
 -String databaseDirectory
-+List<String> QueryDatabase(Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
++List<String> QueryDatabase(Inventory inventory, List<String> cuisineRestriction,
+Duration timeRestriction, Float costRestriction)
 }
 
-RecipeHistory -- Recipe
+RecipeHistory --> Recipe
 User *-- Inventory
 User *-- RecipeHistory
 QueryAPI --* CallRecipe
