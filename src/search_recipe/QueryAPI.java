@@ -13,16 +13,22 @@ public class QueryAPI {
     This calls the API with the passed in arraylist of ingredients and the number of results you want to return
      */
     public static JsonArray getResults(ArrayList<String> ingredients, int number) throws Exception {
-        // Spoonacular
-        String uri_string = createRequest(ingredients, number);
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(uri_string))
-                .header("X-RapidAPI-Key", "44234e2dc8msh68e094b9e0960c7p1932dfjsn65fa819dc540") //may need to be hidden later
-                .header("X-RapidAPI-Host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
-                .method("GET", HttpRequest.BodyPublishers.noBody())
-                .build();
-        HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        return ParseString(response.body());
+        try {
+            // Spoonacular
+            String uri_string = createRequest(ingredients, number);
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(uri_string))
+                    .header("X-RapidAPI-Key", "44234e2dc8msh68e094b9e0960c7p1932dfjsn65fa819dc540") //may need to be hidden later
+                    .header("X-RapidAPI-Host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
+                    .method("GET", HttpRequest.BodyPublishers.noBody())
+                    .build();
+            HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            return ParseString(response.body());
+        }
+        catch (Exception e) {
+            System.out.println("API query failed");
+            return new JsonArray();
+        }
     }
 
     /*
