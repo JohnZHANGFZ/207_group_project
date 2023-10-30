@@ -1,0 +1,74 @@
+@startuml
+!pragma layout smetana
+'https://plantuml.com/sequence-diagram
+
+class User {
+-String userID
+-String password
++Collection allergies
++Collection inventory
+}
+
+
+interface Collection {
++ List<Ingredients> getItems()
++ void addItems(List<String> items)
++ void removeItems(List<String> items)
+}
+
+class Restrictions {
++ List<Ingredient> allergies
+
++ List<Ingredients> getItems()
++ void addItems(List<String> allergies)
++ void removeItems(List<String> allergies)
+}
+
+class Recipe{
++List<String> ingredients
++int rank
++String recipeName
+}
+
+
+class Inventory {
++List<Ingredient> ingredients
+
++ List<Ingredient> getItems()
++void addItems(List<String> items)
++void removeItems(List<String> items)
+}
+
+
+class Ingredient {
++String ingredient
+
++String getIngredient()
+}
+
+class CallRecipe {
++List<Recipe> CallRecipe(Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
+-Recipe StringToRecipe(String recipe)
+}
+
+class QueryAPI {
+-String apiKey
++List<String> QueryAPI(Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
+}
+
+class QueryDatabase {
+-String databaseDirectory
++List<String> QueryDatabase(Inventory inventory, List<String> cuisineRestriction, Duration timeRestriction, Float costRestriction)
+}
+
+Inventory *-- Ingredient
+QueryAPI --* CallRecipe
+QueryDatabase --* CallRecipe
+User -- CallRecipe
+Restrictions *-- Ingredient
+User *-- Collection
+Inventory -.-> Collection
+Restrictions -.-> Collection
+CallRecipe *-- Recipe
+
+@enduml
