@@ -18,8 +18,8 @@ public class CreateDatabase {
 
     public void addToCsv() throws Exception {
         JsonArray recipes = QueryAPI.getResults(this.ingredients, this.number);
-//        System.out.println(recipes);
-        String filePath = "src/resources/database.csv";
+        System.out.println(recipes);
+        String filePath = "src/data_access/resources/database.csv";
         File file = new File(filePath);
 
         boolean append = file.length() > 0; //checks to see if file is empty
@@ -57,7 +57,8 @@ public class CreateDatabase {
             writer.close();
         }
         catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Input/Output exception thrown");
+            //e.printStackTrace();
         }
 
     }
@@ -89,7 +90,7 @@ public class CreateDatabase {
 
     public static void main(String[] args) throws Exception {
         ArrayList<String> ingredients = new ArrayList<>();
-        ingredients.add("egg");
+        ingredients.add("truffle");
         int number = 10;
         CreateDatabase database = new CreateDatabase(ingredients, number);
         database.addToCsv();
