@@ -18,7 +18,6 @@ public class CreateDatabase {
 
     public void addToCsv() throws Exception {
         JsonArray recipes = QueryAPI.getResults(this.ingredients, this.number);
-        System.out.println(recipes);
         String filePath = "src/data_access/resources/database.csv";
         File file = new File(filePath);
 
@@ -90,8 +89,8 @@ public class CreateDatabase {
 
     public static void main(String[] args) throws Exception {
         ArrayList<String> ingredients = new ArrayList<>();
-        ingredients.add("truffle");
-        int number = 10;
+        ingredients.add("egg");
+        int number = 200;
         CreateDatabase database = new CreateDatabase(ingredients, number);
         database.addToCsv();
     }
