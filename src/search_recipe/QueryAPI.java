@@ -1,7 +1,10 @@
 package search_recipe;
-
 import com.google.gson.*;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -15,10 +18,11 @@ public class QueryAPI {
     public static JsonArray getResults(ArrayList<String> ingredients, int number) throws Exception {
         try {
             // Spoonacular
+            String api_key = getAPIKey();
             String uri_string = createRequest(ingredients, number);
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(uri_string))
-                    .header("X-RapidAPI-Key", "44234e2dc8msh68e094b9e0960c7p1932dfjsn65fa819dc540") //may need to be hidden later
+                    .header("X-RapidAPI-Key", api_key) //may need to be hidden later
                     .header("X-RapidAPI-Host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                     .method("GET", HttpRequest.BodyPublishers.noBody())
                     .build();
@@ -60,6 +64,20 @@ public class QueryAPI {
         //System.out.println(jsonArray);
         return jsonArray;
 
+    }
+
+    public static String getAPIKey() {
+        String APIKey = "";
+        BufferedReader reader;
+
+        try {
+            reader = new BufferedReader(new FileReader("APIKey.txt"));
+            APIKey = reader.readLine();
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Check your key file");
+        }
+        return APIKey;
     }
 
     public static void main(String[] args) throws Exception {
