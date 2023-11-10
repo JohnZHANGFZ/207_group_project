@@ -13,8 +13,8 @@ public class CommonRestriction implements Restriction{
     }
 
     @Override
-    public void addAllergies(List<Ingredient> ingredient) {
-        this.allergies.addAll(ingredient);
+    public void addAllergies(List<Ingredient> ingredients) {
+        this.allergies.addAll(ingredients);
     }
 
     @Override
@@ -28,8 +28,8 @@ public class CommonRestriction implements Restriction{
 //            }
 //        }
 //    }
-    public void deleteAllergies(List<Ingredient> ingredient) {
-        for (Ingredient TargetIngredient : ingredient) {
+    public void deleteAllergies(List<Ingredient> ingredients) {
+        for (Ingredient TargetIngredient : ingredients) {
             this.allergies.removeIf(cur_ingredient -> cur_ingredient == TargetIngredient);
         }
     }
