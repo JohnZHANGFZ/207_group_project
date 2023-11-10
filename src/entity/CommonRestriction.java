@@ -18,14 +18,19 @@ public class CommonRestriction implements Restriction{
     }
 
     @Override
+//    public void deleteAllergies(List<Ingredient> ingredient) {
+//        for (Integer i = 0; i < ingredient.size(); i++){
+//            Ingredient TargetIngredient = ingredient.get(i);
+//            for (Integer cur_inx = 0; cur_inx < this.allergies.size(); cur_inx ++){
+//                if (this.allergies.get(cur_inx).getName() == TargetIngredient.getName()) {
+//                    this.allergies.remove(cur_inx);
+//                }
+//            }
+//        }
+//    }
     public void deleteAllergies(List<Ingredient> ingredient) {
-        for (Integer i = 0; i < ingredient.size(); i++){
-            Ingredient TargetIngredient = ingredient.get(i);
-            for (Integer cur_inx = 0; cur_inx < this.allergies.size(); cur_inx ++){
-                if (this.allergies.get(cur_inx).getName() == TargetIngredient.getName()) {
-                    this.allergies.remove(cur_inx);
-                }
-            }
+        for (Ingredient TargetIngredient : ingredient) {
+            this.allergies.removeIf(cur_ingredient -> cur_ingredient == TargetIngredient);
         }
     }
 }
