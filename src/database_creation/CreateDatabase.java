@@ -16,6 +16,9 @@ public class CreateDatabase {
         this.number = number;
     }
 
+    /*
+    Adds more recipes to the database
+     */
     public void addToCsv() throws Exception {
         JsonArray recipes = QueryAPI.getResults(this.ingredients, this.number);
         String filePath = "src/data_access/resources/database.csv";
@@ -48,9 +51,6 @@ public class CreateDatabase {
                 if (!records.contains(Integer.valueOf(id))) {
                     writer.writeNext(data);
                 }
-//                else {
-//                    System.out.println("blocked");
-//                }
             }
             // closing writer connection
             writer.close();
@@ -62,6 +62,9 @@ public class CreateDatabase {
 
     }
 
+    /*
+    Returns an arraylist of ID's of recipes inside the .csv
+     */
     public ArrayList<Integer> loadId(String fileName) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(fileName));
         String line = br.readLine();
@@ -74,6 +77,9 @@ public class CreateDatabase {
         return records;
     }
 
+    /*
+    Converts a json recipe object into a list of ingredients so that we can store it in the database
+     */
     public ArrayList<String> getIngredients(JsonObject recipe) {
         ArrayList <String> ingredients = new ArrayList<>();
         JsonArray usedIngredients = (JsonArray) recipe.get("usedIngredients");
@@ -89,7 +95,7 @@ public class CreateDatabase {
 
     public static void main(String[] args) throws Exception {
         ArrayList<String> ingredients = new ArrayList<>();
-        ingredients.add("egg");
+        ingredients.add("ginger");
         int number = 200;
         CreateDatabase database = new CreateDatabase(ingredients, number);
         database.addToCsv();
