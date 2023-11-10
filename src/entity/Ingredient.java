@@ -1,5 +1,5 @@
 package entity;
 
-public interface Ingredient {
+public interface Ingredient{
     String getName();
 }
