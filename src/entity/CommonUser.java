@@ -7,7 +7,7 @@ public class CommonUser implements User{
     private final String password;
 
     CommonUser(String user, String password){
-        this.name = name;
+        this.name = user;
         this.password = password;
     }
 
