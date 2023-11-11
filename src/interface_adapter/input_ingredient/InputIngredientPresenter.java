@@ -12,11 +12,9 @@ public class InputIngredientPresenter implements InputIngredientOutputBoundary {
 
     @Override
     public void prepareSuccessView() {
-
     }
 
     @Override
-    public void prepareFailView() {
-
+    public void prepareFailView(String error) {
     }
 }

@@ -25,7 +25,7 @@ public class InputIngredientInteractor implements InputIngredientInputBoundary{
     public void execute(InputIngredientInputData inputIngredientInputData) {
 
         if (inputIngredientInputData.getIngredients().isEmpty()) {
-                ingredientPresenter.prepareFailView();
+                ingredientPresenter.prepareFailView("No input.");
         } else {
             for(int i = 0; i < inputIngredientInputData.getIngredients().size();) {
 
