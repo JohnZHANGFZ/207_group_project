@@ -18,5 +18,7 @@ public class InputIngredientState {
 
     public List<String> getIngredient() { return ingredients; }
 
-    public void setInputIngredientError(String error) {this.inputIngredientError = inputIngredientError; }
+    public void setIngredients(List<String> ingredients) { this.ingredients = ingredients; }
+
+    public void setInputIngredientError(String error) { this.inputIngredientError = inputIngredientError; }
 }

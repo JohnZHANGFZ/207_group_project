@@ -16,5 +16,8 @@ public class InputIngredientPresenter implements InputIngredientOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
+        InputIngredientState inputIngredientState = inputIngredientViewModel.getState();
+        inputIngredientState.setInputIngredientError(error);
+        inputIngredientViewModel.firePropertyChanged();
     }
 }
