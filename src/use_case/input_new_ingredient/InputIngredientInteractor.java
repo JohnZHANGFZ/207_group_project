@@ -3,6 +3,7 @@ package use_case.input_new_ingredient;
 import entity.Ingredient;
 import entity.IngredientFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InputIngredientInteractor implements InputIngredientInputBoundary{
@@ -22,18 +23,18 @@ public class InputIngredientInteractor implements InputIngredientInputBoundary{
 
     @Override
     public void execute(InputIngredientInputData inputIngredientInputData) {
-        List<String> ingredientList = inputIngredientInputData.getIngredients();
-        for (int i = 0; i < ingredientList.size();) {
-            String item = ingredientList.get(i);
 
-            if (ingredientDataAccessObject.existsByName(item)){
+        if (inputIngredientInputData.getIngredients().isEmpty()) {
                 ingredientPresenter.prepareFailView();
-            } else if (item.isEmpty()) {
-                ingredientPresenter.prepareFailView();
-            } else {
+        } else {
+            for(int i = 0; i < inputIngredientInputData.getIngredients().size();) {
+
+                List<String> newIngredientList = new ArrayList<>();
+                String item = inputIngredientInputData.getIngredients().get(i);
                 Ingredient ingredient = ingredientFactory.create(item);
                 ingredientDataAccessObject.save(ingredient);
             }
+            ingredientPresenter.prepareSuccessView();
         }
     }
 }
