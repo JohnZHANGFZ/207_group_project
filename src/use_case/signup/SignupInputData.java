@@ -6,7 +6,7 @@ public class SignupInputData {
 
     final private String password;
 
-    public SignupInputData(String username, Stirng password) {
+    public SignupInputData(String username, String password) {
         this.username = username;
         this.password = password;
     }
