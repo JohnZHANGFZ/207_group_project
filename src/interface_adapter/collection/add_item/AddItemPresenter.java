@@ -17,6 +17,8 @@ public class AddItemPresenter implements AddItemOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
-
+        AddItemState addItemState = addItemViewModel.getState();
+        addItemState.setAddItemError(error);
+        addItemViewModel.firePropertyChanged();
     }
 }
