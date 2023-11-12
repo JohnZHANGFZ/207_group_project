@@ -1,6 +1,6 @@
 package interface_adapter.collection.add_item;
 
-import use_case.collection.AddItem.AddItemOutputBoundary;
+import use_case.collection.add_item.AddItemOutputBoundary;
 
 public class AddItemPresenter implements AddItemOutputBoundary {
 

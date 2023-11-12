@@ -1,10 +1,7 @@
-package use_case.collection.AddItem;
+package use_case.collection.add_item;
 
 import entity.Ingredient;
 import entity.IngredientFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddItemInteractor implements AddItemInputBoundary {
 

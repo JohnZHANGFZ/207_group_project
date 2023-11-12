@@ -1,7 +1,7 @@
 package interface_adapter.collection.add_item;
 
-import use_case.collection.AddItem.AddItemInputBoundary;
-import use_case.collection.AddItem.AddItemInputData;
+import use_case.collection.add_item.AddItemInputBoundary;
+import use_case.collection.add_item.AddItemInputData;
 
 import java.util.List;
 

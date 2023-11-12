@@ -1,4 +1,4 @@
-package use_case.collection.AddItem;
+package use_case.collection.add_item;
 
 import java.util.List;
 
