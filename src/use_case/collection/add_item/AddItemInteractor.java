@@ -30,7 +30,7 @@ public class AddItemInteractor implements AddItemInputBoundary {
                 Ingredient ingredient = ingredientFactory.create(item);
                 addItemDataAccessObject.save(ingredient);
             }
-            addItemPresenter.prepareSuccessView();
+            addItemPresenter.prepareSuccessView("inventory");
         }
     }
 }

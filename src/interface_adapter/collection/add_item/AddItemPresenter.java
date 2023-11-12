@@ -11,7 +11,7 @@ public class AddItemPresenter implements AddItemOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView() {
+    public void prepareSuccessView(String type) {
 
     }
 
