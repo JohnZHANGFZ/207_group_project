@@ -1,4 +1,5 @@
 package use_case.add_dietary_restriction;
 
-public class AddDietaryOutputData {
+public class AddRestrictionInputData {
+
 }
