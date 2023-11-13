@@ -2,35 +2,35 @@ package entity;
 
 import java.util.List;
 
-public class CommonUser implements User{
+public class CommonUser implements User {
     private final String username;
-    private final Integer password;
-    private Inventory inventory = null;
-    private List<String> allergies = null;
+    private final String password;
+    private CommonInventory inventory = null;
+    private CommonRestriction allergies = null;
 
-    public CommonUser(String username, Integer password) {
+    public CommonUser(String username, String password) {
         this.username = username;
         this.password = password;
         this.inventory = null;
         this.allergies = null;
     }
-    public CommonUser(String username, Integer password, Inventory inventory) {
+    public CommonUser(String username, String password, CommonInventory inventory) {
         this.username = username;
         this.password = password;
         this.inventory = inventory;
         this.allergies = null;
     }
-    public CommonUser(String username, Integer password, List<String> allergies) {
+    public CommonUser(String username, String password, CommonRestriction allergies) {
         this.username = username;
         this.password = password;
         this.allergies = allergies;
         this.inventory = null;
     }
-    public CommonUser(String username, Integer password, Inventory inventory, List<String> allgergies) {
+    public CommonUser(String username, String password, CommonInventory inventory, CommonRestriction allergies) {
         this.username = username;
         this.password = password;
         this.inventory = inventory;
-        this.allergies = allgergies;
+        this.allergies = allergies;
     }
 
     @Override
@@ -39,18 +39,18 @@ public class CommonUser implements User{
     }
 
     @Override
-    public Integer getPassword() {
+    public String getPassword() {
         return this.password;
     }
 
     // TODO: if this.allergies is null, should we raise exception?
     @Override
-    public List<String> getAllergies() {
+    public CommonRestriction getAllergies() {
         return this.allergies;
     }
 
     // TODO: if this.inventory is null, should we raise exception?
-    public Inventory getInventory(){
+    public CommonInventory getInventory(){
         return this.inventory;
     }
 }

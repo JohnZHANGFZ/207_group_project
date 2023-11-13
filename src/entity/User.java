@@ -7,6 +7,8 @@ public interface User {
 
     String getPassword();
 
-    List<String> getAllergies();
+    CommonRestriction getAllergies();
+
+    CommonInventory getInventory();
 
 }
