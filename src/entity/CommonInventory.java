@@ -24,4 +24,4 @@ public class CommonInventory implements Inventory{
         for (Ingredient TargetIngredient : ingredients) {
             this.ingredients.removeIf(cur_ingredient -> cur_ingredient == TargetIngredient);
     }
-}
+}}
