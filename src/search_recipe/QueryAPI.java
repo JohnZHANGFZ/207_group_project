@@ -15,10 +15,10 @@ public class QueryAPI {
     /*
     This calls the API with the passed in arraylist of ingredients and the number of results you want to return
      */
-    public static JsonArray getResults(ArrayList<String> ingredients, int number) throws Exception {
+    public static JsonArray getResults(ArrayList<String> ingredients, int number) {
         try {
             // Spoonacular
-            String api_key = getAPIKey();
+            String api_key = getAPIKey("APIKey.txt");
             String uri_string = createRequest(ingredients, number);
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(uri_string))
@@ -66,21 +66,21 @@ public class QueryAPI {
 
     }
 
-    public static String getAPIKey() {
+    public static String getAPIKey(String filename) throws IOException {
         String APIKey = "";
         BufferedReader reader;
 
         try {
-            reader = new BufferedReader(new FileReader("APIKey.txt"));
+            reader = new BufferedReader(new FileReader(filename));
             APIKey = reader.readLine();
             reader.close();
         } catch (IOException e) {
-            System.out.println("Check your key file");
+            throw new IOException();
         }
         return APIKey;
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args){
         ArrayList<String> ingredients = new ArrayList<>();
         ingredients.add("egg");
         int number = 2;
