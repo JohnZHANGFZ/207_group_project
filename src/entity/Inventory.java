@@ -3,9 +3,9 @@ package entity;
 import java.util.List;
 
 public interface Inventory {
-    List<Ingredient> getRecipes();
+    List<Ingredient> getItems();
 
-    void addRecipes(List<Ingredient> ingredient);
+    void addItems(List<Ingredient> ingredient);
 
-    void deleteRecipes(List<Ingredient> ingredient);
+    void deleteItems(List<Ingredient> ingredient);
 }
