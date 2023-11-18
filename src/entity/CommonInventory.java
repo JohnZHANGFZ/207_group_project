@@ -18,7 +18,9 @@ public class CommonInventory implements Inventory {
 
     @Override
     public void addItems(List<Ingredient> ingredient) {
-
+        for (int i=0; i < ingredient.size(); i++) {
+            inventory.add(ingredient.get(i));
+        }
     }
 
     @Override
