@@ -7,8 +7,8 @@ public class CommonInventoryFactory implements InventoryFactory {
     private IngredientFactory factory = new CommonIngredientFactory();
 
     @Override
-    public Inventory create(List<String> items) {
-        Inventory inventory = new CommonInventory();
+    public CommonInventory create(List<String> items) {
+        CommonInventory inventory = new CommonInventory();
         List listIngredient = new ArrayList<CommonIngredient>();
         for (int i = 0; i < items.size(); i++) {
             Ingredient item = factory.create(items.get(i));

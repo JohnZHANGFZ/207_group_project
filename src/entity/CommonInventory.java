@@ -3,18 +3,14 @@ package entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommonInventory implements Inventory {
+public class CommonInventory implements Collection {
 
     private List<Ingredient> inventory;
 
-    CommonInventory() {
-        this.inventory = new ArrayList();
-    }
+    CommonInventory() { this.inventory = new ArrayList(); }
 
     @Override
-    public List<Ingredient> getItems() {
-        return inventory;
-    }
+    public List<Ingredient> getItems() { return inventory; }
 
     @Override
     public void addItems(List<Ingredient> ingredient) {

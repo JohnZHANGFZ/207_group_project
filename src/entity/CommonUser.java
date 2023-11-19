@@ -6,7 +6,7 @@ import java.util.List;
 public class CommonUser implements User {
     private final String username;
     private final String password;
-    private Inventory inventory;
+    private CommonInventory inventory;
     private List<String> allergies;
     private InventoryFactory inventoryFactory = new CommonInventoryFactory();
 
@@ -32,5 +32,5 @@ public class CommonUser implements User {
         return this.allergies;
     }
 
-    public Inventory getInventory() { return this.inventory; }
+    public CommonInventory getInventory() { return this.inventory; }
 }

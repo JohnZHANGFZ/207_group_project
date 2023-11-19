@@ -2,23 +2,23 @@ package entity;
 
 import java.util.List;
 
-public class CommonRestriction implements Restriction{
+public class CommonRestriction implements Collection {
     private List<Ingredient> allergies;
     public CommonRestriction(List<Ingredient> allergies){
         this.allergies = allergies;
     }
     @Override
-    public List<Ingredient> getAllergies() {
+    public List<Ingredient> getItems() {
         return this.allergies;
     }
 
     @Override
-    public void addAllergies(List<Ingredient> ingredient) {
+    public void addItems(List<Ingredient> ingredient) {
         this.allergies.addAll(ingredient);
     }
 
     @Override
-    public void deleteAllergies(List<Ingredient> ingredient) {
+    public void deleteItems(List<Ingredient> ingredient) {
         for (Integer i = 0; i < ingredient.size(); i++){
             Ingredient TargetIngredient = ingredient.get(i);
             for (Integer cur_inx = 0; cur_inx < this.allergies.size(); cur_inx ++){

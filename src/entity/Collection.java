@@ -2,7 +2,7 @@ package entity;
 
 import java.util.List;
 
-public interface Inventory {
+public interface Collection {
     List<Ingredient> getItems();
 
     void addItems(List<Ingredient> ingredient);
