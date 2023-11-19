@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommonInventoryFactory implements InventoryFactory {
-    IngredientFactory factory = new CommonIngredientFactory();
+    private IngredientFactory factory = new CommonIngredientFactory();
 
     @Override
     public Inventory create(List<String> items) {
