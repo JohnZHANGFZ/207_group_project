@@ -22,7 +22,7 @@ public class QueryAPI {
             String uri_string = createRequest(ingredients, number);
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(uri_string))
-                    .header("X-RapidAPI-Key", api_key) //may need to be hidden later
+                    .header("X-RapidAPI-Key", api_key)
                     .header("X-RapidAPI-Host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
                     .method("GET", HttpRequest.BodyPublishers.noBody())
                     .build();
@@ -66,6 +66,11 @@ public class QueryAPI {
 
     }
 
+    /*
+    helper method
+
+    Returns the api key given in a file stored in the root
+     */
     public static String getAPIKey(String filename) throws IOException {
         String APIKey = "";
         BufferedReader reader;
@@ -74,8 +79,8 @@ public class QueryAPI {
             reader = new BufferedReader(new FileReader(filename));
             APIKey = reader.readLine();
             reader.close();
-        } catch (IOException e) {
-            throw new IOException();
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException();
         }
         return APIKey;
     }
