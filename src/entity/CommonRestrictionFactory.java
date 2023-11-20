@@ -3,18 +3,17 @@ package entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommonInventoryFactory implements CollectionFactory {
+public class CommonRestrictionFactory implements CollectionFactory {
     private IngredientFactory factory = new CommonIngredientFactory();
-
     @Override
-    public CommonInventory create(List<String> items) {
-        CommonInventory inventory = new CommonInventory();
+    public CommonRestriction create(List<String> items) {
+        CommonRestriction allergies = new CommonRestriction();
         List listIngredient = new ArrayList<CommonIngredient>();
         for (int i = 0; i < items.size(); i++) {
             Ingredient item = factory.create(items.get(i));
             listIngredient.add(item);
         }
-        inventory.addItems(listIngredient);
-        return inventory;
+        allergies.addItems(listIngredient);
+        return allergies;
     }
 }

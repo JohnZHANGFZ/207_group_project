@@ -1,11 +1,12 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommonRestriction implements Collection {
     private List<Ingredient> allergies;
-    public CommonRestriction(List<Ingredient> allergies){
-        this.allergies = allergies;
+    public CommonRestriction(){
+        this.allergies = new ArrayList();
     }
     @Override
     public List<Ingredient> getItems() {
