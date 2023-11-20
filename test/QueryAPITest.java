@@ -1,6 +1,8 @@
 import com.google.gson.JsonArray;
 import org.junit.Test;
 import search_recipe.QueryAPI;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -28,9 +30,22 @@ public class QueryAPITest {
     }
 
     @Test
-    public void testAPIKeyThrowsException(){
+    public void testAPIKeyThrowsFileException(){
         try {
             QueryAPI.getAPIKey("qfiqpf.txt");
+            fail("Expected filenotfound but did not get one.");
+        }
+        catch (FileNotFoundException e) {
+            //caught the exception
+        } catch (IOException e) {
+            fail("Expected Filenotfound but got IO exception instead");
+        }
+    }
+
+    @Test
+    public void testAPIKeyThrowsIOException(){
+        try {
+            QueryAPI.getAPIKey("EmptyAPITest.txt");
             fail("Expected IOException but did not get one.");
         }
         catch (IOException e) {

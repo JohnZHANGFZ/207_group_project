@@ -80,7 +80,12 @@ public class QueryAPI {
             APIKey = reader.readLine();
             reader.close();
         } catch (FileNotFoundException e) {
+            System.out.println("Filename specified not found");
             throw new FileNotFoundException();
+        }
+        if (APIKey == null) {
+            System.out.println("No API key found in file specified");
+            throw new IOException();
         }
         return APIKey;
     }
