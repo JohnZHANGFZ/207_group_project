@@ -22,10 +22,10 @@ public class CommonInventory implements Collection {
     @Override
     // Used Joe's implementation of CommonRestriction's deleteItems
     public void deleteItems(List<Ingredient> ingredient) {
-        for (Integer i = 0; i < ingredient.size(); i++){
+        for (int i = 0; i < ingredient.size(); i++){
             Ingredient TargetIngredient = ingredient.get(i);
-            for (Integer cur_inx = 0; cur_inx < this.inventory.size(); cur_inx ++){
-                if (this.inventory.get(cur_inx).getName() == TargetIngredient.getName()) {
+            for (int cur_inx = 0; cur_inx < this.inventory.size(); cur_inx ++){
+                if (this.inventory.get(cur_inx).getName().equalsIgnoreCase(TargetIngredient.getName())) {
                     this.inventory.remove(cur_inx);
                 }
             }
