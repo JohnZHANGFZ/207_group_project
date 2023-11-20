@@ -8,13 +8,13 @@ public class CommonUser implements User {
     private Collection inventory;
     private Collection allergies;
     private CollectionFactory inventoryFactory = new CommonInventoryFactory();
-
+    private CollectionFactory restrictionFactory = new CommonRestrictionFactory();
 
      CommonUser(String username, String password) {
         this.username = username;
         this.password = password;
         this.inventory = inventoryFactory.create(new ArrayList<>());
-        this.allergies = null;
+        this.allergies = restrictionFactory.create(new ArrayList<>());
      }
 
     @Override
