@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class QueryAPI {
     /*
-    This calls the API with the passed in arraylist of ingredients and the number of results you want to return
+    This calls the API for recipes with the passed in arraylist of ingredients and the number of results you want to return
      */
     public static JsonArray getResults(ArrayList<String> ingredients, int number) {
         try {
@@ -32,6 +32,28 @@ public class QueryAPI {
         catch (Exception e) {
             System.out.println("API query failed");
             return new JsonArray();
+        }
+    }
+
+    /*
+    This calls the API endpoint for recipe information for the ID specified
+     */
+    public static JsonObject getRecipeInformation(String id){
+        try {
+            // Spoonacular
+            String api_key = getAPIKey("APIKey.txt");
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(String.format("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/%s/information", id)))
+                    .header("X-RapidAPI-Key", api_key)
+                    .header("X-RapidAPI-Host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
+                    .method("GET", HttpRequest.BodyPublishers.noBody())
+                    .build();
+            HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            return ParseStringToObject(response.body());
+        }
+        catch (Exception e) {
+            System.out.println("API query failed");
+            return new JsonObject();
         }
     }
 
@@ -69,6 +91,19 @@ public class QueryAPI {
     /*
     helper method
 
+    This parses the string that is returned and converts it into a json object
+ */
+    public static JsonObject ParseStringToObject(String response) {
+        JsonParser jsonParser = new JsonParser();
+        JsonObject jsonObject = (JsonObject) jsonParser.parse(response);
+        //System.out.println(jsonArray);
+        return jsonObject;
+
+    }
+
+    /*
+    helper method
+
     Returns the api key given in a file stored in the root
      */
     public static String getAPIKey(String filename) throws IOException {
@@ -90,12 +125,17 @@ public class QueryAPI {
         return APIKey;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         ArrayList<String> ingredients = new ArrayList<>();
         ingredients.add("egg");
         int number = 2;
         JsonArray recipes = getResults(ingredients, number);
-        System.out.println(recipes.get(1).getAsJsonObject());
+        JsonObject recipe = recipes.get(0).getAsJsonObject();
+        System.out.println(recipe);
+        JsonObject recipeInfo = getRecipeInformation(recipe.get("id").getAsString());
+        System.out.println(recipeInfo.get("summary"));
+        System.out.println(recipeInfo.get("instructions"));
+
     }
 }
 
