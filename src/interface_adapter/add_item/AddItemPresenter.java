@@ -1,4 +1,4 @@
-package interface_adapter.collection.add_item;
+package interface_adapter.add_item;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.logged_in.LoggedInState;

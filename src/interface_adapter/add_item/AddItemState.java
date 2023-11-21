@@ -1,4 +1,4 @@
-package interface_adapter.collection.add_item;
+package interface_adapter.add_item;
 
 import java.util.ArrayList;
 import java.util.List;

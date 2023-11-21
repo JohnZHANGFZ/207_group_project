@@ -1,4 +1,4 @@
-package interface_adapter.collection.add_item;
+package interface_adapter.add_item;
 
 import use_case.collection.add_item.AddItemInputBoundary;
 import use_case.collection.add_item.AddItemInputData;
