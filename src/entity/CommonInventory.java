@@ -7,7 +7,7 @@ public class CommonInventory implements Collection {
 
     private List<Ingredient> inventory;
 
-    CommonInventory() { this.inventory = new ArrayList(); }
+    public CommonInventory() { this.inventory = new ArrayList(); }
 
     @Override
     public List<Ingredient> getItems() { return inventory; }
