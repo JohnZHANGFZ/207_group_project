@@ -11,4 +11,8 @@ public interface User {
 
     Collection getInventory();
 
+    void setInventory(Collection inventory);
+
+    void setRestriction(Collection restriction);
+
 }

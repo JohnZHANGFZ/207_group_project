@@ -17,9 +17,9 @@ public class CommonUser implements User {
         this.allergies = restrictionFactory.create(new ArrayList<>());
     }
 
-    public void setInventory(CommonInventory inventory) { this.inventory = inventory; }
+    public void setInventory(Collection inventory) { this.inventory = inventory; }
 
-    public void setRestriction(CommonRestriction restriction) { this.allergies = restriction; }
+    public void setRestriction(Collection restriction) { this.allergies = restriction; }
 
     @Override
     public String getName() {
