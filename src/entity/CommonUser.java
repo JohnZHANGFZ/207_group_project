@@ -10,12 +10,16 @@ public class CommonUser implements User {
     private CollectionFactory inventoryFactory = new CommonInventoryFactory();
     private CollectionFactory restrictionFactory = new CommonRestrictionFactory();
 
-     public CommonUser(String username, String password) {
+    public CommonUser(String username, String password) {
         this.username = username;
         this.password = password;
         this.inventory = inventoryFactory.create(new ArrayList<>());
         this.allergies = restrictionFactory.create(new ArrayList<>());
-     }
+    }
+
+    public void setInventory(CommonInventory inventory) { this.inventory = inventory; }
+
+    public void setRestriction(CommonRestriction restriction) { this.allergies = restriction; }
 
     @Override
     public String getName() {
