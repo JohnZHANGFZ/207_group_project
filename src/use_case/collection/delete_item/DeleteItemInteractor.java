@@ -22,25 +22,38 @@ public class DeleteItemInteractor implements DeleteItemInputBoundary{
         this.ingredientFactory = ingredientFactory;
     }
 
-//know when to have success view and fail view.
+    // This is about when to have success or fail views
     @Override
     public void execute(DeleteItemInputData deleteItemInputData) {
         List<String> itemList = deleteItemInputData.getItems();
         List<String> deletedItemList = new ArrayList<>();
+        List<String> itemDNE = new ArrayList<>();
+
         if(itemList.isEmpty()) {
-            deletePresenter.prepareFailView("No input. Try agian.");
+            // If user does not type anything--> FailView: 'no input, try again'
+            deletePresenter.prepareFailView("No input. Try again.");
         } else{
             for (String s : itemList) {
                 if (deleteItemDataAccessObject.existByName(s)) {
                     Ingredient ingredient = ingredientFactory.create(s);
                     String deletedItem = deleteItemDataAccessObject.delete(ingredient);
                     deletedItemList.add(deletedItem);
+                } else {
+                    itemDNE.add(s);
                 }
             }
             if (deletedItemList.isEmpty()) {
+                // If none of user's input exists --> FailView: 'Input does not exist. Check spelling'
                 deletePresenter.prepareFailView("Input does not exist. Check spelling");
+
             } else {
-                DeleteItemOutputData deleteItemOutputData = new DeleteItemOutputData(deletedItemList);
+                // If some or all user's input exists --> SuccessView: show the user what was just deleted
+                // successfully and what was not
+                List<List<String>> outputData = new ArrayList<>();
+                outputData.add(deletedItemList);
+                outputData.add(itemDNE);
+
+                DeleteItemOutputData deleteItemOutputData = new DeleteItemOutputData(outputData);
                 deletePresenter.prepareSuccessView(deleteItemOutputData);
             }
         }

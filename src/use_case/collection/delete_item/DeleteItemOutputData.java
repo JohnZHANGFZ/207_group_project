@@ -4,7 +4,7 @@ import java.util.List;
 
 public class DeleteItemOutputData {
 
-    public DeleteItemOutputData(List<String> items) {
+    public DeleteItemOutputData(List<List<String>> items) {
     }
 
 }
