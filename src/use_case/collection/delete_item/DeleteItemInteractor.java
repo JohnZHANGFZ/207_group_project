@@ -49,11 +49,7 @@ public class DeleteItemInteractor implements DeleteItemInputBoundary{
             } else {
                 // If some or all user's input exists --> SuccessView: show the user what was just deleted
                 // successfully and what was not
-                List<List<String>> outputData = new ArrayList<>();
-                outputData.add(deletedItemList);
-                outputData.add(itemDNE);
-
-                DeleteItemOutputData deleteItemOutputData = new DeleteItemOutputData(outputData);
+                DeleteItemOutputData deleteItemOutputData = new DeleteItemOutputData(deletedItemList, itemDNE);
                 deletePresenter.prepareSuccessView(deleteItemOutputData);
             }
         }

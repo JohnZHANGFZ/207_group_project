@@ -4,7 +4,16 @@ import java.util.List;
 
 public class DeleteItemOutputData {
 
-    public DeleteItemOutputData(List<List<String>> items) {
+    private final List<String> successItems;
+
+    private final List<String> failItem;
+
+    public DeleteItemOutputData(List<String> successItems, List<String> failItem) {
+        this.successItems = successItems;
+        this.failItem = failItem;
     }
+
+
+    public List<String> getSuccessDeletedItem() { return successItems; }
 
 }
