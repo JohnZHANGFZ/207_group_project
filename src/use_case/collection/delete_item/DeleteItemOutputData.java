@@ -16,4 +16,6 @@ public class DeleteItemOutputData {
 
     public List<String> getSuccessDeletedItem() { return successItems; }
 
+    public List<String> getFailDeletedItem() { return failItem; }
+
 }
