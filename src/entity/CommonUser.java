@@ -17,8 +17,10 @@ public class CommonUser implements User {
         this.allergies = restrictionFactory.create(new ArrayList<>());
     }
 
+    @Override
     public void setInventory(Collection inventory) { this.inventory = inventory; }
 
+    @Override
     public void setRestriction(Collection restriction) { this.allergies = restriction; }
 
     @Override
@@ -36,5 +38,6 @@ public class CommonUser implements User {
         return this.allergies;
     }
 
+    @Override
     public Collection getInventory() { return this.inventory; }
 }

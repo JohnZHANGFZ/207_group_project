@@ -7,6 +7,7 @@ public class CommonUserFactory implements UserFactory {
         return new CommonUser(name, password);
     }
 
+    @Override
     public User create(String name, String password, Collection inventory, Collection allergies) {
         CommonUser user = new CommonUser(name, password);
         user.setInventory(inventory);
