@@ -13,11 +13,13 @@ public class CommonRestriction implements Collection {
         return this.allergies;
     }
 
+    // Given list of Ingredient objects, adds all to allergies
     @Override
     public void addItems(List<Ingredient> ingredient) {
         this.allergies.addAll(ingredient);
     }
 
+    // Given list of Ingredient objects, checks if each matches Ingredients in allergies, deletes if matched
     @Override
     public void deleteItems(List<Ingredient> ingredient) {
         for (int i = 0; i < ingredient.size(); i++){

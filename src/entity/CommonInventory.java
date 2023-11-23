@@ -12,6 +12,7 @@ public class CommonInventory implements Collection {
     @Override
     public List<Ingredient> getItems() { return inventory; }
 
+    // Given list of Ingredient objects, adds each to inventory
     @Override
     public void addItems(List<Ingredient> ingredient) {
         for (int i=0; i < ingredient.size(); i++) {
@@ -20,7 +21,7 @@ public class CommonInventory implements Collection {
     }
 
     @Override
-    // Used Joe's implementation of CommonRestriction's deleteItems
+    // Given list of Ingredient objects, checks if each matches Ingredients in inventory, deletes if matched
     public void deleteItems(List<Ingredient> ingredient) {
         for (int i = 0; i < ingredient.size(); i++){
             Ingredient TargetIngredient = ingredient.get(i);
