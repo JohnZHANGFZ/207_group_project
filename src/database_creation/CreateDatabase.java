@@ -97,8 +97,8 @@ public class CreateDatabase {
 
     public static void main(String[] args) throws Exception {
         ArrayList<String> ingredients = new ArrayList<>();
-        ingredients.add("carrot");
-        int number = 2;
+        ingredients.add("peanut");
+        int number = 200;
         CreateDatabase database = new CreateDatabase(ingredients, number);
         String filepath = "src/data_access/resources/database.csv";
         database.addToCsv(filepath);
