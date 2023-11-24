@@ -1,8 +1,7 @@
-package interface_adapter.collection.add_item;
+package interface_adapter.add_item;
 
 import interface_adapter.ViewModel;
 
-import javax.swing.text.View;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
