@@ -7,8 +7,12 @@ public interface User {
 
     String getPassword();
 
-    CommonRestriction getAllergies();
+    Collection getAllergies();
 
-    CommonInventory getInventory();
+    Collection getInventory();
+
+    void setInventory(Collection inventory);
+
+    void setRestriction(Collection restriction);
 
 }

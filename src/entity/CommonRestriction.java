@@ -1,28 +1,31 @@
 package entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CommonRestriction implements Restriction{
+public class CommonRestriction implements Collection {
     private List<Ingredient> allergies;
-    public CommonRestriction(List<Ingredient> allergies){
-        this.allergies = allergies;
+    public CommonRestriction(){
+        this.allergies = new ArrayList();
     }
     @Override
-    public List<Ingredient> getAllergies() {
+    public List<Ingredient> getItems() {
         return this.allergies;
     }
 
+    // Given list of Ingredient objects, adds all to allergies
     @Override
-    public void addAllergies(List<Ingredient> ingredient) {
+    public void addItems(List<Ingredient> ingredient) {
         this.allergies.addAll(ingredient);
     }
 
+    // Given list of Ingredient objects, checks if each matches Ingredients in allergies, deletes if matched
     @Override
-    public void deleteAllergies(List<Ingredient> ingredient) {
-        for (Integer i = 0; i < ingredient.size(); i++){
+    public void deleteItems(List<Ingredient> ingredient) {
+        for (int i = 0; i < ingredient.size(); i++){
             Ingredient TargetIngredient = ingredient.get(i);
-            for (Integer cur_inx = 0; cur_inx < this.allergies.size(); cur_inx ++){
-                if (this.allergies.get(cur_inx).getName() == TargetIngredient.getName()) {
+            for (int cur_inx = 0; cur_inx < this.allergies.size(); cur_inx ++){
+                if (this.allergies.get(cur_inx).getName().equalsIgnoreCase(TargetIngredient.getName())) {
                     this.allergies.remove(cur_inx);
                 }
             }

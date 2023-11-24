@@ -1,37 +1,27 @@
 package entity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class CommonUser implements User {
     private final String username;
     private final String password;
-    private CommonInventory inventory = null;
-    private CommonRestriction allergies = null;
+    private Collection inventory;
+    private Collection allergies;
+    private CollectionFactory inventoryFactory = new CommonInventoryFactory();
+    private CollectionFactory restrictionFactory = new CommonRestrictionFactory();
 
     public CommonUser(String username, String password) {
         this.username = username;
         this.password = password;
-        this.inventory = null;
-        this.allergies = null;
+        this.inventory = inventoryFactory.create(new ArrayList<>());
+        this.allergies = restrictionFactory.create(new ArrayList<>());
     }
-    public CommonUser(String username, String password, CommonInventory inventory) {
-        this.username = username;
-        this.password = password;
-        this.inventory = inventory;
-        this.allergies = null;
-    }
-    public CommonUser(String username, String password, CommonRestriction allergies) {
-        this.username = username;
-        this.password = password;
-        this.allergies = allergies;
-        this.inventory = null;
-    }
-    public CommonUser(String username, String password, CommonInventory inventory, CommonRestriction allergies) {
-        this.username = username;
-        this.password = password;
-        this.inventory = inventory;
-        this.allergies = allergies;
-    }
+
+    @Override
+    public void setInventory(Collection inventory) { this.inventory = inventory; }
+
+    @Override
+    public void setRestriction(Collection restriction) { this.allergies = restriction; }
 
     @Override
     public String getName() {
@@ -43,14 +33,11 @@ public class CommonUser implements User {
         return this.password;
     }
 
-    // TODO: if this.allergies is null, should we raise exception?
     @Override
-    public CommonRestriction getAllergies() {
+    public Collection getAllergies() {
         return this.allergies;
     }
 
-    // TODO: if this.inventory is null, should we raise exception?
-    public CommonInventory getInventory(){
-        return this.inventory;
-    }
+    @Override
+    public Collection getInventory() { return this.inventory; }
 }
