@@ -2,7 +2,7 @@ package entity;
 
 import java.util.List;
 
-public class CommonRecipe implements Recipe{
+public class CommonRecipe implements Recipe {
     private final Integer rank;
     private final String recipeName;
     private final List<Ingredient> ingredients;
@@ -18,7 +18,6 @@ public class CommonRecipe implements Recipe{
     }
 
     @Override
-
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
