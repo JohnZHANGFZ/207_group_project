@@ -1,5 +1,4 @@
 package use_case.add_dietary_restriction;
 
-public interface AddDietaryInputBoundary {
-
+public class AddDietaryInteractor {
 }
