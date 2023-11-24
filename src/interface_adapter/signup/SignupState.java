@@ -36,6 +36,7 @@ public class SignupState {
     public String getPasswordError() {
         return passwordError;
     }
+
     public String getRepeatPassword() {
         return repeatPassword;
     }
@@ -68,4 +69,12 @@ public class SignupState {
         this.repeatPasswordError = repeatPasswordError;
     }
 
+    @Override
+    public String toString() {
+        return "SignupState{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", repeatPassword='" + repeatPassword + '\'' +
+                '}';
+    }
 }
