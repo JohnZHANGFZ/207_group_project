@@ -3,6 +3,7 @@ package data_access;
 import entity.User;
 import entity.UserFactory;
 import entity.CollectionFactory;
+import entity.Collection;
 import use_case.signup.SignupUserDataAccessInterface;
 
 import java.io.BufferedReader;
@@ -62,7 +63,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface {
 
     @Override
     public boolean existByName(String identifier) {
-
+        return accounts.containsKey(identifier);
     }
 
     @Override
