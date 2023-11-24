@@ -6,10 +6,7 @@ import entity.CollectionFactory;
 import entity.Collection;
 import use_case.signup.SignupUserDataAccessInterface;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 public class FileUserDataAccessObject implements SignupUserDataAccessInterface {
@@ -68,6 +65,29 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface {
 
     @Override
     public void save(User user) {
+        accounts.put(user.getName(), user);
+        this.save();
+    }
 
+    private void save() {
+        BufferedWriter writer;
+        try {
+            writer = new BufferedWriter(new FileWriter(csvFile));
+            writer.write(String.join(",", headers.keySet()));
+            writer.newLine();
+
+            for (User user : accounts.values()) {
+                String line = String.format("%s;%s;%s;%s",
+                        user.getName(), user.getPassword(),
+                        user.getInventory().getItems(), user.getAllergies().getItems());
+                writer.write(line);
+                writer.newLine();
+            }
+
+            writer.close();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
