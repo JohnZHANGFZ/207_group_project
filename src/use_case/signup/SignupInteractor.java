@@ -6,7 +6,7 @@ import entity.UserFactory;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 
-public class SignupInteractor implements SignupInputBoundary{
+public class SignupInteractor implements SignupInputBoundary {
 
     final SignupUserDataAccessInterface userDataAccessObject;
     final SignupOutputBoundary userPresenter;
@@ -24,6 +24,8 @@ public class SignupInteractor implements SignupInputBoundary{
     public void execute(SignupInputData signupInputData) {
         if (userDataAccessObject.existByName(signupInputData.getUsername())) {
             userPresenter.prepareFailView("Username already taken.");
+        } else if (signupInputData.getPassword().length() < 5) {
+            userPresenter.prepareFailView("Password is too short, please try again.");
         } else if (!signupInputData.getPassword().equals(signupInputData.getRepeatPassword())) {
             userPresenter.prepareFailView("Passwords don't match, please try again.");
         } else {
