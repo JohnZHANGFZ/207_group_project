@@ -3,6 +3,7 @@ package search_recipe;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import use_case.recipe_information_getter.RecipeInfoDataAccessInterface;
 import use_case.recipes_getter.GetRecipeDataAccessInterface;
 
 import java.io.BufferedReader;
@@ -15,7 +16,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
-public class QueryAPI implements GetRecipeDataAccessInterface {
+public class QueryAPI implements GetRecipeDataAccessInterface, RecipeInfoDataAccessInterface {
     /*
     This calls the API for recipes with the passed in arraylist of ingredients and the number of results you want to return
      */
@@ -42,7 +43,7 @@ public class QueryAPI implements GetRecipeDataAccessInterface {
     /*
     This calls the API endpoint for recipe information for the recipe object specified
      */
-    public static JsonObject getRecipeInformation(JsonObject recipe){
+    public JsonObject getRecipeInformation(JsonObject recipe){
         String id = recipe.get("id").getAsString();
         try {
             // Spoonacular
@@ -66,7 +67,7 @@ public class QueryAPI implements GetRecipeDataAccessInterface {
     overloading to make it easier to use
     This calls the API endpoint for recipe information for the string id specified
      */
-    public static JsonObject getRecipeInformation(String id){
+    public JsonObject getRecipeInformation(String id){
         try {
             // Spoonacular
             String api_key = getAPIKey("APIKey.txt");
