@@ -8,4 +8,8 @@ public class GetRecipeOutputData {
     public GetRecipeOutputData(JsonArray recipes) {
         this.recipes = recipes;
     }
+
+    public JsonArray ReturnRecipe() {
+        return recipes;
+    }
 }
