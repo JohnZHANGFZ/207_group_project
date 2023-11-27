@@ -54,6 +54,10 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface {
                     User user = userFactory.create(username, password, inventory, allergies);
                     accounts.put(username, user);
                 }
+            } catch (FileNotFoundException e) {
+                throw new FileNotFoundException("File not found.");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -64,12 +68,12 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface {
     }
 
     @Override
-    public void save(User user) {
+    public void save(User user) throws FileNotFoundException {
         accounts.put(user.getName(), user);
         this.save();
     }
 
-    private void save() {
+    private void save() throws FileNotFoundException {
         BufferedWriter writer;
         try {
             writer = new BufferedWriter(new FileWriter(csvFile));
@@ -85,7 +89,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface {
             }
 
             writer.close();
-
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("File not found.");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

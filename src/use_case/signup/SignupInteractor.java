@@ -3,6 +3,7 @@ package use_case.signup;
 import entity.User;
 import entity.UserFactory;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 
 public class SignupInteractor implements SignupInputBoundary{
@@ -27,11 +28,14 @@ public class SignupInteractor implements SignupInputBoundary{
             userPresenter.prepareFailView("Passwords don't match, please try again.");
         } else {
 
-            User user = userFactory.create(signupInputData.getUsername(), signupInputData.getPassword());
-            userDataAccessObject.save(user);
-
-            SignupOutputData signupOutputData = new SignupOutputData(user.getName(), false);
-            userPresenter.prepareSuccessView(signupOutputData);
+            try {
+                User user = userFactory.create(signupInputData.getUsername(), signupInputData.getPassword());
+                userDataAccessObject.save(user);
+                SignupOutputData signupOutputData = new SignupOutputData(user.getName(), false);
+                userPresenter.prepareSuccessView(signupOutputData);
+            } catch (FileNotFoundException e) {
+                userPresenter.prepareFailView("File error, unable to save.");
+            }
         }
     }
 }
