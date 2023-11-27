@@ -15,8 +15,12 @@ public class GetRecipeInteractor implements GetRecipeInputBoundary{
     public void execute(GetRecipeInputData getRecipeInputData) {
         ArrayList<String> ingredients = getRecipeInputData.getIngredients();
         int number = getRecipeInputData.getNumber();
-        if (!ingredients.isEmpty() && number > 0) {
+        if (!ingredients.isEmpty() && number > 0 && number < 100) {
             new GetRecipeOutputData(getRecipeDataAccessObject.getResults(ingredients, number));
+            getRecipeInputPresenter.prepareSuccessView();
+        }
+        else {
+            getRecipeInputPresenter.prepareFailView("Check your list of ingredients and number of recipes");
         }
     }
 }
