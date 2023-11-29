@@ -46,7 +46,9 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(inventory)){
 
+                        }
                     }
                 }
         );
