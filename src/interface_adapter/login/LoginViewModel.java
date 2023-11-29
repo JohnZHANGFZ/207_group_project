@@ -1,9 +1,9 @@
 package interface_adapter.login;
 
 import interface_adapter.ViewModel;
-import view.LoginView;
 
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public class LoginViewModel extends ViewModel {
 
@@ -23,14 +23,16 @@ public class LoginViewModel extends ViewModel {
         this.state = state;
     }
 
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
+
     @Override
     public void firePropertyChanged() {
-
+        support.firePropertyChange("state", null, this.state);
     }
 
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-
+        support.addPropertyChangeListener(listener);
     }
 
     public LoginState getState() { return state; }
