@@ -1,5 +1,7 @@
 package view;
 
+import interface_adapter.inventory.InventoryState;
+import interface_adapter.inventory.InventoryViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 
 import javax.swing.*;
@@ -13,6 +15,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     public final String viewName = "Logged In";
     private final LoggedInViewModel loggedInViewModel;
+    private final InventoryViewModel inventoryViewModel;
 
 
     JLabel username;
@@ -22,8 +25,9 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     final JButton getRecipe;
 
     //a window with title and 4 JButtons
-    public LoggedInView(LoggedInViewModel loggedInViewModel) {
+    public LoggedInView(LoggedInViewModel loggedInViewModel, InventoryViewModel inventoryViewModel) {
         this.loggedInViewModel = loggedInViewModel;
+        this.inventoryViewModel = inventoryViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel("Logged In Screen");
@@ -47,7 +51,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(inventory)){
-
+                            InventoryState currentState = inventoryViewModel.getState();
                         }
                     }
                 }
