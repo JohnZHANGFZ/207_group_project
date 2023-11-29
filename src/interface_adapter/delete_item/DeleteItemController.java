@@ -1,6 +1,5 @@
 package interface_adapter.delete_item;
 
-import use_case.collection.add_item.AddItemInputData;
 import use_case.collection.delete_item.DeleteItemInputBoundary;
 import use_case.collection.delete_item.DeleteItemInputData;
 
