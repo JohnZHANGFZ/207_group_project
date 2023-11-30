@@ -15,8 +15,9 @@ public class RecipeInfoInteractor implements RecipeInfoInputBoundary{
     a success or fail view with the recipe information it found by querying the API.
     */
     @Override
-    public void execute(String id) {
+    public void execute(RecipeInfoInputData recipeInfoInputData) {
         try {
+            String id = recipeInfoInputData.getId();
             Integer.parseInt(id);
             RecipeInfoOutputData recipe = new RecipeInfoOutputData(recipeInfoDataAccessObject.getRecipeInformation("id"));
             recipeInfoInputPresenter.prepareSuccessView(recipe);

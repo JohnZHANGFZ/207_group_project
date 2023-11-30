@@ -7,6 +7,7 @@ import java.beans.PropertyChangeSupport;
 public class GetRecipesViewModel extends ViewModel {
 
     private GetRecipesState state = new GetRecipesState();
+
     public GetRecipesViewModel(String viewName) {
         super(viewName);
     }
