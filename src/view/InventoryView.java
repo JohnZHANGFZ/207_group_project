@@ -71,7 +71,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
         );
 
         delete.addActionListener(
-                // TODO: implemented actionPerformed for 'delete' button after merging interface adapter for delete_item
+                // TODO: implemented actionPerformed for 'delete' button after merging delete_item interface adapter
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
