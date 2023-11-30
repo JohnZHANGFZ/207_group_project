@@ -46,9 +46,11 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
         // add buttons for log_in and sign_up.
         JPanel buttons = new JPanel();
+
         logIn = new JButton(loginViewModel.LOGIN_BUTTON_LABEL);
         buttons.add(logIn);
         createNewAccount = new JButton(loginViewModel.CREATE_BUTTON_LABEL);
+        buttons.add(createNewAccount);
 
         logIn.addActionListener(
                 new ActionListener() {
