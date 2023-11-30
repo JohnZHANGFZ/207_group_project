@@ -12,4 +12,5 @@ public class InventoryState {
     public InventoryState() {}
     public String getInventory() { return inventory; }
     public String getInventoryError() { return inventoryError;}
+    public void setInventory(String ingredient) {this.inventory = ingredient; }
 }
