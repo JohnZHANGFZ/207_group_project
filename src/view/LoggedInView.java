@@ -1,6 +1,5 @@
 package view;
 
-import interface_adapter.inventory.InventoryViewModel;
 import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
 

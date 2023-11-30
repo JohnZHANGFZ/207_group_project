@@ -12,6 +12,8 @@ public class InventoryViewModel extends ViewModel {
     public static final String ADD_BUTTON_LABEL = "Add";
     public static final String DELETE_BUTTON_LABEL = "Delete";
 
+    public static final String CANCEL_BUTTON_LABEL = "Cancel";
+
     private InventoryState state = new InventoryState();
 
     public void setState(InventoryState state) {this.state = state; }
