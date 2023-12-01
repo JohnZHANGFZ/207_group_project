@@ -19,5 +19,5 @@ public class DeleteItemState {
 
     public void setIngredients(List<String> ingredients) { this.ingredients = ingredients; }
 
-    public void setDeleteItemError(String error) {this.deleteItemError = deleteItemError; }
+    public void setDeleteItemError(String error) {this.deleteItemError = error; }
 }
