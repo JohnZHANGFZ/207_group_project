@@ -8,7 +8,7 @@ public class RecipeInfoState {
     private JsonObject recipe;
 
     public RecipeInfoState(RecipeInfoState copy) {
-        this.resultError = copy.resultError;
+        resultError = copy.resultError;
         this.recipe = copy.recipe;
     }
 

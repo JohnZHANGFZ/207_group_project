@@ -22,6 +22,8 @@ public class GetRecipesPresenter implements GetRecipeOutputBoundary {
         this.resultViewModel = resultViewModel;
         this.viewManagerModel = viewManagerModel;
     }
+
+    //prepares the result view model
     @Override
     public void prepareSuccessView(GetRecipeOutputData results) {
         ResultState resultViewModelState = resultViewModel.getState();

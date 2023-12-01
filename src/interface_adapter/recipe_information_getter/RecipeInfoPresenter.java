@@ -20,6 +20,7 @@ public class RecipeInfoPresenter implements RecipeInfoOutputBoundary {
         this.viewManagerModel = viewManagerModel;
     }
 
+    //switches to result info view model
     @Override
     public void prepareSuccessView(RecipeInfoOutputData recipe) {
         ResultInfoState resultInfoState = resultInfoViewModel.getState();
