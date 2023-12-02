@@ -9,7 +9,7 @@ public class RecipeInfoState {
 
     public RecipeInfoState(RecipeInfoState copy) {
         resultError = copy.resultError;
-        this.recipe = copy.recipe;
+        recipe = copy.recipe;
     }
 
     public RecipeInfoState() {
