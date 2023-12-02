@@ -1,5 +1,10 @@
 package search_recipe;
-import com.google.gson.*;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import use_case.recipe_information_getter.RecipeInfoDataAccessInterface;
+import use_case.recipes_getter.GetRecipeDataAccessInterface;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -11,11 +16,11 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
-public class QueryAPI {
+public class QueryAPI implements GetRecipeDataAccessInterface, RecipeInfoDataAccessInterface {
     /*
     This calls the API for recipes with the passed in arraylist of ingredients and the number of results you want to return
      */
-    public static JsonArray getResults(ArrayList<String> ingredients, int number) {
+    public JsonArray getResults(ArrayList<String> ingredients, int number) {
         try {
             // Spoonacular
             String api_key = getAPIKey("APIKey.txt");
@@ -38,7 +43,7 @@ public class QueryAPI {
     /*
     This calls the API endpoint for recipe information for the recipe object specified
      */
-    public static JsonObject getRecipeInformation(JsonObject recipe){
+    public JsonObject getRecipeInformation(JsonObject recipe){
         String id = recipe.get("id").getAsString();
         try {
             // Spoonacular
@@ -62,7 +67,7 @@ public class QueryAPI {
     overloading to make it easier to use
     This calls the API endpoint for recipe information for the string id specified
      */
-    public static JsonObject getRecipeInformation(String id){
+    public JsonObject getRecipeInformation(String id){
         try {
             // Spoonacular
             String api_key = getAPIKey("APIKey.txt");
@@ -150,22 +155,22 @@ public class QueryAPI {
     }
 
     public static void main(String[] args) {
-        ArrayList<String> ingredients = new ArrayList<>(); //this is creating an arraylist of ingredients
-        ingredients.add("egg"); //adding in an example ingredient
-        int number = 2; //telling the api to return 2 recipes
-        JsonArray recipes = getResults(ingredients, number); //an array of json objects which are recipes
-//        for (int i = 0; i < recipes.size(); i++) {
-//            JsonObject recipe = recipes.get(i).getAsJsonObject();
-//            String id = recipe.get("id").getAsString();
-//            String title = recipe.get("title").getAsString();
-//            String image = recipe.get("image").getAsString();
-//            System.out.println(id + ", "+ title + ", " + image);
-//        }
-        JsonObject recipe = recipes.get(0).getAsJsonObject(); //getting the json recipe object at a specific index
-        System.out.println(recipe);
-        JsonObject recipeInfo = getRecipeInformation(recipe.get("id").getAsString());
-        System.out.println(recipeInfo.get("summary"));
-        System.out.println(recipeInfo.get("instructions"));
+//        ArrayList<String> ingredients = new ArrayList<>(); //this is creating an arraylist of ingredients
+//        ingredients.add("egg"); //adding in an example ingredient
+//        int number = 2; //telling the api to return 2 recipes
+//        JsonArray recipes = getResults(ingredients, number); //an array of json objects which are recipes
+////        for (int i = 0; i < recipes.size(); i++) {
+////            JsonObject recipe = recipes.get(i).getAsJsonObject();
+////            String id = recipe.get("id").getAsString();
+////            String title = recipe.get("title").getAsString();
+////            String image = recipe.get("image").getAsString();
+////            System.out.println(id + ", "+ title + ", " + image);
+////        }
+//        JsonObject recipe = recipes.get(0).getAsJsonObject(); //getting the json recipe object at a specific index
+//        System.out.println(recipe);
+//        JsonObject recipeInfo = getRecipeInformation(recipe.get("id").getAsString());
+//        System.out.println(recipeInfo.get("summary"));
+//        System.out.println(recipeInfo.get("instructions"));
 
     }
 }
