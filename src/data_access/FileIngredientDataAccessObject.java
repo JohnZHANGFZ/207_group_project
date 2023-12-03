@@ -1,4 +1,4 @@
-package data_access.resources;
+package data_access;
 
 public class FileIngredientDataAccessObject {
 }
