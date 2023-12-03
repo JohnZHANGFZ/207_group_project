@@ -1,2 +1,4 @@
-package data_access.resources;public class IngredientDataAccessObject {
+package data_access;
+
+public class IngredientDataAccessObject {
 }
