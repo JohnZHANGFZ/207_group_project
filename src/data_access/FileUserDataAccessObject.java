@@ -5,11 +5,14 @@ import entity.UserFactory;
 import entity.CollectionFactory;
 import entity.Collection;
 import use_case.signup.SignupUserDataAccessInterface;
+import use_case.collection.add_item.AddItemDataAccessInterface;
+import use_case.collection.delete_item.DeleteItemDataAccessInterface;
 
 import java.io.*;
 import java.util.*;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface {
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, AddItemDataAccessInterface,
+        DeleteItemDataAccessInterface {
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();

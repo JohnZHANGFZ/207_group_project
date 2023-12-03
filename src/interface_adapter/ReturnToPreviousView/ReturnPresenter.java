@@ -1,2 +1,4 @@
-package interface_adapter.ReturnToPreviousView;public class ReturnPresenter {
+package interface_adapter.ReturnToPreviousView;
+
+public class ReturnPresenter {
 }
