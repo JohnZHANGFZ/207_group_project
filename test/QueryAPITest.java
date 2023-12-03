@@ -1,5 +1,7 @@
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import org.junit.Test;
+import search_recipe.DeprecatedQueryAPI;
 import search_recipe.QueryAPI;
 
 import java.io.FileNotFoundException;
@@ -12,13 +14,13 @@ public class QueryAPITest {
 
     @Test
     public void testMainRuns() {
-        QueryAPI.main(new String[]{});
+        DeprecatedQueryAPI.main(new String[]{});
     }
 
     @Test
     public void testGetResultReturnsFailedRuns(){
         ArrayList<String> empty = new ArrayList<>();
-        assertEquals(new JsonArray(), QueryAPI.getResults(empty, 1));
+        assertEquals(new JsonArray(), DeprecatedQueryAPI.getResults(empty, 1));
     }
 
     @Test
@@ -26,13 +28,18 @@ public class QueryAPITest {
         ArrayList<String> ingredients = new ArrayList<>();
         ingredients.add("egg");
         ingredients.add("apple");
-        assertNotEquals(QueryAPI.getResults(ingredients, 1), new JsonArray());
+        JsonArray results = DeprecatedQueryAPI.getResults(ingredients, 1);
+        assertNotEquals(results, new JsonArray());
+        JsonObject recipe = results.get(0).getAsJsonObject();
+        JsonObject recipeInfo = DeprecatedQueryAPI.getRecipeInformation(recipe.get("id").getAsString());
+        assertNotEquals(recipeInfo.get("instructions"), "");
+
     }
 
     @Test
     public void testAPIKeyThrowsFileException(){
         try {
-            QueryAPI.getAPIKey("qfiqpf.txt");
+            DeprecatedQueryAPI.getAPIKey("qfiqpf.txt");
             fail("Expected filenotfound but did not get one.");
         }
         catch (FileNotFoundException e) {
@@ -45,11 +52,16 @@ public class QueryAPITest {
     @Test
     public void testAPIKeyThrowsIOException(){
         try {
-            QueryAPI.getAPIKey("EmptyAPITest.txt");
+            DeprecatedQueryAPI.getAPIKey("EmptyAPITest.txt");
             fail("Expected IOException but did not get one.");
         }
         catch (IOException e) {
             //caught the exception
         }
+    }
+
+    @Test
+    public void testRecipeInfoFailed() {
+        assertEquals(new JsonObject(), DeprecatedQueryAPI.getRecipeInformation("1510110715717-1"));
     }
 }
