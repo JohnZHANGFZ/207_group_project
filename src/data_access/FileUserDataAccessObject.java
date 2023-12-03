@@ -93,5 +93,5 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     }
 
     @Override
-    public User get(String username) { return accounts.get(username); }
+    public User getUser(String username) { return accounts.get(username); }
 }
