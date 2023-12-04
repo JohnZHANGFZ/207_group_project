@@ -9,6 +9,7 @@ public class LoggedInState {
 
     public LoggedInState() {}
 
+
     public String getUsername() {
         return username;
     }
@@ -16,4 +17,5 @@ public class LoggedInState {
     public void setUsername(String username) {
         this.username = username;
     }
+
 }
