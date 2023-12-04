@@ -3,7 +3,9 @@ package view;
 import interface_adapter.add_item.AddItemController;
 import interface_adapter.add_item.AddItemState;
 import interface_adapter.add_item.AddItemViewModel;
-import interface_adapter.inventory.InventoryState;
+import interface_adapter.delete_item.DeleteItemController;
+import interface_adapter.delete_item.DeleteItemState;
+import interface_adapter.delete_item.DeleteItemViewModel;
 import interface_adapter.inventory.InventoryViewModel;
 import interface_adapter.restriction.RestrictionState;
 import interface_adapter.restriction.RestrictionViewModel;
@@ -25,6 +27,8 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
     private final RestrictionViewModel restrictionViewModel;
     private final AddItemViewModel addItemViewModel;
     private final AddItemController addItemController;
+    private final DeleteItemViewModel deleteItemViewModel;
+    private final DeleteItemController deleteItemController;
 
     final JButton add;
     final JButton delete;
@@ -32,10 +36,14 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
 
     public RestrictionView(RestrictionViewModel restrictionViewModel,
                            AddItemViewModel addItemViewModel,
-                           AddItemController addItemController) {
+                           AddItemController addItemController,
+                           DeleteItemViewModel deleteItemViewModel,
+                           DeleteItemController deleteItemController) {
         this.restrictionViewModel = restrictionViewModel;
         this.addItemViewModel = addItemViewModel;
         this.addItemController = addItemController;
+        this.deleteItemViewModel = deleteItemViewModel;
+        this.deleteItemController = deleteItemController;
 
         JLabel title = new JLabel("Restriction Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -70,8 +78,20 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
                 }
         );
 
-        //TODO: implemented after merging 'delete_item' interface adapter
-        delete.addActionListener(this);
+        delete.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(delete)) {
+                            DeleteItemState currentState = deleteItemViewModel.getState();
+
+                            deleteItemController.execute(currentState.getIngredients());
+                            //a popup window telling the user what has been deleted
+                            JOptionPane.showMessageDialog(null, currentState.getIngredients());
+                        }
+                    }
+                }
+        );
 
         //TODO: implemented action listener method for 'cancel' buttons
         cancel.addActionListener(this);

@@ -86,6 +86,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                             DeleteItemState currentState = deleteItemViewModel.getState();
 
                             deleteItemController.execute(currentState.getIngredients());
+                            //a popup window telling the user what has been deleted
                             JOptionPane.showMessageDialog(null, currentState.getIngredients());
                         }
                     }
