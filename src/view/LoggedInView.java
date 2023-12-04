@@ -23,7 +23,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     final JButton inventory;
     final JButton restriction;
     final JButton getRecipe;
-    
+
     //a window with title and 4 JButtons
     public LoggedInView(LoggedInViewModel loggedInViewModel, LogoutController logoutController) {
         this.logoutController = logoutController;
@@ -37,7 +37,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         username = new JLabel();
 
         JPanel buttons = new JPanel();
-        
+
         inventory = new JButton(loggedInViewModel.INVENTORY_BUTTON_LABEL);
         buttons.add(inventory);
         restriction = new JButton(loggedInViewModel.RESTRICTION_BUTTON_LABEL);
@@ -50,7 +50,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         inventory.addActionListener(this);
         restriction.addActionListener(this);
         getRecipe.addActionListener(this);
-        
+
         logOut.addActionListener(
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
@@ -71,10 +71,11 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     @Override
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Click " + evt.getActionCommand());
+    }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         LoggedInState state = (LoggedInState) evt.getNewValue();
         username.setText(state.getUsername());
     }
-
+}
