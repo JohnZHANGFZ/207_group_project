@@ -9,7 +9,6 @@ import java.beans.PropertyChangeListener;
 public class DetailsView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "Details";
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
