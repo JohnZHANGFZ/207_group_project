@@ -12,7 +12,7 @@ public class AddItemController {
         this.addItemUseCaseInteractor = addItemUseCaseInteractor;
     }
 
-    void execute(List<String> ingredients) {
+    public void execute(List<String> ingredients) {
         AddItemInputData addItemInputData = new AddItemInputData(ingredients);
 
         addItemUseCaseInteractor.execute(addItemInputData);

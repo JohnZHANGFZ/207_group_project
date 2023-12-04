@@ -1,26 +1,24 @@
-package interface_adapter.login;
+package interface_adapter.delete_item;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class LoginViewModel extends ViewModel {
+public class DeleteItemViewModel extends ViewModel {
 
-    public static final String LOGIN_BUTTON_LABEL = "Log in";
-    public static final String CREATE_BUTTON_LABEL = "Create New Account";
+    private DeleteItemState state = new DeleteItemState();
 
-    private LoginState state = new LoginState();
-
-
-    public LoginViewModel(String viewName) {
+    public DeleteItemViewModel(String viewName) {
         super(viewName);
     }
-    public void setState(LoginState state) {
-        this.state = state;
-    }
+
+    public void setState(DeleteItemState state) { this.state = state;}
+
+    public DeleteItemState getState() { return state; }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
+
 
     @Override
     public void firePropertyChanged() {
@@ -31,6 +29,4 @@ public class LoginViewModel extends ViewModel {
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
-
-    public LoginState getState() { return state; }
 }
