@@ -54,7 +54,7 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
                     public void actionPerformed(ActionEvent e) {
                         RecipeInfoState currentState = recipeInfoViewModel.getState();
 
-                        ResultView.this.recipeInfoController.execute(currentState.getID());
+                        recipeInfoController.execute(currentState.getID());
                     }
                 }
         );
@@ -80,12 +80,9 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
+    public void actionPerformed(ActionEvent e) {System.out.println("Click " + e.getActionCommand()); }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
     }
 }
