@@ -68,6 +68,14 @@ public class Main {
             throw new RuntimeException(e);
         }
 
+        //TODO: instantiate the inventoryDataAccessObject later
+        InventoryDataAccessInterface inventoryDataAccessObject;
+        try {
+            inventoryDataAccessObject = new InventoryDataAccessObject("./inventory.csv", new CommonInventoryFactory());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
@@ -79,16 +87,18 @@ public class Main {
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
         views.add(loggedInView, loggedInView.viewName);
 
-        // TODO: instantiate the AddItemController later
-        InventoryView inventoryView = new InventoryView(inventoryViewModel, addItemViewModel, new AddItemController());
+
+        InventoryView inventoryView = InventoryUseCaseFactory.create(inventoryViewModel, viewManagerModel,
+                addItemViewModel, loggedInViewModel, deleteItemViewModel, inventoryDataAccessObject);
         views.add(inventoryView, inventoryView.viewName);
 
         // TODO: detailsView waited to implement
         DetailsView detailsView = new DetailsView();
         views.add(detailsView, detailsView.viewName);
 
-        // TODO: instantiate the AddItermController later
-        RestrictionView restrictionView = new RestrictionView(restrictionViewModel, addItemViewModel, new AddItemController());
+
+        RestrictionView restrictionView = RestrictionUseCaseFactory.create(inventoryViewModel, viewManagerModel,
+                addItemViewModel, loggedInViewModel, deleteItemViewModel, inventoryDataAccessObject);
         views.add(restrictionView, restrictionView.viewName);
 
         ResultView resultView = new ResultView();
