@@ -2,6 +2,7 @@ package view;
 
 import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
+import interface_adapter.logout.LogoutController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,33 +11,33 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-
-// TODO add inventory info to the view
 public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    public final String viewName = "Logged In";
+    public final String viewName = "logged in";
     private final LoggedInViewModel loggedInViewModel;
-
+    private final LogoutController logoutController;
 
     JLabel username;
+
     final JButton logOut;
     final JButton inventory;
     final JButton restriction;
     final JButton getRecipe;
-
+    
     //a window with title and 4 JButtons
-    public LoggedInView(LoggedInViewModel loggedInViewModel) {
+    public LoggedInView(LoggedInViewModel loggedInViewModel, LogoutController logoutController) {
+        this.logoutController = logoutController;
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
 
-        JLabel title = new JLabel("Logged In Screen");
+        JLabel title = new JLabel("Logged In");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JLabel usernameInfo = new JLabel("Hello ");
+        JLabel welcomeBack = new JLabel("Welcome!");
         username = new JLabel();
 
         JPanel buttons = new JPanel();
-
+        
         inventory = new JButton(loggedInViewModel.INVENTORY_BUTTON_LABEL);
         buttons.add(inventory);
         restriction = new JButton(loggedInViewModel.RESTRICTION_BUTTON_LABEL);
@@ -46,29 +47,34 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         logOut = new JButton(loggedInViewModel.LOGOUT_BUTTON_LABEL);
         buttons.add(logOut);
 
-        // TODO Add the body to the actionPerformed method of the action listener below
-        //      for all buttons.
         inventory.addActionListener(this);
         restriction.addActionListener(this);
         getRecipe.addActionListener(this);
-        logOut.addActionListener(this);
+        
+        logOut.addActionListener(
+                new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(logOut)) {
+                            logoutController.execute();
+                        }
+                    }
+                }
+        );
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
         this.add(title);
-        this.add(usernameInfo);
+        this.add(welcomeBack);
+        this.add(username);
         this.add(buttons);
-
     }
 
-    //React to a button click that results in e.
-    public void actionPerformed(ActionEvent e) {
-        System.out.println("Click " + e.getActionCommand());
-    }
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        System.out.println("Click " + evt.getActionCommand());
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         LoggedInState state = (LoggedInState) evt.getNewValue();
         username.setText(state.getUsername());
     }
-}
+
