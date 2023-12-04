@@ -48,7 +48,6 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         LabelTextPanel ingredientsInfo = new LabelTextPanel(
                 new JLabel("Ingredients:"), ingredientsInputField);
-
         ingredientsInputField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -70,6 +69,24 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         LabelTextPanel numRecipesInfo = new LabelTextPanel(
                 new JLabel("Number of recipes: "), numRecipesInputField);
+        numRecipesInputField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                LoggedInState currentState = loggedInViewModel.getState();
+                currentState.setNumRecipes(Integer.valueOf(ingredientsInputField.getText() + e.getKeyChar()));
+                loggedInViewModel.setState(currentState);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
 
         JPanel buttons = new JPanel();
 
