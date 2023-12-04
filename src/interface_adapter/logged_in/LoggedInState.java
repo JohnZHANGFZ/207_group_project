@@ -7,8 +7,8 @@ public class LoggedInState {
         username = copy.username;
     }
 
+    // Because of the previous copy constructor, the default constructor must be explicit.
     public LoggedInState() {}
-
 
     public String getUsername() {
         return username;
@@ -17,5 +17,4 @@ public class LoggedInState {
     public void setUsername(String username) {
         this.username = username;
     }
-
 }

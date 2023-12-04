@@ -3,7 +3,7 @@ import entity.User;
 
 public interface SignupUserDataAccessInterface {
 
-    boolean existByName(String identifier);
+    boolean existsByName(String identifier);
 
     void save(User user);
 }

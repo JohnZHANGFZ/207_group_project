@@ -4,12 +4,13 @@ import entity.User;
 import entity.UserFactory;
 import entity.CollectionFactory;
 import entity.Collection;
+import use_case.login.LoginUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 
 import java.io.*;
 import java.util.*;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface {
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface {
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
@@ -59,11 +60,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface {
     }
 
     @Override
-    public boolean existByName(String identifier) {
-        return accounts.containsKey(identifier);
-    }
-
-    @Override
     public void save(User user) {
         accounts.put(user.getName(), user);
         this.save();
@@ -90,4 +86,12 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public boolean existsByName(String identifier) {
+        return accounts.containsKey(identifier);
+    }
+
+    @Override
+    public User getUser(String username) { return accounts.get(username); }
 }
