@@ -27,7 +27,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
     private final DeleteItemViewModel deleteItemViewModel;
     private final DeleteItemController deleteItemController;
 
-    //TODO am I allowed to do this?
+    //TODO am I allowed to do this????
     private final CommonInventory inventory;
 
     private final JTextField itemInputField = new JTextField(15);
