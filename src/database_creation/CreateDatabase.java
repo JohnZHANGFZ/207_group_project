@@ -1,4 +1,5 @@
 package database_creation;
+import search_recipe.DeprecatedQueryAPI;
 import search_recipe.QueryAPI;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -24,7 +25,7 @@ public class CreateDatabase {
     Adds more recipes to the database
      */
     public void addToCsv(String filepath) throws Exception {
-        JsonArray recipes = QueryAPI.getResults(this.ingredients, this.number);
+        JsonArray recipes = DeprecatedQueryAPI.getResults(this.ingredients, this.number);
         //String filePath = "src/data_access/resources/database.csv";
         File file = new File(filepath);
 
