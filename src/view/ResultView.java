@@ -54,8 +54,7 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
                     public void actionPerformed(ActionEvent e) {
                         RecipeInfoState currentState = recipeInfoViewModel.getState();
 
-                        //TODO: How can I get the recipe ID????
-                        ResultView.this.recipeInfoController.execute(currentState.);
+                        ResultView.this.recipeInfoController.execute(currentState.getID());
                     }
                 }
         );
