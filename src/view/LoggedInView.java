@@ -3,12 +3,15 @@ package view;
 import interface_adapter.inventory.InventoryController;
 import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
+import interface_adapter.login.LoginState;
 import interface_adapter.logout.LogoutController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -16,6 +19,10 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     public final String viewName = "logged in";
     private final LoggedInViewModel loggedInViewModel;
+
+    final JTextField ingredientsInputField = new JTextField(15);
+    final JPasswordField numRecipesInputField = new JPasswordField(15);
+
     private final LogoutController logoutController;
     private final InventoryController inventoryController;
 
@@ -38,6 +45,31 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         JLabel welcomeBack = new JLabel("Welcome!");
         username = new JLabel();
+
+        LabelTextPanel ingredientsInfo = new LabelTextPanel(
+                new JLabel("Ingredients:"), ingredientsInputField);
+
+        ingredientsInputField.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                LoggedInState currentState = loggedInViewModel.getState();
+                currentState.setIngredients(ingredientsInputField.getText() + e.getKeyChar());
+                loggedInViewModel.setState(currentState);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
+
+        LabelTextPanel numRecipesInfo = new LabelTextPanel(
+                new JLabel("Number of recipes: "), numRecipesInputField);
 
         JPanel buttons = new JPanel();
 
@@ -79,6 +111,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.add(title);
         this.add(welcomeBack);
         this.add(username);
+        this.add(ingredientsInfo);
+        this.add(numRecipesInfo);
         this.add(buttons);
     }
 
