@@ -1,7 +1,6 @@
 package interface_adapter.recipe_information_getter;
 
 import com.google.gson.JsonObject;
-import interface_adapter.recipe_info_result.ResultInfoState;
 
 public class RecipeInfoState {
     private String resultError = null;

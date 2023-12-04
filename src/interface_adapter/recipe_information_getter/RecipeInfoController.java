@@ -11,7 +11,7 @@ public class RecipeInfoController {
         this.recipeInfoInteractor = recipeInfoInteractor;
     }
 
-    void execute(String id) {
+    public void execute(String id) {
         RecipeInfoInputData recipeInfoInputData = new RecipeInfoInputData(id);
 
         recipeInfoInteractor.execute(recipeInfoInputData);
