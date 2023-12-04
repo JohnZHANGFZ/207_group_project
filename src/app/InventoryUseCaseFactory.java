@@ -33,22 +33,22 @@ public class InventoryUseCaseFactory {
     /** Prevent instantiation. */
     private InventoryUseCaseFactory() {}
 
+    //TODO: InventoryDataAccessInterface need to be implemented later
     public static InventoryView create(InventoryViewModel inventoryViewModel,
                                        ViewManagerModel viewManagerModel,
                                        AddItemViewModel addItemViewModel,
                                        LoggedInViewModel loggedInViewModel,
-                                       AddItemDataAccessInterface addItemDataAccessObject,
                                        DeleteItemViewModel deleteItemViewModel,
-                                       DeleteItemDataAccessInterface deleteItemDataAccessObject) {
+                                       InventoryDataAccessInterface IventoryDataAccessObject) {
 
             try {
                 IngredientFactory ingredientFactory = new CommonIngredientFactory();
                 CollectionFactory inventoryFactory = new CommonInventoryFactory();
                 AddItemController addItemController = createAddItemUseCase(viewManagerModel, addItemViewModel,
-                        loggedInViewModel, addItemDataAccessObject, ingredientFactory);
+                        loggedInViewModel, InventoryDataAccessObject, ingredientFactory);
 
                 DeleteItemController deleteItemController = createDeleteItemUseCase(viewManagerModel,
-                        deleteItemViewModel, loggedInViewModel, deleteItemDataAccessObject, ingredientFactory);
+                        deleteItemViewModel, loggedInViewModel, InventoryDataAccessObject, ingredientFactory);
 
                 return new InventoryView(inventoryViewModel, addItemViewModel,addItemController,
                         deleteItemViewModel, deleteItemController, inventoryFactory);
