@@ -1,5 +1,6 @@
 package view;
 
+import entity.CommonRestriction;
 import interface_adapter.add_item.AddItemController;
 import interface_adapter.add_item.AddItemState;
 import interface_adapter.add_item.AddItemViewModel;
@@ -29,6 +30,7 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
     private final AddItemController addItemController;
     private final DeleteItemViewModel deleteItemViewModel;
     private final DeleteItemController deleteItemController;
+    private final CommonRestriction restriction;
 
     final JButton add;
     final JButton delete;
@@ -38,12 +40,14 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
                            AddItemViewModel addItemViewModel,
                            AddItemController addItemController,
                            DeleteItemViewModel deleteItemViewModel,
-                           DeleteItemController deleteItemController) {
+                           DeleteItemController deleteItemController,
+                           CommonRestriction restriction) {
         this.restrictionViewModel = restrictionViewModel;
         this.addItemViewModel = addItemViewModel;
         this.addItemController = addItemController;
         this.deleteItemViewModel = deleteItemViewModel;
         this.deleteItemController = deleteItemController;
+        this.restriction = restriction;
 
         JLabel title = new JLabel("Restriction Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -51,7 +55,8 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
         LabelTextPanel usernameInfo = new LabelTextPanel(
                 new JLabel("Enter Items: "), itemInputField);
 
-        //TODO: add restriction info
+        //TODO: not sure if this is correct
+        JLabel restrictionInfo = new JLabel(String.valueOf(restriction.getItems()));
 
         //Add buttons
         JPanel buttons = new JPanel();

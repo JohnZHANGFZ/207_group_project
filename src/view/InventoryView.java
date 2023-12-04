@@ -1,5 +1,6 @@
 package view;
 
+import entity.CommonInventory;
 import interface_adapter.add_item.AddItemController;
 import interface_adapter.add_item.AddItemState;
 import interface_adapter.add_item.AddItemViewModel;
@@ -26,6 +27,9 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
     private final DeleteItemViewModel deleteItemViewModel;
     private final DeleteItemController deleteItemController;
 
+    //TODO am I allowed to do this?
+    private final CommonInventory inventory;
+
     private final JTextField itemInputField = new JTextField(15);
 
     final JButton add;
@@ -37,12 +41,14 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                          AddItemViewModel addItemViewModel,
                          AddItemController addItemController,
                          DeleteItemViewModel deleteItemViewModel,
-                         DeleteItemController deleteItemController) {
+                         DeleteItemController deleteItemController,
+                         CommonInventory inventory) {
         this.inventoryViewModel = inventoryViewModel;
         this.addItemViewModel = addItemViewModel;
         this.addItemController = addItemController;
         this.deleteItemViewModel = deleteItemViewModel;
         this.deleteItemController = deleteItemController;
+        this.inventory = inventory;
 
         JLabel title = new JLabel("Inventory Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -50,7 +56,9 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
         LabelTextPanel usernameInfo = new LabelTextPanel(
                 new JLabel("Enter Items: "), itemInputField);
 
-        //TODO: add inventory info
+        //TODO not sure if this is correct way to display inventory info
+        JLabel inventoryInfo = new JLabel(String.valueOf(inventory.getItems()));
+
 
         //Add buttons
         JPanel buttons = new JPanel();
