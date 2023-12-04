@@ -34,7 +34,7 @@ public class DeleteItemInteractor implements DeleteItemInputBoundary{
             deletePresenter.prepareFailView("No input. Try again.");
         } else{
             for (String s : itemList) {
-                if (deleteItemDataAccessObject.existByName(s)) {
+                if (deleteItemDataAccessObject.existsByName(s)) {
                     Ingredient ingredient = ingredientFactory.create(s);
                     String deletedItem = deleteItemDataAccessObject.delete(ingredient);
                     deletedItemList.add(deletedItem);

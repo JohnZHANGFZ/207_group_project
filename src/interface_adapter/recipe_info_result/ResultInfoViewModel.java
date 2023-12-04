@@ -1,22 +1,21 @@
-package interface_adapter.login;
+package interface_adapter.recipe_info_result;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class LoginViewModel extends ViewModel {
+public class ResultInfoViewModel extends ViewModel {
+    private ResultInfoState state = new ResultInfoState();
 
-    public static final String LOGIN_BUTTON_LABEL = "Log in";
-    public static final String CREATE_BUTTON_LABEL = "Create New Account";
-
-    private LoginState state = new LoginState();
-
-
-    public LoginViewModel(String viewName) {
+    public ResultInfoViewModel(String viewName) {
         super(viewName);
     }
-    public void setState(LoginState state) {
+
+    public ResultInfoState getState() {
+        return state;
+    }
+    public void setState(ResultInfoState state) {
         this.state = state;
     }
 
@@ -31,6 +30,4 @@ public class LoginViewModel extends ViewModel {
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
-
-    public LoginState getState() { return state; }
 }
