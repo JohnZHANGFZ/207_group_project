@@ -88,14 +88,16 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
             }
         });
 
+        JPanel getRecipeButton = new JPanel();
+        getRecipe = new JButton(loggedInViewModel.RECIPEGETTER_BUTTON_LABLE);
+        getRecipeButton.add(getRecipe);
+
         JPanel buttons = new JPanel();
 
         inventory = new JButton(loggedInViewModel.INVENTORY_BUTTON_LABEL);
         buttons.add(inventory);
         restriction = new JButton(loggedInViewModel.RESTRICTION_BUTTON_LABEL);
         buttons.add(restriction);
-        getRecipe = new JButton(loggedInViewModel.RECIPEGETTER_BUTTON_LABLE);
-        buttons.add(getRecipe);
         logOut = new JButton(loggedInViewModel.LOGOUT_BUTTON_LABEL);
         buttons.add(logOut);
 
@@ -128,8 +130,9 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.add(title);
         this.add(welcomeBack);
         this.add(username);
-        this.add(ingredientsInfo);
-        this.add(numRecipesInfo);
+        this.add(ingredientsInfo); // textbox for ingredient list
+        this.add(numRecipesInfo); // textbox for numRecipes
+        this.add(getRecipeButton);
         this.add(buttons);
     }
 
