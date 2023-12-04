@@ -22,6 +22,7 @@ import use_case.collection.delete_item.DeleteItemInputBoundary;
 import use_case.collection.delete_item.DeleteItemInteractor;
 import use_case.collection.delete_item.DeleteItemDataAccessInterface;
 
+import data_access.FileUserDataAccessObject;
 import view.InventoryView;
 import view.ViewManager;
 
@@ -39,16 +40,16 @@ public class InventoryUseCaseFactory {
                                        AddItemViewModel addItemViewModel,
                                        LoggedInViewModel loggedInViewModel,
                                        DeleteItemViewModel deleteItemViewModel,
-                                       InventoryDataAccessInterface IventoryDataAccessObject) {
+                                       FileUserDataAccessObject userDataAccessObject) {
 
             try {
                 IngredientFactory ingredientFactory = new CommonIngredientFactory();
                 CollectionFactory inventoryFactory = new CommonInventoryFactory();
                 AddItemController addItemController = createAddItemUseCase(viewManagerModel, addItemViewModel,
-                        loggedInViewModel, InventoryDataAccessObject, ingredientFactory);
+                        loggedInViewModel, userDataAccessObject, ingredientFactory);
 
                 DeleteItemController deleteItemController = createDeleteItemUseCase(viewManagerModel,
-                        deleteItemViewModel, loggedInViewModel, InventoryDataAccessObject, ingredientFactory);
+                        deleteItemViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
                 return new InventoryView(inventoryViewModel, addItemViewModel,addItemController,
                         deleteItemViewModel, deleteItemController, inventoryFactory);
