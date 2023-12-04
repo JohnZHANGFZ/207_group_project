@@ -20,12 +20,12 @@ public class AddItemPresenter implements AddItemOutputBoundary {
 
     @Override
     public void prepareSuccessView() {
-        //switch to LoggedIn view
-        LoggedInState loggedInState = loggedInViewModel.getState();
-        this.loggedInViewModel.setState(loggedInState);
-        this.loggedInViewModel.firePropertyChanged();
+        //Stay in current view
+        AddItemState addItemState = addItemViewModel.getState();
+        this.addItemViewModel.setState(addItemState);
+        this.addItemViewModel.firePropertyChanged();
 
-        this.viewManagerModel.setActiveView(loggedInViewModel.getViewName());
+        this.viewManagerModel.setActiveView(addItemViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 
