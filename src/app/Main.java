@@ -2,12 +2,17 @@ package app;
 
 import data_access.FileUserDataAccessObject;
 import entity.CommonUserFactory;
+import interface_adapter.add_item.AddItemController;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.add_item.AddItemViewModel;
 import interface_adapter.delete_item.DeleteItemViewModel;
 import interface_adapter.inventory.InventoryViewModel;
+import interface_adapter.recipe_information_getter.RecipeInfoViewModel;
+import interface_adapter.recipe_result.ResultViewModel;
+import interface_adapter.recipes_getter.GetRecipesViewModel;
+import interface_adapter.restriction.RestrictionViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.login.LoginUserDataAccessInterface;
 import view.LoggedInView;
@@ -49,7 +54,12 @@ public class Main {
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel("Logged In");
         SignupViewModel signupViewModel = new SignupViewModel("Signup");
         AddItemViewModel addItemViewModel = new AddItemViewModel("Add Item");
-
+        DeleteItemViewModel deleteItemViewModel = new DeleteItemViewModel("Delete Item");
+        InventoryViewModel inventoryViewModel = new InventoryViewModel("Inventory");
+        RecipeInfoViewModel recipeInfoViewModel = new RecipeInfoViewModel("Recipe Info");
+        ResultViewModel resultViewModel = new ResultViewModel("Result");
+        GetRecipesViewModel getRecipesViewModel = new GetRecipesViewModel("Get Recipes");
+        RestrictionViewModel restrictionViewModel = new RestrictionViewModel("Restriction");
 
         FileUserDataAccessObject userDataAccessObject;
         try {
@@ -58,14 +68,31 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
+        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
+                signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
 
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel, userDataAccessObject);
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
+                loggedInViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
         views.add(loggedInView, loggedInView.viewName);
+
+        // TODO: instantiate the AddItemController later
+        InventoryView inventoryView = new InventoryView(inventoryViewModel, addItemViewModel, new AddItemController());
+        views.add(inventoryView, inventoryView.viewName);
+
+        // TODO: detailsView waited to implement
+        DetailsView detailsView = new DetailsView();
+        views.add(detailsView, detailsView.viewName);
+
+        // TODO: instantiate the AddItermController later
+        RestrictionView restrictionView = new RestrictionView(restrictionViewModel, addItemViewModel, new AddItemController());
+        views.add(restrictionView, restrictionView.viewName);
+
+        ResultView resultView = new ResultView();
+        views.add(resultView, resultView.viewName);
 
         viewManagerModel.setActiveView(signupView.viewName);
         viewManagerModel.firePropertyChanged();
