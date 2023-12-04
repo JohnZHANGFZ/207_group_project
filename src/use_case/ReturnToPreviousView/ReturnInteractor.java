@@ -1,5 +1,6 @@
 package use_case.ReturnToPreviousView;
 import interface_adapter.ReturnToPreviousView.ReturnPresenter;
+
 public class ReturnInteractor implements ReturnInputBoundary{
     private ReturnOutputBoundary ReturnPresenter;
     private ViewStack viewStack;
