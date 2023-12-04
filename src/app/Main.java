@@ -68,14 +68,6 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        //TODO: instantiate the inventoryDataAccessObject later
-        InventoryDataAccessInterface inventoryDataAccessObject;
-        try {
-            inventoryDataAccessObject = new InventoryDataAccessObject("./inventory.csv", new CommonInventoryFactory());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
@@ -87,9 +79,8 @@ public class Main {
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
         views.add(loggedInView, loggedInView.viewName);
 
-
         InventoryView inventoryView = InventoryUseCaseFactory.create(inventoryViewModel, viewManagerModel,
-                addItemViewModel, loggedInViewModel, deleteItemViewModel, inventoryDataAccessObject);
+                addItemViewModel, loggedInViewModel, deleteItemViewModel, userDataAccessObject);
         views.add(inventoryView, inventoryView.viewName);
 
         // TODO: detailsView waited to implement
@@ -98,7 +89,7 @@ public class Main {
 
 
         RestrictionView restrictionView = RestrictionUseCaseFactory.create(inventoryViewModel, viewManagerModel,
-                addItemViewModel, loggedInViewModel, deleteItemViewModel, inventoryDataAccessObject);
+                addItemViewModel, loggedInViewModel, deleteItemViewModel, userDataAccessObject);
         views.add(restrictionView, restrictionView.viewName);
 
         ResultView resultView = new ResultView();
