@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.inventory.InventoryController;
 import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.logout.LogoutController;
@@ -16,6 +17,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     public final String viewName = "logged in";
     private final LoggedInViewModel loggedInViewModel;
     private final LogoutController logoutController;
+    private final InventoryController inventoryController;
 
     JLabel username;
 
@@ -25,8 +27,9 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     final JButton getRecipe;
 
     //a window with title and 4 JButtons
-    public LoggedInView(LoggedInViewModel loggedInViewModel, LogoutController logoutController) {
+    public LoggedInView(LoggedInViewModel loggedInViewModel, LogoutController logoutController, InventoryController inventoryController) {
         this.logoutController = logoutController;
+        this.inventoryController = inventoryController;
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
 
@@ -47,12 +50,23 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         logOut = new JButton(loggedInViewModel.LOGOUT_BUTTON_LABEL);
         buttons.add(logOut);
 
-        inventory.addActionListener(this);
+        inventory.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(inventory)) {
+                            inventoryController.execute();
+                        }
+                    }
+                }
+        );
+
         restriction.addActionListener(this);
         getRecipe.addActionListener(this);
 
         logOut.addActionListener(
                 new ActionListener() {
+                    @Override
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(logOut)) {
                             logoutController.execute();
