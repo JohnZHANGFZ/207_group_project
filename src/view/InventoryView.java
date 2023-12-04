@@ -53,7 +53,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
         JLabel title = new JLabel("Inventory Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        LabelTextPanel usernameInfo = new LabelTextPanel(
+        LabelTextPanel itemInfo = new LabelTextPanel(
                 new JLabel("Enter Items: "), itemInputField);
 
         //TODO not sure if this is correct way to display inventory info
@@ -103,6 +103,11 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
 
         //TODO: implemented action listener method for 'cancel' buttons
         cancel.addActionListener(this);
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(title);
+        this.add(itemInfo);
+        this.add(inventoryInfo);
 
 
         //a typing box for users to type what they want to add or delete

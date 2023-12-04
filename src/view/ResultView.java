@@ -52,10 +52,10 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        RecipeInfoState currentState = ResultView.this.recipeInfoViewModel.getState();
+                        RecipeInfoState currentState = recipeInfoViewModel.getState();
 
                         //TODO: How can I get the recipe ID????
-                        ResultView.this.recipeInfoController.execute();
+                        ResultView.this.recipeInfoController.execute(currentState.);
                     }
                 }
         );
