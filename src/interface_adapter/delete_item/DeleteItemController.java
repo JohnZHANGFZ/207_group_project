@@ -12,7 +12,7 @@ public class DeleteItemController {
         this.deleteItemUseCaseInteractor = deleteItemUseCaseInteractor;
     }
 
-    void execute(List<String> ingredients) {
+    public void execute(List<String> ingredients) {
         DeleteItemInputData deleteItemInputData = new DeleteItemInputData(ingredients);
 
         deleteItemUseCaseInteractor.execute(deleteItemInputData);
