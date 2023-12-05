@@ -33,7 +33,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     final JButton restriction;
     final JButton getRecipe;
 
-    //a window with title and 4 JButtons
+    //a window with title, 2 textboxes, 4 JButtons
     public LoggedInView(LoggedInViewModel loggedInViewModel, LogoutController logoutController, InventoryController inventoryController) {
         this.logoutController = logoutController;
         this.inventoryController = inventoryController;
@@ -73,7 +73,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
             @Override
             public void keyTyped(KeyEvent e) {
                 LoggedInState currentState = loggedInViewModel.getState();
-                currentState.setNumRecipes(Integer.valueOf(ingredientsInputField.getText() + e.getKeyChar()));
+                currentState.setNumRecipes(ingredientsInputField.getText() + e.getKeyChar());
                 loggedInViewModel.setState(currentState);
             }
 
