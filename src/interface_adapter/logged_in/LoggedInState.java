@@ -4,7 +4,7 @@ public class LoggedInState {
     private String username = "";
     private String ingredients = "";
     // leaving numRecipes stored in state as a String so that textbox can be updated regardless of what is typed
-    private String numRecipes;
+    private String numRecipes = "";
 
     public LoggedInState(LoggedInState copy) {
         username = copy.username;
