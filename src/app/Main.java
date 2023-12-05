@@ -79,16 +79,17 @@ public class Main {
         LoggedInView loggedInView = new LoggedInView(loggedInViewModel);
         views.add(loggedInView, loggedInView.viewName);
 
-        // TODO: instantiate the AddItemController later
-        InventoryView inventoryView = new InventoryView(inventoryViewModel, addItemViewModel, new AddItemController());
+        InventoryView inventoryView = InventoryUseCaseFactory.create(inventoryViewModel, viewManagerModel,
+                addItemViewModel, loggedInViewModel, deleteItemViewModel, userDataAccessObject);
         views.add(inventoryView, inventoryView.viewName);
 
         // TODO: detailsView waited to implement
         DetailsView detailsView = new DetailsView();
         views.add(detailsView, detailsView.viewName);
 
-        // TODO: instantiate the AddItermController later
-        RestrictionView restrictionView = new RestrictionView(restrictionViewModel, addItemViewModel, new AddItemController());
+
+        RestrictionView restrictionView = RestrictionUseCaseFactory.create(inventoryViewModel, viewManagerModel,
+                addItemViewModel, loggedInViewModel, deleteItemViewModel, userDataAccessObject);
         views.add(restrictionView, restrictionView.viewName);
 
         ResultView resultView = new ResultView();
