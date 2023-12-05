@@ -1,16 +1,18 @@
 package data_access;
 
-import entity.User;
-import entity.UserFactory;
-import entity.CollectionFactory;
+import entity.*;
 import entity.Collection;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
+import use_case.collection.add_item.AddItemDataAccessInterface;
+import use_case.collection.delete_item.DeleteItemDataAccessInterface;
 
 import java.io.*;
 import java.util.*;
 
-public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface {
+public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface,
+        AddItemDataAccessInterface, DeleteItemDataAccessInterface {
+
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
@@ -90,6 +92,16 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     @Override
     public boolean existsByName(String identifier) {
         return accounts.containsKey(identifier);
+    }
+
+    @Override
+    public String delete(Ingredient ingredient) {
+        return null;
+    }
+
+    @Override
+    public void save(Ingredient ingredient) {
+
     }
 
     @Override
