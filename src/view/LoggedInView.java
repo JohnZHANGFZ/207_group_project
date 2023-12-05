@@ -98,12 +98,16 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         getRecipe.add(numRecipesInfo);
         getRecipe.add(getRecipeButton);
 
-        JPanel buttons = new JPanel();
 
+        JPanel inventoryPanel = new JPanel(); // panel with inventory items information and add/delete items button
         inventory = new JButton(loggedInViewModel.INVENTORY_BUTTON_LABEL);
-        buttons.add(inventory);
+        inventoryPanel.add(inventory);
+
+        JPanel restrictionPanel = new JPanel(); // panel with restriction items information and add/delete items button
         restriction = new JButton(loggedInViewModel.RESTRICTION_BUTTON_LABEL);
-        buttons.add(restriction);
+        restrictionPanel.add(restriction);
+
+        JPanel buttons = new JPanel(); // panel for other non-inventory, non-restriction buttons
         logOut = new JButton(loggedInViewModel.LOGOUT_BUTTON_LABEL);
         buttons.add(logOut);
 
@@ -147,7 +151,9 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.add(welcomeBack);
         this.add(username);
         this.add(getRecipe); // includes 2 input textboxes and getRecipeButton
-        this.add(buttons);
+        this.add(inventoryPanel); // includes inventory items and add/delete button
+        this.add(restrictionPanel); // includes restriction items and add/delete button
+        this.add(buttons); // includes log out button
     }
 
     @Override
