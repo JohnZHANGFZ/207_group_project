@@ -12,7 +12,6 @@ public class ViewManager implements PropertyChangeListener {
     private final CardLayout cardLayout;
     private final JPanel views;
     private ViewManagerModel viewManagerModel;
-
     private Stack<String> viewHistory = new Stack<>();
 
 
