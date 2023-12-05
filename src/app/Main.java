@@ -1,6 +1,8 @@
 package app;
 
 import data_access.FileUserDataAccessObject;
+import entity.CommonInventoryFactory;
+import entity.CommonRestrictionFactory;
 import entity.CommonUserFactory;
 import interface_adapter.ReturnToPreviousView.ReturnState;
 import interface_adapter.add_item.AddItemController;
@@ -57,7 +59,7 @@ public class Main {
         // be observed by the Views.
         LoginViewModel loginViewModel = new LoginViewModel("Login");
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel("Logged In");
-        SignupViewModel signupViewModel = new SignupViewModel("Signup");
+        SignupViewModel signupViewModel = new SignupViewModel();
         AddItemViewModel addItemViewModel = new AddItemViewModel("Add Item");
         DeleteItemViewModel deleteItemViewModel = new DeleteItemViewModel("Delete Item");
         InventoryViewModel inventoryViewModel = new InventoryViewModel("Inventory");
@@ -68,7 +70,8 @@ public class Main {
 
         FileUserDataAccessObject userDataAccessObject;
         try {
-            userDataAccessObject = new FileUserDataAccessObject("./users.csv", new CommonUserFactory());
+            userDataAccessObject = new FileUserDataAccessObject("./users.csv", new CommonUserFactory(),
+                    new CommonInventoryFactory(), new CommonRestrictionFactory());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
