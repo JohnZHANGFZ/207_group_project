@@ -33,7 +33,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     final JButton logOut;
     final JButton inventory;
     final JButton restriction;
-    final JButton getRecipe;
+    final JButton getRecipeButton;
 
     //a window with title, 2 textboxes, 4 JButtons
     public LoggedInView(LoggedInViewModel loggedInViewModel, LogoutController logoutController,
@@ -92,9 +92,11 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
             }
         });
 
-        JPanel getRecipeButton = new JPanel();
-        getRecipe = new JButton(loggedInViewModel.RECIPEGETTER_BUTTON_LABLE);
-        getRecipeButton.add(getRecipe);
+        JPanel getRecipe = new JPanel();
+        getRecipeButton = new JButton(loggedInViewModel.RECIPEGETTER_BUTTON_LABLE);
+        getRecipe.add(ingredientsInfo);
+        getRecipe.add(numRecipesInfo);
+        getRecipe.add(getRecipeButton);
 
         JPanel buttons = new JPanel();
 
@@ -127,7 +129,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
-        getRecipe.addActionListener(this);
+        getRecipeButton.addActionListener(this);
 
         logOut.addActionListener(
                 new ActionListener() {
@@ -144,9 +146,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.add(title);
         this.add(welcomeBack);
         this.add(username);
-        this.add(ingredientsInfo); // textbox for ingredient list
-        this.add(numRecipesInfo); // textbox for numRecipes
-        this.add(getRecipeButton);
+        this.add(getRecipe); // includes 2 input textboxes and getRecipeButton
         this.add(buttons);
     }
 
