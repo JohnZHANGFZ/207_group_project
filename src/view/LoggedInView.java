@@ -29,6 +29,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     private final RestrictionController restrictionController;
 
     JLabel username;
+    JTextArea inventoryList;
+    JTextArea allergiesList;
 
     final JButton logOut;
     final JButton inventory;
@@ -98,14 +100,15 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         getRecipe.add(numRecipesInfo); // adds numRecipes input text box
         getRecipe.add(getRecipeButton); // adds Get Recipe button
 
-
         JPanel inventoryPanel = new JPanel(); // panel with inventory items information and add/delete items button
         inventory = new JButton(loggedInViewModel.INVENTORY_BUTTON_LABEL);
-        inventoryPanel.add(inventory);
+        inventoryPanel.add(inventoryList); // adds user's current inventory info
+        inventoryPanel.add(inventory); // adds Add/Delete inventory items button
 
         JPanel restrictionPanel = new JPanel(); // panel with restriction items information and add/delete items button
         restriction = new JButton(loggedInViewModel.RESTRICTION_BUTTON_LABEL);
-        restrictionPanel.add(restriction);
+        restrictionPanel.add(allergiesList); // adds user's current allergies info
+        restrictionPanel.add(restriction); // adds Add/Delete allergy items button
 
         JPanel buttons = new JPanel(); // panel for other non-inventory, non-restriction buttons
         logOut = new JButton(loggedInViewModel.LOGOUT_BUTTON_LABEL);
@@ -165,5 +168,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     public void propertyChange(PropertyChangeEvent evt) {
         LoggedInState state = (LoggedInState) evt.getNewValue();
         username.setText(state.getUsername());
+        inventoryList.setText(""); // TODO: access user's inventory items from here
+        allergiesList.setText(""); // TODO: access user's restriction items from here
     }
 }
