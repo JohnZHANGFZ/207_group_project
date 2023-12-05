@@ -168,7 +168,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     public void propertyChange(PropertyChangeEvent evt) {
         LoggedInState state = (LoggedInState) evt.getNewValue();
         username.setText(state.getUsername());
-        inventoryList.setText(""); // TODO: access user's inventory items from here
-        allergiesList.setText(""); // TODO: access user's restriction items from here
+        inventoryList.setText(state.getUserInventory());
+        allergiesList.setText(state.getUserRestrictions());
     }
 }
