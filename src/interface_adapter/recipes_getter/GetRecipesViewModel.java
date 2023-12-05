@@ -5,6 +5,11 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class GetRecipesViewModel extends ViewModel {
+    public final String TITLE_LABEL = "Recipe Result View";
+    public final String ITEM_LABLE = "Enter Recipe ID: ";
+    public static final String CANCEL_BUTTON_LABEL = "Cancel";
+    public static final String SEARCHID_BUTTON_LABEL = "Search ID";
+
 
     private GetRecipesState state = new GetRecipesState();
 

@@ -4,13 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommonRestriction implements Collection {
-    private List<Ingredient> allergies;
+    private ArrayList<Ingredient> allergies;
     public CommonRestriction(){
         this.allergies = new ArrayList();
     }
     @Override
-    public List<Ingredient> getItems() {
+    public ArrayList<Ingredient> getItems() {
         return this.allergies;
+    }
+
+    public String toString() {
+        String result = "";
+        for (int i=0; i < allergies.size(); i++) {
+            result += allergies.get(i).getName();
+            result += ", ";
+        }
+        return result;
     }
 
     // Given list of Ingredient objects, adds all to allergies

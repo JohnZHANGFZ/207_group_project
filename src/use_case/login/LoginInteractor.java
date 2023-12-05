@@ -19,9 +19,6 @@ public class LoginInteractor implements LoginInputBoundary {
          if (!loginUserDataAccessInterface.existsByName(username)) {
              loginOutputBoundary.prepareFailView(username + ": Account does not exist.");
 
-         } else if (username.equals("admin") && password.equals("admin")) {
-             loginOutputBoundary.prepareSuccessView(new LoginOutputData("admin", true));
-
          } else if (!loginInputData.isUsernameValid() || !loginInputData.isPasswordValid()) {
              loginOutputBoundary.prepareFailView("Username or password is invalid.");
 
@@ -33,7 +30,8 @@ public class LoginInteractor implements LoginInputBoundary {
 
                  User user = loginUserDataAccessInterface.getUser(loginInputData.getUsername());
 
-                 LoginOutputData loginOutputData = new LoginOutputData(user.getName(), false);
+                 LoginOutputData loginOutputData = new LoginOutputData(user.getName(), false,
+                         user.getInventory().toString(), user.getAllergies().toString());
                  loginOutputBoundary.prepareSuccessView(loginOutputData);
              }
          }

@@ -5,12 +5,23 @@ import java.util.List;
 
 public class CommonInventory implements Collection {
 
-    private List<Ingredient> inventory;
+    private ArrayList<Ingredient> inventory;
 
     public CommonInventory() { this.inventory = new ArrayList(); }
 
     @Override
-    public List<Ingredient> getItems() { return inventory; }
+    public ArrayList<Ingredient> getItems() { return inventory; }
+
+    // returns inventory as String, with each item separated by ','
+    @Override
+    public String toString() {
+        String result = "";
+        for (int i=0; i < inventory.size(); i++) {
+            result += inventory.get(i).getName();
+            result += ", ";
+        }
+        return result;
+    }
 
     // Given list of Ingredient objects, adds each to inventory
     @Override

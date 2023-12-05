@@ -3,8 +3,9 @@ package interface_adapter.logout;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
+import use_case.logout.LogoutOutputBoundary;
 
-public class LogoutPresenter {
+public class LogoutPresenter implements LogoutOutputBoundary {
     private final LoginViewModel loginViewModel;
     private ViewManagerModel viewManagerModel;
 
