@@ -5,6 +5,7 @@ import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginState;
 import interface_adapter.logout.LogoutController;
+import interface_adapter.restriction.RestrictionController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +26,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     private final LogoutController logoutController;
     private final InventoryController inventoryController;
+    private final RestrictionController restrictionController;
 
     JLabel username;
 
@@ -34,9 +36,11 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     final JButton getRecipe;
 
     //a window with title, 2 textboxes, 4 JButtons
-    public LoggedInView(LoggedInViewModel loggedInViewModel, LogoutController logoutController, InventoryController inventoryController) {
+    public LoggedInView(LoggedInViewModel loggedInViewModel, LogoutController logoutController,
+                        InventoryController inventoryController, RestrictionController restrictionController) {
         this.logoutController = logoutController;
         this.inventoryController = inventoryController;
+        this.restrictionController = restrictionController;
         this.loggedInViewModel = loggedInViewModel;
         this.loggedInViewModel.addPropertyChangeListener(this);
 
@@ -112,7 +116,17 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
-        restriction.addActionListener(this);
+        restriction.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(restriction)) {
+                            restrictionController.execute();
+                        }
+                    }
+                }
+        );
+
         getRecipe.addActionListener(this);
 
         logOut.addActionListener(
