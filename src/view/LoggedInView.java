@@ -92,11 +92,11 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
             }
         });
 
-        JPanel getRecipe = new JPanel();
+        JPanel getRecipe = new JPanel(); // panel with getRecipe related items
         getRecipeButton = new JButton(loggedInViewModel.RECIPEGETTER_BUTTON_LABLE);
-        getRecipe.add(ingredientsInfo);
-        getRecipe.add(numRecipesInfo);
-        getRecipe.add(getRecipeButton);
+        getRecipe.add(ingredientsInfo); // adds ingredients input text box
+        getRecipe.add(numRecipesInfo); // adds numRecipes input text box
+        getRecipe.add(getRecipeButton); // adds Get Recipe button
 
 
         JPanel inventoryPanel = new JPanel(); // panel with inventory items information and add/delete items button
