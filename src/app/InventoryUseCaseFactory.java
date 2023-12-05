@@ -1,33 +1,30 @@
 package app;
 
-import entity.*;
-
+import data_access.FileUserDataAccessObject;
+import entity.CommonIngredientFactory;
+import entity.CommonInventory;
+import entity.CommonInventoryFactory;
+import entity.IngredientFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.inventory.InventoryViewModel;
-
 import interface_adapter.add_item.AddItemController;
 import interface_adapter.add_item.AddItemPresenter;
 import interface_adapter.add_item.AddItemViewModel;
-
 import interface_adapter.delete_item.DeleteItemController;
 import interface_adapter.delete_item.DeleteItemPresenter;
 import interface_adapter.delete_item.DeleteItemViewModel;
-
+import interface_adapter.inventory.InventoryViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
+import use_case.collection.add_item.AddItemDataAccessInterface;
 import use_case.collection.add_item.AddItemInputBoundary;
 import use_case.collection.add_item.AddItemInteractor;
-import use_case.collection.add_item.AddItemDataAccessInterface;
-
+import use_case.collection.delete_item.DeleteItemDataAccessInterface;
 import use_case.collection.delete_item.DeleteItemInputBoundary;
 import use_case.collection.delete_item.DeleteItemInteractor;
-import use_case.collection.delete_item.DeleteItemDataAccessInterface;
-
-import data_access.FileUserDataAccessObject;
 import view.InventoryView;
-import view.ViewManager;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class InventoryUseCaseFactory {
 
@@ -44,14 +41,14 @@ public class InventoryUseCaseFactory {
 
             try {
                 IngredientFactory ingredientFactory = new CommonIngredientFactory();
-                CollectionFactory inventoryFactory = new CommonInventoryFactory();
+                CommonInventory inventoryFactory = new CommonInventoryFactory().create(new ArrayList<String>());
                 AddItemController addItemController = createAddItemUseCase(viewManagerModel, addItemViewModel,
                         loggedInViewModel, userDataAccessObject, ingredientFactory);
 
                 DeleteItemController deleteItemController = createDeleteItemUseCase(viewManagerModel,
                         deleteItemViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
-                return new InventoryView(inventoryViewModel, addItemViewModel,addItemController,
+                return new InventoryView(inventoryViewModel, addItemViewModel, addItemController,
                         deleteItemViewModel, deleteItemController, inventoryFactory);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Could not open inventory data file.");
