@@ -6,11 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Stack;
 
 public class ViewManager implements PropertyChangeListener {
     private final CardLayout cardLayout;
     private final JPanel views;
     private ViewManagerModel viewManagerModel;
+
+    private Stack<String> viewHistory = new Stack<>();
 
 
 
@@ -26,6 +29,24 @@ public class ViewManager implements PropertyChangeListener {
         if (evt.getPropertyName().equals("view")) {
             String viewModelName = (String) evt.getNewValue();
             cardLayout.show(views, viewModelName);
+
+            // Push the new view onto the stack
+            if (!viewHistory.isEmpty() && !viewHistory.peek().equals(viewModelName)) {
+                viewHistory.push(viewModelName);
+            }
+        }
+    }
+
+    public void goBack() {
+        if (!viewHistory.isEmpty()) {
+            // Pop the current view
+            viewHistory.pop();
+
+            if (!viewHistory.isEmpty()) {
+                // Show the previous view
+                String previousView = viewHistory.peek();
+                cardLayout.show(views, previousView);
+            }
         }
     }
 }
