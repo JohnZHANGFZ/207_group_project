@@ -2,6 +2,7 @@ package app;
 
 import data_access.FileUserDataAccessObject;
 import entity.CommonUserFactory;
+import interface_adapter.ReturnToPreviousView.ReturnState;
 import interface_adapter.add_item.AddItemController;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
@@ -14,6 +15,7 @@ import interface_adapter.recipe_result.ResultViewModel;
 import interface_adapter.recipes_getter.GetRecipesViewModel;
 import interface_adapter.restriction.RestrictionViewModel;
 import interface_adapter.ViewManagerModel;
+import use_case.ReturnToPreviousView.ReturnInteractor;
 import use_case.login.LoginUserDataAccessInterface;
 import view.LoggedInView;
 import view.LoginView;
@@ -42,9 +44,12 @@ public class Main {
         JPanel views = new JPanel(cardLayout);
         application.add(views);
 
+        ReturnState returnState = new ReturnState();
+        ReturnInteractor returnInteractor = new ReturnInteractor(returnState);
         // This keeps track of and manages which view is currently showing.
         ViewManagerModel viewManagerModel = new ViewManagerModel();
-        new ViewManager(views, cardLayout, viewManagerModel);
+        ViewManager viewManager = new ViewManager(views, cardLayout, viewManagerModel);
+        returnInteractor.addObserver(viewManager);
 
         // The data for the views, such as username and password, are in the ViewModels.
         // This information will be changed by a presenter object that is reporting the
