@@ -52,7 +52,7 @@ public class InventoryUseCaseFactory {
                         deleteItemViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
                 return new InventoryView(inventoryViewModel, addItemViewModel,addItemController,
-                        deleteItemViewModel, deleteItemController, inventoryFactory);
+                        deleteItemViewModel, deleteItemController);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Could not open inventory data file.");
             }

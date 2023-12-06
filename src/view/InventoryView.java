@@ -53,7 +53,6 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
         LabelTextPanel itemInfo = new LabelTextPanel(
                 new JLabel("Enter Items: "), itemInputField);
 
-        //TODO not sure if this is correct way to display inventory info
 
 
         //Add buttons
