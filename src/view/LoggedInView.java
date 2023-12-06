@@ -3,7 +3,6 @@ package view;
 import interface_adapter.inventory.InventoryController;
 import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
-import interface_adapter.login.LoginState;
 import interface_adapter.logout.LogoutController;
 import interface_adapter.restriction.RestrictionController;
 
@@ -102,6 +101,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         JPanel inventoryPanel = new JPanel(); // panel with inventory items information and add/delete items button
         inventory = new JButton(loggedInViewModel.INVENTORY_BUTTON_LABEL);
+        inventoryList = new JTextArea(); // TODO: the size should be specified later
+        allergiesList = new JTextArea(); // TODO: same as above
         inventoryPanel.add(inventoryList); // adds user's current inventory info
         inventoryPanel.add(inventory); // adds Add/Delete inventory items button
 
