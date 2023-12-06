@@ -61,6 +61,9 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 }
         );
 
+        //TODO implemented action listener method for 'cancel' buttons
+        cancel.addActionListener(this);
+
         usernameInputField.addKeyListener(
                 new KeyListener() {
                     @Override

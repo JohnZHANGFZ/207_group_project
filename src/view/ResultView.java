@@ -103,6 +103,7 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
         searchID = new JButton(GetRecipesViewModel.SEARCHID_BUTTON_LABEL);
         buttons.add(searchID);
 
+        //TODO implemented action listener method for 'cancel' buttons
         cancel.addActionListener(this);
         searchID.addActionListener(
                 new ActionListener() {
