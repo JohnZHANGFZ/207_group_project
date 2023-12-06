@@ -26,6 +26,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     final JTextField ingredientsInputField = new JTextField(15);
     final JPasswordField numRecipesInputField = new JPasswordField(15);
+    private final JLabel deleteAccountErrorField = new JLabel();
 
     private final LogoutController logoutController;
     private final InventoryController inventoryController;
@@ -37,6 +38,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     JTextArea allergiesList;
 
     final JButton logOut;
+    final JButton deleteAccount;
     final JButton inventory;
     final JButton restriction;
     final JButton getRecipeButton;
@@ -118,7 +120,10 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         JPanel buttons = new JPanel(); // panel for other non-inventory, non-restriction buttons
         logOut = new JButton(loggedInViewModel.LOGOUT_BUTTON_LABEL);
+        deleteAccount = new JButton(loggedInViewModel.DELETE_ACCOUNT_BUTTON_LABEL);
         buttons.add(logOut);
+        buttons.add(deleteAccount);
+        buttons.add(deleteAccountErrorField);
 
         inventory.addActionListener(
                 new ActionListener() {
@@ -178,7 +183,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.add(getRecipe); // includes 2 input textboxes and getRecipeButton
         this.add(inventoryPanel); // includes inventory items and add/delete button
         this.add(restrictionPanel); // includes restriction items and add/delete button
-        this.add(buttons); // includes log out button
+        this.add(buttons); // includes log out and delete account buttons
     }
 
     @Override
@@ -192,5 +197,6 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         username.setText(state.getUsername());
         inventoryList.setText(state.getUserInventory());
         allergiesList.setText(state.getUserRestrictions());
+        deleteAccountErrorField.setText(state.getDeleteAccountError());
     }
 }

@@ -19,6 +19,7 @@ public class LoggedInViewModel extends ViewModel {
     public static final String RECIPEGETTER_BUTTON_LABLE = "Get Recipe";
     public static final String INVENTORY_BUTTON_LABEL = "Add/Delete Items in Inventory";
     public static final String RESTRICTION_BUTTON_LABEL = "Add/Delete Items in Allergies";
+    public static final String DELETE_ACCOUNT_BUTTON_LABEL = "Delete account";
 
 
 
