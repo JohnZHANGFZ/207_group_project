@@ -52,7 +52,7 @@ public class RestrictionUseCaseFactory {
                     deleteItemViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
             return new RestrictionView(inventoryViewModel, addItemViewModel,addItemController,
-                    deleteItemViewModel, deleteItemController, inventoryFactory);
+                    deleteItemViewModel, deleteItemController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open inventory data file.");
         }
