@@ -121,8 +121,8 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(title);
-        this.add(itemInfo);
         this.add(inventoryInfo);
+        this.add(itemInfo);
     }
 
     @Override
