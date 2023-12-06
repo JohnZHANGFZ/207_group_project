@@ -25,7 +25,7 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     //deleteItem
     @Override
     public String delete(Ingredient ingredient) {
-        if (existsByName(String.valueOf(ingredient))) {
+        if (inventory.containsValue(ingredient)) {
             inventory.remove(ingredient);
             return String.valueOf(ingredient);
         } else{
