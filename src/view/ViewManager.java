@@ -1,14 +1,14 @@
 package view;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.return_home.ViewChangeObserver;
+
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Stack;
 
-public class ViewManager implements PropertyChangeListener, ViewChangeObserver {
+public class ViewManager implements PropertyChangeListener {
     private final CardLayout cardLayout;
     private final JPanel views;
     private ViewManagerModel viewManagerModel;
@@ -36,20 +36,4 @@ public class ViewManager implements PropertyChangeListener, ViewChangeObserver {
         }
     }
 
-    public void goBack() {
-        if (!viewHistory.isEmpty()) {
-            // Pop the current view
-            viewHistory.pop();
-
-            if (!viewHistory.isEmpty()) {
-                // Show the previous view
-                String previousView = viewHistory.peek();
-                cardLayout.show(views, previousView);
-            }
-        }
-    }
-    public void onViewChange(String viewName) {
-        cardLayout.show(views, viewName);
-        // might need to update view history stack
-    }
 }

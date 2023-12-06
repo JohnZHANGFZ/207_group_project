@@ -1,8 +1,5 @@
 package use_case.return_home;
 
-import interface_adapter.return_home.ReturnPresenter;
-import interface_adapter.return_home.ViewChangeObserver;
-
 public class ReturnInteractor implements ReturnInputBoundary {
     final ReturnOutputBoundary returnPresenter;
 
