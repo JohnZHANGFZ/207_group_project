@@ -90,9 +90,8 @@ public class Main {
                 addItemViewModel, loggedInViewModel, deleteItemViewModel, userDataAccessObject);
         views.add(inventoryView, inventoryView.viewName);
 
-        // TODO: detailsView waited to implement
-//        DetailsView detailsView = new DetailsView();
-//        views.add(detailsView, detailsView.viewName);
+        DetailsView detailsView = new DetailsView(resultInfoViewModel);
+        views.add(detailsView, detailsView.viewName);
 
         RestrictionView restrictionView = RestrictionUseCaseFactory.create(viewManagerModel,
                 addItemViewModel, loggedInViewModel, deleteItemViewModel, restrictionViewModel, userDataAccessObject);
