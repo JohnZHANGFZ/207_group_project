@@ -3,13 +3,13 @@ package interface_adapter.return_home;
 import use_case.return_home.ReturnInputBoundary;
 
 public class ReturnController {
-    private ReturnInputBoundary returnInputBoundary;
+    private ReturnInputBoundary returnInteractor;
 
-    public ReturnController(ReturnInputBoundary returnInputBoundary) {
-        this.returnInputBoundary = returnInputBoundary;
+    public ReturnController(ReturnInputBoundary returnInteractor) {
+        this.returnInteractor = returnInteractor;
     }
 
-    public void onBackButtonClicked() {
-        returnInputBoundary.navigateBack();
+    public void execute() {
+        returnInteractor.execute();
     }
 }
