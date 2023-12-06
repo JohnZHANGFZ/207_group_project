@@ -1,20 +1,24 @@
 import app.Main;
-import data_access.FileUserDataAccessObject;
-import entity.Collection;
-import entity.CommonInventory;
+import entity.CommonIngredientFactory;
+import interface_adapter.add_item.AddItemPresenter;
+import interface_adapter.add_item.AddItemViewModel;
 import interface_adapter.inventory.InventoryViewModel;
-import use_case.collection.add_item.AddItemDataAccessInterface;
+import interface_adapter.logged_in.LoggedInViewModel;
+import use_case.collection.add_item.*;
 import use_case.login.LoginOutputBoundary;
-import use_case.login.LoginUserDataAccessInterface;
 import view.InventoryView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 
 public class AddItemTest {
+    private AddItemViewModel addItemViewModel;
+    private LoggedInViewModel loggedInViewModel;
 
     public void addOneToInventory() {
         InventoryViewModel inventoryViewModel = new InventoryViewModel("mock Inventory");
@@ -47,7 +51,7 @@ public class AddItemTest {
 
         JPanel buttons = (JPanel) sv.getComponent(4);
 
-        return (JButton) buttons.getComponent(num); // this should be the clear button
+        return (JButton) buttons.getComponent(num); // this should be the button we want
     }
 
     @org.junit.Test
@@ -72,8 +76,28 @@ public class AddItemTest {
     }
 
 
-    public void testAddInventoryOneItem() {
+    public void successAddItemTest() {
+        AddItemDataAccessInterface addDataAccess = mock(AddItemDataAccessInterface.class);
 
+        AddItemOutputBoundary successPresenter = new AddItemOutputBoundary() {
+            @Override
+            public void prepareSuccessView() {
+                assertEquals();
+            }
 
+            @Override
+            public void prepareFailView(String error) {
+
+            }
+        };
+
+        ArrayList ingredients = new ArrayList<>();
+        ingredients.add("Apple");
+        ingredients.add("Banana");
+        AddItemInputData inputData = new AddItemInputData(ingredients);
+
+        AddItemInputBoundary interactor = new AddItemInteractor(addDataAccess, successPresenter,
+                new CommonIngredientFactory());
+        interactor.execute(inputData);
     }
 }
