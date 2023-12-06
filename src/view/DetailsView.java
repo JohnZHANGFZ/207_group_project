@@ -5,10 +5,8 @@ import interface_adapter.recipe_info_result.ResultInfoViewModel;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
-public class DetailsView extends JPanel implements ActionListener, PropertyChangeListener {
+public class DetailsView extends JPanel implements ActionListener{
 
     public final String viewName = "Details";
     public DetailsView(ResultInfoViewModel resultInfoViewModel) {
@@ -18,7 +16,7 @@ public class DetailsView extends JPanel implements ActionListener, PropertyChang
 
         // JLabel recipeName = new JLabel("Recipe Name: " + recipeInfoViewModel.getState().getName());
         // JLabel recipeIngredients = new JLabel("Recipe Ingredients: " + recipeInfoViewModel.getState().getIngredients());
-        JLabel recipeInstructions = new JLabel("Recipe Instructions: " + recipeInfoViewModel.getState().getInstructions());
+        JLabel recipeInstructions = new JLabel("Recipe Instructions: " + resultInfoViewModel.getState().getRecipe());
 
 
         //add buttons
@@ -31,29 +29,15 @@ public class DetailsView extends JPanel implements ActionListener, PropertyChang
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        recipeInfoViewModel.getState().setID(id);
-
+                        //TODO
                     }
-
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-
-                    }
-
-                    @Override
-                    public void propertyChange(PropertyChangeEvent evt) {
-
-                    }
-                }
+}
+        );
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-    }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
 
     }
 }
