@@ -1,6 +1,7 @@
 package view;
 
 import entity.CommonInventory;
+import interface_adapter.ReturnToPreviousView.ReturnController;
 import interface_adapter.add_item.AddItemController;
 import interface_adapter.add_item.AddItemState;
 import interface_adapter.add_item.AddItemViewModel;
@@ -40,7 +41,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                          AddItemViewModel addItemViewModel,
                          AddItemController addItemController,
                          DeleteItemViewModel deleteItemViewModel,
-                         DeleteItemController deleteItemController) {
+                         DeleteItemController deleteItemController, ReturnController returnController) {
         this.inventoryViewModel = inventoryViewModel;
         this.addItemViewModel = addItemViewModel;
         this.addItemController = addItemController;
@@ -96,9 +97,14 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                 }
         );
 
-        //TODO: implemented action listener method for 'cancel' buttons
-        cancel.addActionListener(this);
-
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(cancel)) {
+                    returnController.onBackButtonClicked();
+                }
+            }
+        });
 
         //a typing box for users to type what they want to add or delete
         itemInputField.addKeyListener(new KeyListener() {
