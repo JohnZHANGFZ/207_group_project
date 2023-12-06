@@ -50,7 +50,7 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
         JLabel title = new JLabel("Restriction Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        LabelTextPanel usernameInfo = new LabelTextPanel(
+        LabelTextPanel itemInfo = new LabelTextPanel(
                 new JLabel("Enter Items: "), itemInputField);
 
 
@@ -120,6 +120,7 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(title);
         this.add(restrictionInfo);
+        this.add(itemInfo);
         this.add(buttons);
     }
 
