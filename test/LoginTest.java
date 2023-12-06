@@ -1,5 +1,7 @@
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
+
+import entity.CommonUser;
 import org.junit.Test;
 import use_case.login.*;
 public class LoginTest {
@@ -8,7 +10,7 @@ public class LoginTest {
         LoginUserDataAccessInterface userDataAccess = mock(LoginUserDataAccessInterface.class);
         LoginOutputBoundary outputBoundary = mock(LoginOutputBoundary.class);
         when(userDataAccess.existsByName("validUser")).thenReturn(true);
-        when(userDataAccess.getUser("validUser")).thenReturn(new User("validUser", "password123"));
+        when(userDataAccess.getUser("validUser")).thenReturn(new CommonUser("validUser", "password123"));
 
         LoginInteractor loginInteractor = new LoginInteractor(userDataAccess, outputBoundary);
         loginInteractor.execute(new LoginInputData("validUser", "password123"));
@@ -21,7 +23,7 @@ public class LoginTest {
         LoginUserDataAccessInterface userDataAccess = mock(LoginUserDataAccessInterface.class);
         LoginOutputBoundary outputBoundary = mock(LoginOutputBoundary.class);
         when(userDataAccess.existsByName("validUser")).thenReturn(true);
-        when(userDataAccess.getUser("validUser")).thenReturn(new User("validUser", "password123"));
+        when(userDataAccess.getUser("validUser")).thenReturn(new CommonUser("validUser", "password123"));
 
         LoginInteractor loginInteractor = new LoginInteractor(userDataAccess, outputBoundary);
         loginInteractor.execute(new LoginInputData("validUser", "wrongPassword"));
