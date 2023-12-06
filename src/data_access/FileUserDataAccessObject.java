@@ -120,8 +120,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
                 writer.close();
                 reader.close();
 
-                tempFile.renameTo(csvFile); // new rewritten file replaces original file
                 csvFile.delete();
+                tempFile.renameTo(csvFile); // renames new file to replace original
 
                 return true;
 
