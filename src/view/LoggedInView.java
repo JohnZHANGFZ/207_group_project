@@ -110,6 +110,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
         JPanel inventoryPanel = new JPanel(); // panel with inventory items information and add/delete items button
         inventory = new JButton(loggedInViewModel.INVENTORY_BUTTON_LABEL);
+        inventoryList = new JTextArea(); // TODO: the size should be specified later
+        allergiesList = new JTextArea(); // TODO: same as above
         inventoryPanel.add(inventoryList); // adds user's current inventory info
         inventoryPanel.add(inventory); // adds Add/Delete inventory items button
 
