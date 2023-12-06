@@ -2,6 +2,7 @@ package data_access;
 
 import entity.*;
 import entity.Collection;
+import use_case.delete_account.DeleteAccountDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 import use_case.collection.add_item.AddItemDataAccessInterface;
@@ -11,7 +12,7 @@ import java.io.*;
 import java.util.*;
 
 public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface,
-        AddItemDataAccessInterface, DeleteItemDataAccessInterface {
+        AddItemDataAccessInterface, DeleteItemDataAccessInterface, DeleteAccountDataAccessInterface {
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
@@ -92,6 +93,17 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     @Override
     public boolean existsByName(String identifier) {
         return accounts.containsKey(identifier);
+    }
+
+    @Override
+    public boolean deleteUser(String username) {
+        if (existsByName(username)) {
+            // TODO: implement deletion of account from file
+            
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
