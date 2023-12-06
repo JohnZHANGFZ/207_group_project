@@ -6,6 +6,12 @@ import com.google.gson.JsonObject;
 import java.util.ArrayList;
 
 public class process_allergy {
+
+    /*
+    Takes in a json array of recipes and an arraylist of strings of allergies and then checks
+    each recipe to make sure it has no ingredients with allergies in them. It then returns an updated
+    json array with the recipes that have allergies removed.
+     */
     public static JsonArray processAllergies(JsonArray recipes, ArrayList<String> allergies) {
         JsonArray new_recipe = new JsonArray();
         for (int i = 0; i < recipes.size(); i++) { //allows us to loop through the list of recipe json objects
@@ -38,6 +44,9 @@ public class process_allergy {
         return false;
     }
 
+    /*
+    takes the json object recipe and returns the ingredients in it.
+     */
     public static ArrayList<String> getIngredients(JsonObject recipe) {
         ArrayList <String> ingredients = new ArrayList<>();
         JsonArray usedIngredients = (JsonArray) recipe.get("usedIngredients");
