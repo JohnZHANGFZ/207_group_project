@@ -97,10 +97,35 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     @Override
     public boolean deleteUser(String username) {
+
         if (existsByName(username)) {
-            // TODO: implement deletion of account from file
-            
-            return true;
+
+            try {
+                File tempFile = new File("myTempFile.txt"); // creates new file to rewrite data into
+
+                BufferedReader reader = new BufferedReader(new FileReader(csvFile));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+                String lineToRemove = username;
+                int nameLength = username.length();
+                String currentLine;
+
+                // checkes if first nameLength of each length matches username to remove, skips over that line if matches
+                while((currentLine = reader.readLine()) != null) {
+                    String currentUser = currentLine.trim().substring(0, nameLength);
+                    if(currentUser.equals(lineToRemove)) continue;
+                    writer.write(currentLine + "/n");
+                }
+
+                writer.close();
+                reader.close();
+                tempFile.renameTo(csvFile); // new rewritten file replaces original file
+                return true;
+
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         } else {
             return false;
         }
