@@ -2,6 +2,7 @@ package view;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import interface_adapter.ReturnToPreviousView.ReturnController;
 import interface_adapter.recipe_information_getter.RecipeInfoController;
 import interface_adapter.recipe_information_getter.RecipeInfoState;
 import interface_adapter.recipe_information_getter.RecipeInfoViewModel;
@@ -27,6 +28,7 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     private final GetRecipesViewModel getRecipesViewModel;
     private final RecipeInfoViewModel recipeInfoViewModel;
     private final RecipeInfoController recipeInfoController;
+    private final ReturnController returnController;
 
     JTable recipeResult;
     final JButton cancel;
@@ -34,10 +36,12 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
 
     public ResultView(GetRecipesViewModel getRecipesViewModel,
                       RecipeInfoViewModel recipeInfoViewModel,
-                      RecipeInfoController recipeInfoController) {
+                      RecipeInfoController recipeInfoController,
+                      ReturnController returnController) {
         this.getRecipesViewModel = getRecipesViewModel;
         this.recipeInfoViewModel = recipeInfoViewModel;
         this.recipeInfoController = recipeInfoController;
+        this.returnController = returnController;
 
 
         JLabel viewTitle = new JLabel("Recipe Result");
@@ -103,8 +107,15 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
         searchID = new JButton(GetRecipesViewModel.SEARCHID_BUTTON_LABEL);
         buttons.add(searchID);
 
-        //TODO implemented action listener method for 'cancel' buttons
-        cancel.addActionListener(this);
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(cancel)) {
+                    returnController.onBackButtonClicked();
+                }
+            }
+        });
+
         searchID.addActionListener(
                 new ActionListener() {
                     @Override
