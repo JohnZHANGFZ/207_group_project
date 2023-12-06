@@ -46,7 +46,7 @@ public class RestrictionUseCaseFactory {
             DeleteItemController deleteItemController = createDeleteItemUseCase(viewManagerModel,
                     deleteItemViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
-            return new RestrictionView(inventoryViewModel, addItemViewModel,addItemController,
+            return new RestrictionView(restrictionViewModel, addItemViewModel,addItemController,
                     deleteItemViewModel, deleteItemController);
 
         } catch (IOException e) {
