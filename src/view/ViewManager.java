@@ -1,7 +1,7 @@
 package view;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.ReturnToPreviousView.ViewChangeObserver;
+import interface_adapter.return_home.ViewChangeObserver;
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;

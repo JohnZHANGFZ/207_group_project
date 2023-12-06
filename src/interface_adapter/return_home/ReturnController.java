@@ -1,6 +1,6 @@
-package interface_adapter.ReturnToPreviousView;
+package interface_adapter.return_home;
 
-import use_case.ReturnToPreviousView.ReturnInputBoundary;
+import use_case.return_home.ReturnInputBoundary;
 
 public class ReturnController {
     private ReturnInputBoundary returnInputBoundary;

@@ -1,4 +1,4 @@
-package interface_adapter.ReturnToPreviousView;
+package interface_adapter.return_home;
 
 import java.util.Stack;
 

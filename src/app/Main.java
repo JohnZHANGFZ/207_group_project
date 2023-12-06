@@ -4,7 +4,7 @@ import data_access.FileUserDataAccessObject;
 import entity.CommonInventoryFactory;
 import entity.CommonRestrictionFactory;
 import entity.CommonUserFactory;
-import interface_adapter.ReturnToPreviousView.ReturnState;
+import interface_adapter.return_home.ReturnState;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.add_item.AddItemViewModel;
 import interface_adapter.delete_item.DeleteItemViewModel;
@@ -17,7 +17,7 @@ import interface_adapter.recipe_result.ResultViewModel;
 import interface_adapter.recipes_getter.GetRecipesViewModel;
 import interface_adapter.restriction.RestrictionViewModel;
 import interface_adapter.signup.SignupViewModel;
-import use_case.ReturnToPreviousView.ReturnInteractor;
+import use_case.return_home.ReturnInteractor;
 import view.*;
 
 import javax.swing.*;
