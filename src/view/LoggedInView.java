@@ -3,8 +3,9 @@ package view;
 import interface_adapter.inventory.InventoryController;
 import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
-import interface_adapter.login.LoginState;
 import interface_adapter.logout.LogoutController;
+import interface_adapter.recipes_getter.GetRecipesController;
+import interface_adapter.recipes_getter.GetRecipesState;
 import interface_adapter.restriction.RestrictionController;
 
 import javax.swing.*;
@@ -15,6 +16,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -27,6 +29,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
     private final LogoutController logoutController;
     private final InventoryController inventoryController;
     private final RestrictionController restrictionController;
+    private final GetRecipesController getRecipesController;
 
     JLabel username;
     JTextArea inventoryList;
@@ -39,11 +42,13 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     //a window with title, 2 textboxes, 4 JButtons
     public LoggedInView(LoggedInViewModel loggedInViewModel, LogoutController logoutController,
-                        InventoryController inventoryController, RestrictionController restrictionController) {
+                        InventoryController inventoryController, RestrictionController restrictionController,
+                        GetRecipesController getRecipesController) {
         this.logoutController = logoutController;
         this.inventoryController = inventoryController;
         this.restrictionController = restrictionController;
         this.loggedInViewModel = loggedInViewModel;
+        this.getRecipesController = getRecipesController;
         this.loggedInViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel("Logged In");
@@ -136,7 +141,19 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                 }
         );
 
-        getRecipeButton.addActionListener(this);
+        getRecipeButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(getRecipeButton)) {
+                            LoggedInState currentState = loggedInViewModel.getState();
+                            //TODO String ingredients = currentState.getIngredients();
+                            int recipeNum = Integer.parseInt(currentState.getNumRecipes());
+                            // TODO getRecipesController.execute();
+                        }
+                    }
+                }
+        );
 
         logOut.addActionListener(
                 new ActionListener() {
