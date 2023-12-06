@@ -140,7 +140,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     }
 
     @Override
-    public void save(Ingredient ingredient) {
+    public void add(Ingredient ingredient) {
 
     }
 
