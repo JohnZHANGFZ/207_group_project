@@ -7,6 +7,7 @@ public class LoggedInState {
     private String ingredients = "";
     // leaving numRecipes stored in state as a String so that textbox can be updated regardless of what is typed
     private String numRecipes = "";
+    private String deleteAccountError = null;
 
     public LoggedInState(LoggedInState copy) {
         username = copy.username;
@@ -38,4 +39,7 @@ public class LoggedInState {
     public String getNumRecipes() {return numRecipes;} // for numRecipe textbox input
 
     public void setNumRecipes(String numRecipes) {this.numRecipes = numRecipes;} // for numRecipe textbox input
+
+    public void setDeleteAccountError(String error) {this.deleteAccountError = error;}
+    public String getDeleteAccountError() {return deleteAccountError;}
 }
