@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class CommonInventoryTest extends TestCase {
     private CommonInventory inventory;
 
+    public void init() {
+        inventory = new CommonInventory();
+    }
+
     public void testGetItems() {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         Ingredient apple = new CommonIngredient("Apple");

@@ -82,7 +82,7 @@ public class AddItemTest {
         AddItemOutputBoundary successPresenter = new AddItemOutputBoundary() {
             @Override
             public void prepareSuccessView() {
-                assertEquals();
+
             }
 
             @Override
