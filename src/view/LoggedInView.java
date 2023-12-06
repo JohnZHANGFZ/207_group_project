@@ -17,6 +17,7 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -147,9 +148,13 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(getRecipeButton)) {
                             LoggedInState currentState = loggedInViewModel.getState();
-                            //TODO String ingredients = currentState.getIngredients();
+
+                            String ingredients = currentState.getIngredients();
+                            String[] ingredientSplit = ingredients.split(",");
+                            ArrayList<String> ingredientArray = new ArrayList<>(Arrays.asList(ingredientSplit));
                             int recipeNum = Integer.parseInt(currentState.getNumRecipes());
-                            // TODO getRecipesController.execute();
+
+                            getRecipesController.execute(ingredientArray, recipeNum);
                         }
                     }
                 }
