@@ -3,7 +3,7 @@ import com.google.gson.JsonObject;
 import org.junit.Test;
 import search_recipe.DeprecatedQueryAPI;
 import search_recipe.QueryAPI;
-
+import process_allergy.process_allergy;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +32,28 @@ public class QueryAPITest {
         assertNotEquals(results, new JsonArray());
         JsonObject recipe = results.get(0).getAsJsonObject();
         JsonObject recipeInfo = DeprecatedQueryAPI.getRecipeInformation(recipe.get("id").getAsString());
-        assertNotEquals(recipeInfo.get("instructions"), "");
+        assertNotEquals(recipeInfo.get("instructions").getAsString(), "");
+
+    }
+
+    @Test
+    public void testProcessAllergy(){
+        ArrayList<String> ingredients = new ArrayList<>();
+        ingredients.add("egg");
+        ArrayList<String> allergy = new ArrayList<>();
+        allergy.add("date");
+        allergy.add("rice");
+        allergy.add("chocolate");
+        JsonArray results = DeprecatedQueryAPI.getResults(ingredients, 5);
+        System.out.println(results);
+        System.out.println(allergy);
+        JsonArray processed_results = process_allergy.processAllergies(results, allergy);
+        System.out.println(processed_results);
+        assertNotEquals(results, new JsonArray());
+
+        JsonObject recipe = results.get(0).getAsJsonObject();
+        JsonObject recipeInfo = DeprecatedQueryAPI.getRecipeInformation(recipe.get("id").getAsString());
+        assertNotEquals(recipeInfo.get("instructions").getAsString(), "");
 
     }
 
