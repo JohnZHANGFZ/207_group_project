@@ -1,58 +1,53 @@
 package app;
 
+import data_access.FileUserDataAccessObject;
 import entity.*;
-
 import interface_adapter.ViewManagerModel;
-import interface_adapter.inventory.InventoryViewModel;
-
 import interface_adapter.add_item.AddItemController;
 import interface_adapter.add_item.AddItemPresenter;
 import interface_adapter.add_item.AddItemViewModel;
-
 import interface_adapter.delete_item.DeleteItemController;
 import interface_adapter.delete_item.DeleteItemPresenter;
 import interface_adapter.delete_item.DeleteItemViewModel;
-
 import interface_adapter.logged_in.LoggedInViewModel;
+import interface_adapter.restriction.RestrictionViewModel;
+import use_case.collection.add_item.AddItemDataAccessInterface;
 import use_case.collection.add_item.AddItemInputBoundary;
 import use_case.collection.add_item.AddItemInteractor;
-import use_case.collection.add_item.AddItemDataAccessInterface;
-
+import use_case.collection.delete_item.DeleteItemDataAccessInterface;
 import use_case.collection.delete_item.DeleteItemInputBoundary;
 import use_case.collection.delete_item.DeleteItemInteractor;
-import use_case.collection.delete_item.DeleteItemDataAccessInterface;
-
-import data_access.FileUserDataAccessObject;
 import view.RestrictionView;
-import view.ViewManager;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class RestrictionUseCaseFactory {
 
     /** Prevent instantiation. */
     private RestrictionUseCaseFactory() {}
 
-    //TODO: InventoryDataAccessInterface need to be implemented later
-    public static RestrictionView create(InventoryViewModel inventoryViewModel,
-                                       ViewManagerModel viewManagerModel,
+    public static RestrictionView create(ViewManagerModel viewManagerModel,
                                        AddItemViewModel addItemViewModel,
                                        LoggedInViewModel loggedInViewModel,
                                        DeleteItemViewModel deleteItemViewModel,
+                                       RestrictionViewModel restrictionViewModel,
                                        FileUserDataAccessObject userDataAccessObject) {
 
         try {
             IngredientFactory ingredientFactory = new CommonIngredientFactory();
             CollectionFactory inventoryFactory = new CommonInventoryFactory();
+            CommonRestrictionFactory restrictionFactory = new CommonRestrictionFactory();
+            CommonRestriction restriction = restrictionFactory.create(new ArrayList<String>());
             AddItemController addItemController = createAddItemUseCase(viewManagerModel, addItemViewModel,
                     loggedInViewModel, userDataAccessObject, ingredientFactory);
 
             DeleteItemController deleteItemController = createDeleteItemUseCase(viewManagerModel,
                     deleteItemViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
-            return new RestrictionView(inventoryViewModel, addItemViewModel,addItemController,
-                    deleteItemViewModel, deleteItemController, inventoryFactory);
+            return new RestrictionView(restrictionViewModel, addItemViewModel,addItemController,
+                    deleteItemViewModel, deleteItemController, restriction);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open inventory data file.");
         }
