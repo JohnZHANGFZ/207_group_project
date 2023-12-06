@@ -73,7 +73,7 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
 
 
         //a typing box for user to type recipe id
-        LabelTextPanel usernameInfo = new LabelTextPanel(
+        LabelTextPanel recipeIDInfo = new LabelTextPanel(
                 new JLabel("Enter Recipe ID: "), idInputField);
         idInputField.addKeyListener(new KeyListener() {
                     @Override
@@ -118,8 +118,9 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(viewTitle);
-        this.add(usernameInfo);
         this.add(recipeResult);
+        this.add(recipeIDInfo);
+        this.add(buttons);
     }
 
     @Override
