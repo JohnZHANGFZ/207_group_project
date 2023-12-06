@@ -54,7 +54,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         this.getRecipesController = getRecipesController;
         this.loggedInViewModel.addPropertyChangeListener(this);
 
-        JLabel title = new JLabel("Logged In");
+        JLabel title = new JLabel("Home Page");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JLabel welcomeBack = new JLabel("Welcome!");
