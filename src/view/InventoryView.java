@@ -27,6 +27,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
     private final AddItemController addItemController;
     private final DeleteItemViewModel deleteItemViewModel;
     private final DeleteItemController deleteItemController;
+    private final ReturnController returnController;
 
     JTextArea inventoryInfo;
 
@@ -41,12 +42,14 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                          AddItemViewModel addItemViewModel,
                          AddItemController addItemController,
                          DeleteItemViewModel deleteItemViewModel,
-                         DeleteItemController deleteItemController, ReturnController returnController) {
+                         DeleteItemController deleteItemController,
+                         ReturnController returnController) {
         this.inventoryViewModel = inventoryViewModel;
         this.addItemViewModel = addItemViewModel;
         this.addItemController = addItemController;
         this.deleteItemViewModel = deleteItemViewModel;
         this.deleteItemController = deleteItemController;
+        this.returnController = returnController;
 
         JLabel title = new JLabel("Inventory Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
