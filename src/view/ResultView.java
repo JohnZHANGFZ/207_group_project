@@ -1,5 +1,7 @@
 package view;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import interface_adapter.recipe_information_getter.RecipeInfoController;
 import interface_adapter.recipe_information_getter.RecipeInfoState;
 import interface_adapter.recipe_information_getter.RecipeInfoViewModel;
@@ -7,6 +9,7 @@ import interface_adapter.recipes_getter.GetRecipesState;
 import interface_adapter.recipes_getter.GetRecipesViewModel;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +17,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Vector;
 
 public class ResultView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -23,6 +27,8 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
     private final GetRecipesViewModel getRecipesViewModel;
     private final RecipeInfoViewModel recipeInfoViewModel;
     private final RecipeInfoController recipeInfoController;
+
+    JTable recipeResult;
     final JButton cancel;
     final JButton searchID;
 
@@ -34,13 +40,62 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
         this.recipeInfoController = recipeInfoController;
 
 
-        JLabel title = new JLabel("Recipe Result Screen");
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JLabel viewTitle = new JLabel("Recipe Result");
+        viewTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+
+        // display recipe as a table
+        JsonArray recipes = getRecipesViewModel.getState().getRecipes();
+
+        Vector<Vector<String>> dataVector = new Vector<>();
+        for (int i = 0; i < recipes.size(); i++) {
+            JsonObject recipe = recipes.get(i).getAsJsonObject();
+
+            String id = recipe.get("id").getAsString();
+            String title = recipe.get("title").getAsString();
+            String image = recipe.get("image").getAsString();
+
+            Vector<String> row = new Vector<>();
+            row.add(id);
+            row.add(title);
+            row.add(image);
+
+            dataVector.add(row);
+        }
+
+        Vector<String> columnNames = new Vector<>();
+        columnNames.add("ID");
+        columnNames.add("Title");
+        columnNames.add("Image");
+
+        DefaultTableModel model = new DefaultTableModel(dataVector, columnNames);
+        JTable recipeResult = new JTable(model);
+
+
+        //a typing box for user to type recipe id
         LabelTextPanel usernameInfo = new LabelTextPanel(
                 new JLabel("Enter Recipe ID: "), idInputField);
+        idInputField.addKeyListener(new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        GetRecipesState currentState = getRecipesViewModel.getState();
+                        currentState.setRecipes(currentState.getRecipes());
+                        getRecipesViewModel.setState(currentState);
+                    }
 
-        //add buttons
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+
+        //buttons
         JPanel buttons = new JPanel();
 
         cancel = new JButton(GetRecipesViewModel.CANCEL_BUTTON_LABEL);
@@ -48,6 +103,7 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
         searchID = new JButton(GetRecipesViewModel.SEARCHID_BUTTON_LABEL);
         buttons.add(searchID);
 
+        cancel.addActionListener(this);
         searchID.addActionListener(
                 new ActionListener() {
                     @Override
@@ -59,24 +115,10 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
                 }
         );
 
-        idInputField.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                GetRecipesState currentState = getRecipesViewModel.getState();
-                currentState.setRecipes(currentState.getRecipes());
-                getRecipesViewModel.setState(currentState);
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
-        });
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(viewTitle);
+        this.add(usernameInfo);
+        this.add(recipeResult);
     }
 
     @Override
@@ -84,5 +126,6 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        GetRecipesState state = (GetRecipesState) evt.getNewValue();
     }
 }
