@@ -27,8 +27,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
     private final DeleteItemViewModel deleteItemViewModel;
     private final DeleteItemController deleteItemController;
 
-    //TODO am I allowed to do this????
-    private final CommonInventory inventory;
+    JTextArea inventoryInfo;
 
     private final JTextField itemInputField = new JTextField(15);
 
@@ -41,14 +40,12 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                          AddItemViewModel addItemViewModel,
                          AddItemController addItemController,
                          DeleteItemViewModel deleteItemViewModel,
-                         DeleteItemController deleteItemController,
-                         CommonInventory inventory) {
+                         DeleteItemController deleteItemController) {
         this.inventoryViewModel = inventoryViewModel;
         this.addItemViewModel = addItemViewModel;
         this.addItemController = addItemController;
         this.deleteItemViewModel = deleteItemViewModel;
         this.deleteItemController = deleteItemController;
-        this.inventory = inventory;
 
         JLabel title = new JLabel("Inventory Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -56,8 +53,6 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
         LabelTextPanel itemInfo = new LabelTextPanel(
                 new JLabel("Enter Items: "), itemInputField);
 
-        //TODO not sure if this is correct way to display inventory info
-        JLabel inventoryInfo = new JLabel(String.valueOf(inventory.getItems()));
 
 
         //Add buttons
@@ -104,11 +99,6 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
         //TODO: implemented action listener method for 'cancel' buttons
         cancel.addActionListener(this);
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(title);
-        this.add(itemInfo);
-        this.add(inventoryInfo);
-
 
         //a typing box for users to type what they want to add or delete
         itemInputField.addKeyListener(new KeyListener() {
@@ -128,6 +118,12 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
             public void keyReleased(KeyEvent e) {
             }
         });
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(title);
+        this.add(inventoryInfo);
+        this.add(itemInfo);
+        this.add(buttons);
     }
 
     @Override
@@ -141,5 +137,6 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
         if (state.getInventoryError() != null) {
             JOptionPane.showMessageDialog(this, state.getInventoryError());
         }
+        inventoryInfo.setText(state.getInventory());
     }
 }

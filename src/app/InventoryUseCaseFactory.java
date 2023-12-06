@@ -48,8 +48,9 @@ public class InventoryUseCaseFactory {
                 DeleteItemController deleteItemController = createDeleteItemUseCase(viewManagerModel,
                         deleteItemViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
-                return new InventoryView(inventoryViewModel, addItemViewModel, addItemController,
-                        deleteItemViewModel, deleteItemController, inventoryFactory);
+                return new InventoryView(inventoryViewModel, addItemViewModel,addItemController,
+                        deleteItemViewModel, deleteItemController);
+
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Could not open inventory data file.");
             }

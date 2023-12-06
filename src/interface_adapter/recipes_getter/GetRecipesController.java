@@ -11,7 +11,7 @@ public class GetRecipesController {
         this.getRecipeUseCaseInteractor = getRecipeUseCaseInteractor;
     }
 
-    void execute(ArrayList<String> ingredients, int number) {
+    public void execute(ArrayList<String> ingredients, int number) {
         GetRecipeInputData recipeInputData = new GetRecipeInputData(ingredients, number);
         
         getRecipeUseCaseInteractor.execute(recipeInputData);

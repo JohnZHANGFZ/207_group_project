@@ -30,33 +30,30 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
     private final AddItemController addItemController;
     private final DeleteItemViewModel deleteItemViewModel;
     private final DeleteItemController deleteItemController;
-    private final CommonRestriction restriction;
 
     final JButton add;
     final JButton delete;
     final JButton cancel;
+    JTextArea restrictionInfo;
 
     public RestrictionView(RestrictionViewModel restrictionViewModel,
                            AddItemViewModel addItemViewModel,
                            AddItemController addItemController,
                            DeleteItemViewModel deleteItemViewModel,
-                           DeleteItemController deleteItemController,
-                           CommonRestriction restriction) {
+                           DeleteItemController deleteItemController) {
         this.restrictionViewModel = restrictionViewModel;
         this.addItemViewModel = addItemViewModel;
         this.addItemController = addItemController;
         this.deleteItemViewModel = deleteItemViewModel;
         this.deleteItemController = deleteItemController;
-        this.restriction = restriction;
 
         JLabel title = new JLabel("Restriction Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        LabelTextPanel usernameInfo = new LabelTextPanel(
+        LabelTextPanel itemInfo = new LabelTextPanel(
                 new JLabel("Enter Items: "), itemInputField);
 
-        //TODO: not sure if this is correct
-        JLabel restrictionInfo = new JLabel(String.valueOf(restriction.getItems()));
+
 
         //Add buttons
         JPanel buttons = new JPanel();
@@ -101,6 +98,7 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
         //TODO: implemented action listener method for 'cancel' buttons
         cancel.addActionListener(this);
 
+
         //a typing box for user to enter items
         itemInputField.addKeyListener(new KeyListener() {
             @Override
@@ -118,6 +116,12 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
             public void keyReleased(KeyEvent e) {
             }
         });
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(title);
+        this.add(restrictionInfo);
+        this.add(itemInfo);
+        this.add(buttons);
     }
 
 
@@ -132,5 +136,6 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
         if (state.getRestrictionError() != null) {
             JOptionPane.showMessageDialog(this, state.getRestrictionError());
         }
+        restrictionInfo.setText(state.getRestriction());
     }
 }

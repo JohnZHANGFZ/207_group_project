@@ -46,8 +46,9 @@ public class RestrictionUseCaseFactory {
             DeleteItemController deleteItemController = createDeleteItemUseCase(viewManagerModel,
                     deleteItemViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
-            return new RestrictionView(restrictionViewModel, addItemViewModel,addItemController,
-                    deleteItemViewModel, deleteItemController, restriction);
+            return new RestrictionView(inventoryViewModel, addItemViewModel,addItemController,
+                    deleteItemViewModel, deleteItemController);
+
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open inventory data file.");
         }
