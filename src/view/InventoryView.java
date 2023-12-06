@@ -99,11 +99,6 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
         //TODO: implemented action listener method for 'cancel' buttons
         cancel.addActionListener(this);
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(title);
-        this.add(itemInfo);
-        this.add(inventoryInfo);
-
 
         //a typing box for users to type what they want to add or delete
         itemInputField.addKeyListener(new KeyListener() {
@@ -123,6 +118,11 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
             public void keyReleased(KeyEvent e) {
             }
         });
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(title);
+        this.add(itemInfo);
+        this.add(inventoryInfo);
     }
 
     @Override
