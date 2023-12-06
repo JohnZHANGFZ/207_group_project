@@ -27,8 +27,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
     private final DeleteItemViewModel deleteItemViewModel;
     private final DeleteItemController deleteItemController;
 
-    //TODO am I allowed to do this????
-    private final CommonInventory inventory;
+    JTextArea inventoryInfo;
 
     private final JTextField itemInputField = new JTextField(15);
 
@@ -41,14 +40,12 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                          AddItemViewModel addItemViewModel,
                          AddItemController addItemController,
                          DeleteItemViewModel deleteItemViewModel,
-                         DeleteItemController deleteItemController,
-                         CommonInventory inventory) {
+                         DeleteItemController deleteItemController) {
         this.inventoryViewModel = inventoryViewModel;
         this.addItemViewModel = addItemViewModel;
         this.addItemController = addItemController;
         this.deleteItemViewModel = deleteItemViewModel;
         this.deleteItemController = deleteItemController;
-        this.inventory = inventory;
 
         JLabel title = new JLabel("Inventory Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -57,7 +54,6 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                 new JLabel("Enter Items: "), itemInputField);
 
         //TODO not sure if this is correct way to display inventory info
-        JLabel inventoryInfo = new JLabel(String.valueOf(inventory.getItems()));
 
 
         //Add buttons
@@ -141,5 +137,6 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
         if (state.getInventoryError() != null) {
             JOptionPane.showMessageDialog(this, state.getInventoryError());
         }
+        inventoryInfo.setText(state.getInventory());
     }
 }
