@@ -37,7 +37,7 @@ public class RestrictionUseCaseFactory {
 
         try {
             IngredientFactory ingredientFactory = new CommonIngredientFactory();
-            CollectionFactory inventoryFactory = new CommonInventoryFactory();
+            // CollectionFactory inventoryFactory = new CommonInventoryFactory();
             CommonRestrictionFactory restrictionFactory = new CommonRestrictionFactory();
             CommonRestriction restriction = restrictionFactory.create(new ArrayList<String>());
             AddItemController addItemController = createAddItemUseCase(viewManagerModel, addItemViewModel,
@@ -55,7 +55,7 @@ public class RestrictionUseCaseFactory {
         return null;
     }
 
-    public static AddItemController createAddItemUseCase(
+    private static AddItemController createAddItemUseCase(
             ViewManagerModel viewManagerModel,
             AddItemViewModel addItemViewModel,
             LoggedInViewModel loggedInViewModel,
@@ -71,7 +71,7 @@ public class RestrictionUseCaseFactory {
         return new AddItemController(addItemInteractor);
     }
 
-    public static DeleteItemController createDeleteItemUseCase(
+    private static DeleteItemController createDeleteItemUseCase(
             ViewManagerModel viewManagerModel,
             DeleteItemViewModel deleteItemViewModel,
             LoggedInViewModel loggedInViewModel,
