@@ -115,6 +115,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                 if (e.getSource().equals(cancel)) {
                     DeleteInventoryState deleteInventoryState = deleteInventoryViewModel.getState();
                     returnController.execute();
+                    // TODO: display output here
                     JOptionPane.showMessageDialog(null, deleteInventoryState.getDeleteItemError());
                 }
             }
