@@ -7,5 +7,5 @@ public class DeleteInventoryInputData {
 
     public DeleteInventoryInputData(List<String> items) { this.items = items; }
 
-    List<String> getItems() { return items;}
+    public List<String> getItems() { return items;}
 }
