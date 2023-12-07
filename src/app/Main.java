@@ -11,6 +11,7 @@ import interface_adapter.delete_inventory.DeleteInventoryViewModel;
 import interface_adapter.inventory.InventoryViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.logout.LogoutController;
 import interface_adapter.recipe_info_result.ResultInfoViewModel;
 import interface_adapter.recipe_information_getter.RecipeInfoViewModel;
 import interface_adapter.recipe_result.ResultViewModel;
@@ -75,8 +76,9 @@ public class Main {
 
         GetRecipeDataAccessInterface getRecipeDataAccessInterface = new QueryAPI();
         ReturnController returnController = ReturnUseCaseFactory.create(viewManagerModel, loggedInViewModel);
+        // LogoutController logoutController = new LogoutController();
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
-                signupViewModel, userDataAccessObject, returnController);
+                signupViewModel, userDataAccessObject, logoutController);
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
                 loggedInViewModel, userDataAccessObject);
