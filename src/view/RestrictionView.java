@@ -1,10 +1,8 @@
 package view;
 
-import interface_adapter.add_item.AddItemController;
-import interface_adapter.add_item.AddItemState;
-import interface_adapter.add_item.AddItemViewModel;
+import interface_adapter.add_inventory.AddInventoryController;
+import interface_adapter.add_inventory.AddInventoryViewModel;
 import interface_adapter.delete_inventory.DeleteInventoryController;
-import interface_adapter.delete_inventory.DeleteInventoryState;
 import interface_adapter.delete_inventory.DeleteInventoryViewModel;
 import interface_adapter.inventory.InventoryViewModel;
 import interface_adapter.restriction.RestrictionState;
@@ -26,8 +24,10 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
     private final JTextField itemInputField = new JTextField(15);
 
     private final RestrictionViewModel restrictionViewModel;
-    private final AddItemViewModel addItemViewModel;
-    private final AddItemController addItemController;
+    private final AddInventoryViewModel addInventoryViewModel;
+    private final AddInventoryController addInventoryController;
+   
+
     private final DeleteInventoryViewModel deleteInventoryViewModel;
     private final DeleteInventoryController deleteInventoryController;
 
@@ -39,14 +39,14 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
     JTextArea restrictionInfo;
 
     public RestrictionView(RestrictionViewModel restrictionViewModel,
-                           AddItemViewModel addItemViewModel,
-                           AddItemController addItemController, 
+                           AddInventoryViewModel addInventoryViewModel,
+                           AddInventoryController addInventoryController,
                            DeleteInventoryViewModel deleteInventoryViewModel,
                            DeleteInventoryController deleteInventoryController,
                            ReturnController returnController) {
         this.restrictionViewModel = restrictionViewModel;
-        this.addItemViewModel = addItemViewModel;
-        this.addItemController = addItemController;
+        this.addInventoryViewModel = addInventoryViewModel;
+        this.addInventoryController = addInventoryController;
         this.deleteInventoryViewModel = deleteInventoryViewModel;
         this.deleteInventoryController = deleteInventoryController;        
         this.returnController = returnController;
@@ -69,35 +69,9 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
         cancel = new JButton(InventoryViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
 
-        add.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(add)) {
-                            AddItemState currentState = addItemViewModel.getState();
+        add.addActionListener(this);
 
-                            addItemController.execute(currentState.getIngredients());
-                            //a popup window telling the user what has been added
-                            JOptionPane.showMessageDialog(null, currentState.getIngredients());
-                        }
-                    }
-                }
-        );
-
-        delete.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(delete)) {
-                            DeleteInventoryState currentState = deleteInventoryViewModel.getState();
-
-                            deleteInventoryController.execute(currentState.getIngredients());
-                            //a popup window telling the user what has been deleted
-                            JOptionPane.showMessageDialog(null, currentState.getIngredients());
-                        }
-                    }
-                }
-        );
+        delete.addActionListener(this);
 
         cancel.addActionListener(new ActionListener() {
             @Override

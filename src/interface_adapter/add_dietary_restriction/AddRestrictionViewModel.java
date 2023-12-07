@@ -1,21 +1,21 @@
-package interface_adapter.add_item;
+package interface_adapter.add_dietary_restriction;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class AddItemViewModel extends ViewModel {
+public class AddRestrictionViewModel extends ViewModel {
 
-    private AddItemState state = new AddItemState();
+    private AddRestrictionState state = new AddRestrictionState();
 
-    public AddItemViewModel(String viewName) {
+    public AddRestrictionViewModel(String viewName) {
         super(viewName);
     }
 
-    public void setState(AddItemState state) { this.state = state;}
+    public void setState(AddRestrictionState state) { this.state = state;}
 
-    public AddItemState getState() { return state; }
+    public AddRestrictionState getState() { return state; }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 

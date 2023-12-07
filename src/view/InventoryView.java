@@ -1,8 +1,7 @@
 package view;
 
-import interface_adapter.add_item.AddItemController;
-import interface_adapter.add_item.AddItemState;
-import interface_adapter.add_item.AddItemViewModel;
+import interface_adapter.add_inventory.AddInventoryController;
+import interface_adapter.add_inventory.AddInventoryViewModel;
 import interface_adapter.delete_inventory.DeleteInventoryController;
 import interface_adapter.delete_inventory.DeleteInventoryState;
 import interface_adapter.delete_inventory.DeleteInventoryViewModel;
@@ -18,12 +17,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class InventoryView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "Inventory";
     private final InventoryViewModel inventoryViewModel;
-    private final AddItemViewModel addItemViewModel;
-    private final AddItemController addItemController;
+    private final AddInventoryViewModel addInventoryViewModel;
+    private final AddInventoryController addInventoryController;
+   
     private final DeleteInventoryViewModel deleteInventoryViewModel;
     private final DeleteInventoryController deleteInventoryController;
 
@@ -41,14 +44,14 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
 
 
     public InventoryView(InventoryViewModel inventoryViewModel,
-                         AddItemViewModel addItemViewModel,
-                         AddItemController addItemController,
+                         AddInventoryViewModel addInventoryViewModel,
+                         AddInventoryController addInventoryController,
                          DeleteInventoryViewModel deleteInventoryViewModel,
                          DeleteInventoryController deleteInventoryController,
                          ReturnController returnController) {
         this.inventoryViewModel = inventoryViewModel;
-        this.addItemViewModel = addItemViewModel;
-        this.addItemController = addItemController;
+        this.addInventoryViewModel = addInventoryViewModel;
+        this.addInventoryController = addInventoryController;
         this.deleteInventoryViewModel = deleteInventoryViewModel;
         this.deleteInventoryController = deleteInventoryController;
         this.returnController = returnController;
@@ -78,11 +81,11 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(add)) {
-                            AddItemState currentState = addItemViewModel.getState();
-
-                            addItemController.execute(currentState.getIngredients());
-                            //a popup window telling the user what has been added
-                            JOptionPane.showMessageDialog(null, currentState.getIngredients());
+                            InventoryState currentState = inventoryViewModel.getState();
+                            String stringIngredient = currentState.getInput();
+                            ArrayList<String> listIngredient = new ArrayList<>();
+                            listIngredient.addAll(Arrays.asList(stringIngredient.split(",")));
+                            addInventoryController.execute(currentState.getUser(), listIngredient);
                         }
                     }
                 }
@@ -93,11 +96,16 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(delete)) {
-                            DeleteInventoryState currentState = deleteInventoryViewModel.getState();
+                            InventoryState currentState = inventoryViewModel.getState();
+                            // DeleteInventoryState currentState = deleteInventoryViewModel.getState();
 
-                            deleteInventoryController.execute(currentState.getIngredients());
+                            ArrayList currentInventory = new ArrayList();
+                            currentInventory.addAll(Arrays.asList(currentState.getInventory().split(",")));
+                            deleteInventoryController.execute(currentState.getUser(), currentInventory);
+
                             //a popup window telling the user what has been deleted
-                            JOptionPane.showMessageDialog(null, currentState.getIngredients());
+                            // JOptionPane.showMessageDialog(null, currentState.getIngredients());
+
                         }
                     }
                 }
@@ -107,7 +115,10 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource().equals(cancel)) {
+                    DeleteInventoryState deleteInventoryState = deleteInventoryViewModel.getState();
                     returnController.execute();
+                    // TODO: display output here
+                    JOptionPane.showMessageDialog(null, deleteInventoryState.getDeleteItemError());
                 }
             }
         });
@@ -119,7 +130,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
             @Override
             public void keyTyped(KeyEvent e) {
                 InventoryState currentState = inventoryViewModel.getState();
-                currentState.setInventory(itemInputField.getText() + e.getKeyChar());
+                currentState.setInput(itemInputField.getText() + e.getKeyChar());
                 inventoryViewModel.setState(currentState);
             }
 
@@ -152,6 +163,6 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
         if (state.getInventoryError() != null) {
             JOptionPane.showMessageDialog(this, state.getInventoryError());
         }
-        inventoryInfo.setText(state.getInventory());
+        inventoryInfo.setText(state.getInventory()); // current inventory info
     }
 }
