@@ -78,7 +78,7 @@ public class Main {
         ReturnController returnController = ReturnUseCaseFactory.create(viewManagerModel, loggedInViewModel);
         // LogoutController logoutController = new LogoutController();
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
-                signupViewModel, userDataAccessObject, logoutController);
+                signupViewModel, userDataAccessObject);
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
                 loggedInViewModel, userDataAccessObject);
