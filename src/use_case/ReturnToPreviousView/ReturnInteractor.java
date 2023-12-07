@@ -1,14 +1,14 @@
 package use_case.ReturnToPreviousView;
+
+import interface_adapter.ReturnToPreviousView.ViewChangeObserver;
 import java.util.ArrayList;
 import java.util.List;
-import interface_adapter.ReturnToPreviousView.ReturnState;
-import interface_adapter.ReturnToPreviousView.ViewChangeObserver;
 
 public class ReturnInteractor implements ReturnInputBoundary {
-    private ReturnState returnState;
+    private ReturnStateInterface returnState;
     private List<ViewChangeObserver> observers = new ArrayList<>();
 
-    public ReturnInteractor(ReturnState returnState) {
+    public ReturnInteractor(ReturnStateInterface returnState) {
         this.returnState = returnState;
     }
 
