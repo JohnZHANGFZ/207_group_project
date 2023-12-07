@@ -1,11 +1,7 @@
 package interface_adapter.remove_dietary_restriction;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.delete_item.DeleteItemState;
-import interface_adapter.delete_item.DeleteItemViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
-import use_case.delete_inventory.DeleteInventoryOutputBoundary;
-import use_case.delete_inventory.DeleteInventoryOutputData;
 import use_case.remove_dietary_restriction.RemoveRestrictionOutputBoundary;
 import use_case.remove_dietary_restriction.RemoveRestrictionOutputData;
 
