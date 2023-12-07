@@ -68,11 +68,14 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
 
     @Override
     public String deleteInventory(String user, Ingredient ingredient) {
+
         return null;
     }
 
     @Override
     public boolean inventoryExists(String user, String itemName) {
-        return false;
+
+        User target = users.get(user);
+        target.getInventory()
     }
 }
