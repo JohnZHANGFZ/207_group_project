@@ -9,31 +9,31 @@ import use_case.delete_inventory.DeleteInventoryOutputData;
 
 public class DeleteInventoryPresenter implements DeleteInventoryOutputBoundary {
 
-    private final InventoryViewModel inventoryViewModel;
+    private final DeleteInventoryViewModel deleteInventoryViewModel;
 
     private ViewManagerModel viewManagerModel;
 
-    public DeleteInventoryPresenter(InventoryViewModel inventoryViewModel, ViewManagerModel viewManagerModel) {
-        this.inventoryViewModel = inventoryViewModel;
+    public DeleteInventoryPresenter(DeleteInventoryViewModel deleteInventoryViewModel, ViewManagerModel viewManagerModel) {
+        this.deleteInventoryViewModel = deleteInventoryViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
     @Override
     public void prepareFailView(String error) {
-        InventoryState inventoryState = inventoryViewModel.getState();
-        inventoryState.setInventoryError(error);
-        inventoryViewModel.firePropertyChanged();
+        DeleteInventoryState deleteInventoryState = deleteInventoryViewModel.getState();
+        deleteInventoryState.setDeleteItemError(error);
+        deleteInventoryViewModel.firePropertyChanged();
     }
 
     @Override
     public void prepareSuccessView(DeleteInventoryOutputData items) {
         //Stay in Current View
         // DeleteInventoryState deleteInventoryState = deleteInventoryViewModel.getState();
-        InventoryState inventoryState = inventoryViewModel.getState();
-        this.inventoryViewModel.setState(inventoryState);
-        this.inventoryViewModel.firePropertyChanged();
+        DeleteInventoryState deleteInventoryState = deleteInventoryViewModel.getState();
+        this.deleteInventoryViewModel.setState(deleteInventoryState);
+        this.deleteInventoryViewModel.firePropertyChanged();
 
-        this.viewManagerModel.setActiveView(inventoryViewModel.getViewName());
+        this.viewManagerModel.setActiveView(deleteInventoryViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }
 }
