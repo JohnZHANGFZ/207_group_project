@@ -1,21 +1,22 @@
 package use_case.delete_inventory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DeleteInventoryOutputData {
 
-    private final List<String> successItems;
+    private final ArrayList<String> successItems;
 
-    private final List<String> failItem;
+    private final ArrayList<String> failItem;
 
-    public DeleteInventoryOutputData(List<String> successItems, List<String> failItem) {
+    public DeleteInventoryOutputData(ArrayList<String> successItems, ArrayList<String> failItem) {
         this.successItems = successItems;
         this.failItem = failItem;
     }
 
 
-    public List<String> getSuccessDeletedItem() { return successItems; }
+    public ArrayList<String> getSuccessDeletedItem() { return successItems; }
 
-    public List<String> getFailDeletedItem() { return failItem; }
+    public ArrayList<String> getFailDeletedItem() { return failItem; }
 
 }

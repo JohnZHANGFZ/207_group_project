@@ -25,9 +25,9 @@ public class DeleteInventoryInteractor implements DeleteInventoryInputBoundary {
     // This is about when to have success or fail views
     @Override
     public void execute(DeleteInventoryInputData deleteInventoryInputData) {
-        List<String> itemList = deleteInventoryInputData.getItems();
-        List<String> deletedItemList = new ArrayList<>();
-        List<String> itemDNE = new ArrayList<>();
+        ArrayList<String> itemList = deleteInventoryInputData.getItems();
+        ArrayList<String> deletedItemList = new ArrayList<>();
+        ArrayList<String> itemDNE = new ArrayList<>();
 
         if(itemList.isEmpty()) {
             // If user does not type anything--> FailView: 'no input, try again'
