@@ -1,5 +1,7 @@
 package data_access;
 
+import entity.Collection;
+import entity.CommonInventory;
 import entity.Ingredient;
 import entity.User;
 import use_case.add_dietary_restriction.AddRestrictionDataAccessInterface;
@@ -68,14 +70,21 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
 
     @Override
     public String deleteInventory(String user, Ingredient ingredient) {
+        User target = users.get(user);
+        Collection targetInventory = target.getInventory();
+        int inventorySize = targetInventory.getItems().size();
 
-        return null;
+        for (int i=0; i < inventorySize; i++) {
+
+            if (targetInventory.item) {
+
+            }
+        }
     }
 
     @Override
     public boolean inventoryExists(String user, String itemName) {
-
         User target = users.get(user);
-        target.getInventory()
+        return target.getInventory().itemExists();
     }
 }
