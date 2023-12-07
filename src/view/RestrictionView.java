@@ -1,6 +1,5 @@
 package view;
 
-import entity.CommonRestriction;
 import interface_adapter.add_item.AddItemController;
 import interface_adapter.add_item.AddItemState;
 import interface_adapter.add_item.AddItemViewModel;
@@ -127,6 +126,8 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
             }
         });
 
+        //TODO: this should be initialized properly before adding to the panel
+        JTextArea restrictionInfo = new JTextArea();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(title);
         this.add(restrictionInfo);

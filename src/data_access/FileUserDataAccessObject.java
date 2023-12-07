@@ -2,17 +2,20 @@ package data_access;
 
 import entity.*;
 import entity.Collection;
+import use_case.add_dietary_restriction.AddRestrictionDataAccessInterface;
 import use_case.delete_account.DeleteAccountDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
+import use_case.remove_dietary_restriction.RemoveRestrictionDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
-import use_case.collection.add_item.AddItemDataAccessInterface;
-import use_case.collection.delete_item.DeleteItemDataAccessInterface;
+import use_case.add_inventory.AddInventoryDataAccessInterface;
+import use_case.delete_inventory.DeleteInventoryDataAccessInterface;
 
 import java.io.*;
 import java.util.*;
 
 public class FileUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface,
-        AddItemDataAccessInterface, DeleteItemDataAccessInterface, DeleteAccountDataAccessInterface {
+        AddInventoryDataAccessInterface, DeleteInventoryDataAccessInterface, DeleteAccountDataAccessInterface,
+        AddRestrictionDataAccessInterface, RemoveRestrictionDataAccessInterface {
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
@@ -100,6 +103,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
         if (existsByName(username)) {
 
+            accounts.remove(username);
+
             try {
                 File tempFile = new File("myTempFile.txt"); // creates new file to rewrite data into
 
@@ -135,15 +140,35 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     }
 
     @Override
-    public String delete(Ingredient ingredient) {
+    public User getUser(String username) { return accounts.get(username); }
+
+    @Override
+    public boolean inventoryExists(String itemName) {
+        return false;
+    }
+
+    @Override
+    public void addInventory(Ingredient ingredient) {
+
+    }
+
+    @Override
+    public String deleteInventory(Ingredient ingredient) {
         return null;
     }
 
     @Override
-    public void save(Ingredient ingredient) {
+    public boolean restrictionExists(String itemName) {
+        return false;
+    }
+
+    @Override
+    public void addRestriction(Ingredient restriction) {
 
     }
 
     @Override
-    public User getUser(String username) { return accounts.get(username); }
+    public String removeRestriction(Ingredient ingredient) {
+        return null;
+    }
 }

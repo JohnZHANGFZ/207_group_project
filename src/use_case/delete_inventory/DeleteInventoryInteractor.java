@@ -1,4 +1,4 @@
-package use_case.collection.delete_item;
+package use_case.delete_inventory;
 
 import entity.Ingredient;
 import entity.IngredientFactory;
@@ -6,17 +6,17 @@ import entity.IngredientFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeleteItemInteractor implements DeleteItemInputBoundary{
+public class DeleteInventoryInteractor implements DeleteInventoryInputBoundary {
 
-    final DeleteItemDataAccessInterface deleteItemDataAccessObject;
+    final DeleteInventoryDataAccessInterface deleteItemDataAccessObject;
 
-    final DeleteItemOutputBoundary deletePresenter;
+    final DeleteInventoryOutputBoundary deletePresenter;
 
     final IngredientFactory ingredientFactory;
 
-    public DeleteItemInteractor(DeleteItemDataAccessInterface deleteItemDataAccessObject,
-                                DeleteItemOutputBoundary deletePresenter,
-                                IngredientFactory ingredientFactory) {
+    public DeleteInventoryInteractor(DeleteInventoryDataAccessInterface deleteItemDataAccessObject,
+                                     DeleteInventoryOutputBoundary deletePresenter,
+                                     IngredientFactory ingredientFactory) {
         this.deleteItemDataAccessObject = deleteItemDataAccessObject;
         this.deletePresenter = deletePresenter;
         this.ingredientFactory = ingredientFactory;
@@ -24,8 +24,8 @@ public class DeleteItemInteractor implements DeleteItemInputBoundary{
 
     // This is about when to have success or fail views
     @Override
-    public void execute(DeleteItemInputData deleteItemInputData) {
-        List<String> itemList = deleteItemInputData.getItems();
+    public void execute(DeleteInventoryInputData deleteInventoryInputData) {
+        List<String> itemList = deleteInventoryInputData.getItems();
         List<String> deletedItemList = new ArrayList<>();
         List<String> itemDNE = new ArrayList<>();
 
@@ -49,8 +49,8 @@ public class DeleteItemInteractor implements DeleteItemInputBoundary{
             } else {
                 // If some or all user's input exists --> SuccessView: show the user what was just deleted
                 // successfully and what was not
-                DeleteItemOutputData deleteItemOutputData = new DeleteItemOutputData(deletedItemList, itemDNE);
-                deletePresenter.prepareSuccessView(deleteItemOutputData);
+                DeleteInventoryOutputData deleteInventoryOutputData = new DeleteInventoryOutputData(deletedItemList, itemDNE);
+                deletePresenter.prepareSuccessView(deleteInventoryOutputData);
             }
         }
     }

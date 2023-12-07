@@ -2,10 +2,10 @@ package interface_adapter.delete_item;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.logged_in.LoggedInViewModel;
-import use_case.collection.delete_item.DeleteItemOutputBoundary;
-import use_case.collection.delete_item.DeleteItemOutputData;
+import use_case.delete_inventory.DeleteInventoryOutputBoundary;
+import use_case.delete_inventory.DeleteInventoryOutputData;
 
-public class DeleteItemPresenter implements DeleteItemOutputBoundary {
+public class DeleteInventoryPresenter implements DeleteInventoryOutputBoundary {
 
     private final DeleteItemViewModel deleteItemViewModel;
 
@@ -13,7 +13,7 @@ public class DeleteItemPresenter implements DeleteItemOutputBoundary {
 
     private ViewManagerModel viewManagerModel;
 
-    public DeleteItemPresenter(DeleteItemViewModel deleteItemViewModel, LoggedInViewModel loggedInViewModel, ViewManagerModel viewManagerModel) {
+    public DeleteInventoryPresenter(DeleteItemViewModel deleteItemViewModel, LoggedInViewModel loggedInViewModel, ViewManagerModel viewManagerModel) {
         this.deleteItemViewModel = deleteItemViewModel;
         this.loggedInViewModel = loggedInViewModel;
         this.viewManagerModel = viewManagerModel;
@@ -27,7 +27,7 @@ public class DeleteItemPresenter implements DeleteItemOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(DeleteItemOutputData items) {
+    public void prepareSuccessView(DeleteInventoryOutputData items) {
         //Stay in Current View
         DeleteItemState deleteItemState = deleteItemViewModel.getState();
         this.deleteItemViewModel.setState(deleteItemState);

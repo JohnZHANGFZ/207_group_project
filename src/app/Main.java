@@ -17,6 +17,9 @@ import interface_adapter.recipes_getter.GetRecipesViewModel;
 import interface_adapter.restriction.RestrictionViewModel;
 import interface_adapter.signup.SignupViewModel;
 import use_case.return_home.ReturnInteractor;
+import search_recipe.QueryAPI;
+import use_case.ReturnToPreviousView.ReturnInteractor;
+import use_case.recipes_getter.GetRecipeDataAccessInterface;
 import view.*;
 
 import javax.swing.*;
@@ -68,6 +71,8 @@ public class Main {
             throw new RuntimeException(e);
         }
 
+        GetRecipeDataAccessInterface getRecipeDataAccessInterface = new QueryAPI();
+
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
@@ -77,7 +82,8 @@ public class Main {
         views.add(loginView, loginView.viewName);
 
         LoggedInView loggedInView = LoggedInViewFactory.create(viewManagerModel,loggedInViewModel, loginViewModel,
-                inventoryViewModel, restrictionViewModel);
+                inventoryViewModel, restrictionViewModel, getRecipesViewModel, resultViewModel,
+                getRecipeDataAccessInterface);
         views.add(loggedInView, loggedInView.viewName);
 
         InventoryView inventoryView = InventoryUseCaseFactory.create(inventoryViewModel, viewManagerModel,

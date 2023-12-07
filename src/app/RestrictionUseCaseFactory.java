@@ -7,16 +7,16 @@ import interface_adapter.add_item.AddItemController;
 import interface_adapter.add_item.AddItemPresenter;
 import interface_adapter.add_item.AddItemViewModel;
 import interface_adapter.delete_item.DeleteItemController;
-import interface_adapter.delete_item.DeleteItemPresenter;
+import interface_adapter.delete_item.DeleteInventoryPresenter;
 import interface_adapter.delete_item.DeleteItemViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.restriction.RestrictionViewModel;
-import use_case.collection.add_item.AddItemDataAccessInterface;
-import use_case.collection.add_item.AddItemInputBoundary;
-import use_case.collection.add_item.AddItemInteractor;
-import use_case.collection.delete_item.DeleteItemDataAccessInterface;
-import use_case.collection.delete_item.DeleteItemInputBoundary;
-import use_case.collection.delete_item.DeleteItemInteractor;
+import use_case.add_inventory.AddInventoryDataAccessInterface;
+import use_case.add_inventory.AddInventoryInputBoundary;
+import use_case.add_inventory.AddInventoryInteractor;
+import use_case.delete_inventory.DeleteInventoryDataAccessInterface;
+import use_case.delete_inventory.DeleteInventoryInputBoundary;
+import use_case.delete_inventory.DeleteInventoryInteractor;
 import view.RestrictionView;
 
 import javax.swing.*;
@@ -46,7 +46,7 @@ public class RestrictionUseCaseFactory {
             DeleteItemController deleteItemController = createDeleteItemUseCase(viewManagerModel,
                     deleteItemViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
-            return new RestrictionView(inventoryViewModel, addItemViewModel,addItemController,
+            return new RestrictionView(restrictionViewModel, addItemViewModel,addItemController,
                     deleteItemViewModel, deleteItemController);
 
         } catch (IOException e) {
@@ -60,13 +60,13 @@ public class RestrictionUseCaseFactory {
             ViewManagerModel viewManagerModel,
             AddItemViewModel addItemViewModel,
             LoggedInViewModel loggedInViewModel,
-            AddItemDataAccessInterface addItemDataAccessObject,
+            AddInventoryDataAccessInterface addItemDataAccessObject,
             IngredientFactory ingredientFactory) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
         AddItemPresenter addItemPresenter = new AddItemPresenter(addItemViewModel, loggedInViewModel);
 
-        AddItemInputBoundary addItemInteractor = new AddItemInteractor(
+        AddInventoryInputBoundary addItemInteractor = new AddInventoryInteractor(
                 addItemDataAccessObject, addItemPresenter, ingredientFactory);
 
         return new AddItemController(addItemInteractor);
@@ -76,13 +76,13 @@ public class RestrictionUseCaseFactory {
             ViewManagerModel viewManagerModel,
             DeleteItemViewModel deleteItemViewModel,
             LoggedInViewModel loggedInViewModel,
-            DeleteItemDataAccessInterface deleteItemDataAccessObject,
+            DeleteInventoryDataAccessInterface deleteItemDataAccessObject,
             IngredientFactory ingredientFactory) throws IOException {
 
-        DeleteItemPresenter deleteItemPresenter = new DeleteItemPresenter(deleteItemViewModel,
+        DeleteInventoryPresenter deleteItemPresenter = new DeleteInventoryPresenter(deleteItemViewModel,
                 loggedInViewModel, viewManagerModel);
 
-        DeleteItemInputBoundary deleteItemInteractor = new DeleteItemInteractor(
+        DeleteInventoryInputBoundary deleteItemInteractor = new DeleteInventoryInteractor(
                 deleteItemDataAccessObject, deleteItemPresenter, ingredientFactory);
 
         return new DeleteItemController(deleteItemInteractor);

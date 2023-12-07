@@ -1,6 +1,5 @@
 package view;
 
-import entity.CommonInventory;
 import interface_adapter.add_item.AddItemController;
 import interface_adapter.add_item.AddItemState;
 import interface_adapter.add_item.AddItemViewModel;
@@ -128,6 +127,8 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
             public void keyReleased(KeyEvent e) {
             }
         });
+        //TODO: this should be initialized properly
+        JTextArea inventoryInfo = new JTextArea();
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(title);

@@ -5,12 +5,12 @@ import entity.IngredientFactory;
 
 public class AddRestrictionInteractor implements AddRestrictionInputBoundary{
 
-    final AddRestrictionUserDataAccessInterface addRestrictionDataAccessObject;
+    final AddRestrictionDataAccessInterface addRestrictionDataAccessObject;
     final AddRestrictionOutputBoundary addRestrictionPresenter;
 
     final IngredientFactory ingredientFactory;
 
-    public AddRestrictionInteractor(AddRestrictionUserDataAccessInterface addRestrictionDataAccessInterface,
+    public AddRestrictionInteractor(AddRestrictionDataAccessInterface addRestrictionDataAccessInterface,
                                     AddRestrictionOutputBoundary addRestrictionOutputBoundary, IngredientFactory ingredientFactory){
         this.addRestrictionDataAccessObject = addRestrictionDataAccessInterface;
         this.addRestrictionPresenter = addRestrictionOutputBoundary;

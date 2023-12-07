@@ -50,21 +50,23 @@ public class ResultView extends JPanel implements ActionListener, PropertyChange
 
         // display recipe as a table
         JsonArray recipes = getRecipesViewModel.getState().getRecipes();
-
+        //TODO: please make sure it is not null when it been processed
         Vector<Vector<String>> dataVector = new Vector<>();
-        for (int i = 0; i < recipes.size(); i++) {
-            JsonObject recipe = recipes.get(i).getAsJsonObject();
+        if (recipes != null) {
+            for (int i = 0; i < recipes.size(); i++) {
+                JsonObject recipe = recipes.get(i).getAsJsonObject();
 
-            String id = recipe.get("id").getAsString();
-            String title = recipe.get("title").getAsString();
-            String image = recipe.get("image").getAsString();
+                String id = recipe.get("id").getAsString();
+                String title = recipe.get("title").getAsString();
+                String image = recipe.get("image").getAsString();
 
-            Vector<String> row = new Vector<>();
-            row.add(id);
-            row.add(title);
-            row.add(image);
+                Vector<String> row = new Vector<>();
+                row.add(id);
+                row.add(title);
+                row.add(image);
 
-            dataVector.add(row);
+                dataVector.add(row);
+            }
         }
 
         Vector<String> columnNames = new Vector<>();
