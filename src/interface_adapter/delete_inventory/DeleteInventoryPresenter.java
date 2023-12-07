@@ -28,7 +28,6 @@ public class DeleteInventoryPresenter implements DeleteInventoryOutputBoundary {
     @Override
     public void prepareSuccessView(DeleteInventoryOutputData items) {
         //Stay in Current View
-        // DeleteInventoryState deleteInventoryState = deleteInventoryViewModel.getState();
         DeleteInventoryState deleteInventoryState = deleteInventoryViewModel.getState();
         this.deleteInventoryViewModel.setState(deleteInventoryState);
         this.deleteInventoryViewModel.firePropertyChanged();
