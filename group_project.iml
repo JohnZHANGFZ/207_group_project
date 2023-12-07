@@ -18,5 +18,18 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/dependancies" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/dependancies" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/dependancies" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/dependancies" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
   </component>
 </module>

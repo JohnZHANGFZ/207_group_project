@@ -143,7 +143,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     public User getUser(String username) { return accounts.get(username); }
 
     @Override
-    public boolean inventoryExists(String itemName) {
+    public boolean inventoryExists(String user, String itemName) {
         return false;
     }
 
@@ -153,7 +153,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
     }
 
     @Override
-    public String deleteInventory(Ingredient ingredient) {
+    public String deleteInventory(String user, Ingredient ingredient) {
         return null;
     }
 
