@@ -9,4 +9,6 @@ public interface Collection {
     void addItems(List<Ingredient> ingredient);
 
     void deleteItems(List<Ingredient> ingredient);
+
+    boolean itemExists(String item);
 }
