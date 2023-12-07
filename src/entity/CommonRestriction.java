@@ -40,4 +40,15 @@ public class CommonRestriction implements Collection {
             }
         }
     }
+
+    @Override
+    public boolean itemExists(String item) {
+        for (int i = 0; i< allergies.size(); i++) {
+            if (item.equalsIgnoreCase(allergies.get(i).getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

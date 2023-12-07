@@ -8,6 +8,7 @@ import interface_adapter.delete_inventory.DeleteInventoryState;
 import interface_adapter.delete_inventory.DeleteInventoryViewModel;
 import interface_adapter.inventory.InventoryState;
 import interface_adapter.inventory.InventoryViewModel;
+import interface_adapter.return_home.ReturnController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +27,10 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
     private final DeleteInventoryViewModel deleteInventoryViewModel;
     private final DeleteInventoryController deleteInventoryController;
 
+
+    private final ReturnController returnController;
+
+
     JTextArea inventoryInfo;
 
     private final JTextField itemInputField = new JTextField(15);
@@ -39,12 +44,15 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                          AddItemViewModel addItemViewModel,
                          AddItemController addItemController,
                          DeleteInventoryViewModel deleteInventoryViewModel,
-                         DeleteInventoryController deleteInventoryController) {
+                         DeleteInventoryController deleteInventoryController,
+                         ReturnController returnController) {
         this.inventoryViewModel = inventoryViewModel;
         this.addItemViewModel = addItemViewModel;
         this.addItemController = addItemController;
         this.deleteInventoryViewModel = deleteInventoryViewModel;
         this.deleteInventoryController = deleteInventoryController;
+        this.returnController = returnController;
+
 
         JLabel title = new JLabel("Inventory Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -95,8 +103,14 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                 }
         );
 
-        //TODO: implemented action listener method for 'cancel' buttons
-        cancel.addActionListener(this);
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(cancel)) {
+                    returnController.execute();
+                }
+            }
+        });
 
 
         //a typing box for users to type what they want to add or delete
