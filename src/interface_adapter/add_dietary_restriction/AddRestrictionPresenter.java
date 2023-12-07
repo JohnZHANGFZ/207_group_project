@@ -2,9 +2,9 @@ package interface_adapter.add_dietary_restriction;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.logged_in.LoggedInViewModel;
-import use_case.add_inventory.AddItemOutputBoundary;
+import use_case.add_inventory.AddInventoryOutputBoundary;
 
-public class AddRestrictionPresenter implements AddItemOutputBoundary {
+public class AddRestrictionPresenter implements AddInventoryOutputBoundary {
 
     private final AddRestrictionViewModel addRestrictionViewModel;
 
