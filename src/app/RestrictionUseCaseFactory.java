@@ -1,7 +1,10 @@
 package app;
 
 import data_access.FileUserDataAccessObject;
-import entity.*;
+import entity.CommonIngredientFactory;
+import entity.CommonRestriction;
+import entity.CommonRestrictionFactory;
+import entity.IngredientFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.add_item.AddItemController;
 import interface_adapter.add_item.AddItemPresenter;
@@ -11,6 +14,7 @@ import interface_adapter.delete_inventory.DeleteInventoryPresenter;
 import interface_adapter.delete_inventory.DeleteInventoryViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.restriction.RestrictionViewModel;
+import interface_adapter.return_home.ReturnController;
 import use_case.add_inventory.AddInventoryDataAccessInterface;
 import use_case.add_inventory.AddInventoryInputBoundary;
 import use_case.add_inventory.AddInventoryInteractor;
@@ -33,7 +37,8 @@ public class RestrictionUseCaseFactory {
                                        LoggedInViewModel loggedInViewModel,
                                        DeleteInventoryViewModel deleteInventoryViewModel,
                                        RestrictionViewModel restrictionViewModel,
-                                       FileUserDataAccessObject userDataAccessObject) {
+                                       FileUserDataAccessObject userDataAccessObject,
+                                         ReturnController returnController) {
 
         try {
             IngredientFactory ingredientFactory = new CommonIngredientFactory();
@@ -47,7 +52,7 @@ public class RestrictionUseCaseFactory {
                     deleteInventoryViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
             return new RestrictionView(restrictionViewModel, addItemViewModel,addItemController,
-                    deleteInventoryViewModel, deleteInventoryController);
+                    deleteInventoryViewModel, deleteInventoryController, returnController);
 
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open inventory data file.");

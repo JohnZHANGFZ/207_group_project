@@ -91,7 +91,7 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
                         if (e.getSource().equals(delete)) {
                             DeleteInventoryState currentState = deleteInventoryViewModel.getState();
 
-                            deleteInventoryController.execute(currentState.getIngredients());
+                            deleteInventoryController.execute(currentState.getUsername(), currentState.getIngredients());
                             //a popup window telling the user what has been deleted
                             JOptionPane.showMessageDialog(null, currentState.getIngredients());
                         }

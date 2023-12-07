@@ -28,7 +28,7 @@ public class AddInventoryInteractor implements AddInventoryInputBoundary {
 
                 String item = addInventoryInputData.getItems().get(i);
                 Ingredient ingredient = ingredientFactory.create(item);
-                addItemDataAccessObject.save(ingredient);
+                addItemDataAccessObject.addInventory(ingredient);
             }
             addItemPresenter.prepareSuccessView();
         }

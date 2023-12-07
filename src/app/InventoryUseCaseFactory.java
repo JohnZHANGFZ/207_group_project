@@ -14,6 +14,7 @@ import interface_adapter.delete_inventory.DeleteInventoryPresenter;
 import interface_adapter.delete_inventory.DeleteInventoryViewModel;
 import interface_adapter.inventory.InventoryViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
+import interface_adapter.return_home.ReturnController;
 import use_case.add_inventory.AddInventoryDataAccessInterface;
 import use_case.add_inventory.AddInventoryInputBoundary;
 import use_case.add_inventory.AddInventoryInteractor;
@@ -37,7 +38,8 @@ public class InventoryUseCaseFactory {
                                        AddItemViewModel addItemViewModel,
                                        LoggedInViewModel loggedInViewModel,
                                        DeleteInventoryViewModel deleteInventoryViewModel,
-                                       FileUserDataAccessObject userDataAccessObject) {
+                                       FileUserDataAccessObject userDataAccessObject,
+                                       ReturnController returnController) {
 
             try {
                 IngredientFactory ingredientFactory = new CommonIngredientFactory();
@@ -49,7 +51,7 @@ public class InventoryUseCaseFactory {
                         deleteInventoryViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
                 return new InventoryView(inventoryViewModel, addItemViewModel,addItemController,
-                        deleteInventoryViewModel, deleteInventoryController);
+                        deleteInventoryViewModel, deleteInventoryController, returnController);
 
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Could not open inventory data file.");
