@@ -1,8 +1,9 @@
 package interface_adapter.ReturnToPreviousView;
 
+import use_case.ReturnToPreviousView.ReturnStateInterface;
 import java.util.Stack;
 
-public class ReturnState {
+public class ReturnState implements ReturnStateInterface {
     private Stack<String> viewHistory = new Stack<>();
 
     public void addView(String viewName) {
