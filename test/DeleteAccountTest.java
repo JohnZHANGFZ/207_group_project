@@ -4,14 +4,25 @@ import interface_adapter.delete_account.DeleteAccountPresenter;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
 import org.junit.Test;
-import use_case.collection.delete_item.DeleteItemInputBoundary;
-import use_case.collection.delete_item.DeleteItemInputData;
-import use_case.delete_account.DeleteAccountInputBoundary;
+import use_case.delete_account.*;
 
 import static org.mockito.Mockito.*;
 import java.awt.*;
 
 public class DeleteAccountTest {
+    @Test
+    public void useCaseTest() {
+        DeleteAccountInputData deleteAccountInputData = new DeleteAccountInputData("fqihfp");
+        deleteAccountInputData.getUsername();
+
+        DeleteAccountOutputData deleteAccountOutputData = new DeleteAccountOutputData(false);
+
+        DeleteAccountDataAccessInterface deleteAccountDataAccessInterface = mock(DeleteAccountDataAccessInterface.class);
+        DeleteAccountOutputBoundary deleteAccountOutputBoundary = mock(DeleteAccountOutputBoundary.class);
+
+        DeleteAccountInteractor deleteAccountInteractor = new DeleteAccountInteractor(deleteAccountDataAccessInterface, deleteAccountOutputBoundary);
+        deleteAccountInteractor.execute(deleteAccountInputData);
+    }
     @Test
     public void deleteTest() {
         DeleteAccountInputBoundary deleteAccountInputBoundary = mock(DeleteAccountInputBoundary.class);

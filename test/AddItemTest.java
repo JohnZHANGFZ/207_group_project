@@ -5,7 +5,7 @@ import interface_adapter.add_item.AddItemViewModel;
 import interface_adapter.delete_account.DeleteAccountController;
 import interface_adapter.logged_in.LoggedInViewModel;
 import org.junit.Test;
-import use_case.collection.add_item.AddItemInputBoundary;
+import use_case.add_inventory.AddInventoryInputBoundary;
 import use_case.delete_account.DeleteAccountInputBoundary;
 import view.DetailsView;
 import static org.mockito.Mockito.*;
@@ -44,7 +44,7 @@ public class AddItemTest {
 
     @Test
     public void controller() {
-        AddItemInputBoundary addItemInputBoundary = mock(AddItemInputBoundary.class);
+        AddInventoryInputBoundary addItemInputBoundary = mock(AddInventoryInputBoundary.class);
         AddItemController addItemController = new AddItemController(addItemInputBoundary);
         addItemController.execute(new ArrayList<>());
     }
