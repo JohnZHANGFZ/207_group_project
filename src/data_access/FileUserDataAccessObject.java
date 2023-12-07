@@ -149,21 +149,19 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     @Override
     public void addInventory(String user, Ingredient ingredient) {
+        User theUser = accounts.get(user);
+        Collection userInventory = theUser.getInventory();
 
         ArrayList<Ingredient> addedIngredient = new ArrayList<>();
-        addedIngredient.add(ingredient);
-
-        if (accounts.containsKey(user)) {
-            User theUser = accounts.get(user);
-            Collection userInventory = theUser.getInventory();
+        if (!inventoryExists(user, String.valueOf(ingredient))) {
+            addedIngredient.add(ingredient);
             userInventory.addItems(addedIngredient);
             theUser.setInventory(userInventory);
             accounts.put(user, theUser);
-            save();
-        } else{
-            System.out.println("User does not exist.");
+            this.save();
+        } else {
+            System.out.println("Input exists");
         }
-
     }
 
     @Override
