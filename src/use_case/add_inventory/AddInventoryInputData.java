@@ -1,11 +1,11 @@
-package use_case.collection.add_item;
+package use_case.add_inventory;
 
 import java.util.List;
 
-public class AddItemInputData {
+public class AddInventoryInputData {
     final private List<String> items;
 
-    public AddItemInputData(List<String> items) {
+    public AddInventoryInputData(List<String> items) {
         this.items = items;
     }
 

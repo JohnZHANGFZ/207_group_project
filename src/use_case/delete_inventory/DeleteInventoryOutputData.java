@@ -1,14 +1,14 @@
-package use_case.collection.delete_item;
+package use_case.delete_inventory;
 
 import java.util.List;
 
-public class DeleteItemOutputData {
+public class DeleteInventoryOutputData {
 
     private final List<String> successItems;
 
     private final List<String> failItem;
 
-    public DeleteItemOutputData(List<String> successItems, List<String> failItem) {
+    public DeleteInventoryOutputData(List<String> successItems, List<String> failItem) {
         this.successItems = successItems;
         this.failItem = failItem;
     }

@@ -1,4 +1,4 @@
-package use_case.collection.add_item;
+package use_case.add_inventory;
 
 public interface AddItemOutputBoundary {
     void prepareSuccessView();
