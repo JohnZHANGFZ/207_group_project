@@ -5,6 +5,6 @@ import entity.Ingredient;
 public interface AddInventoryDataAccessInterface {
     void addInventory(Ingredient ingredient);
 
-    boolean inventoryExists(String itemName);
+    boolean inventoryExists(String user, String itemName);
 
 }

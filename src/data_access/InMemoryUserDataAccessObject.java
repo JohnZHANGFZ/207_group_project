@@ -67,12 +67,12 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     }
 
     @Override
-    public String deleteInventory(Ingredient ingredient) {
+    public String deleteInventory(String user, Ingredient ingredient) {
         return null;
     }
 
     @Override
-    public boolean inventoryExists(String itemName) {
+    public boolean inventoryExists(String user, String itemName) {
         return false;
     }
 }
