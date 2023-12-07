@@ -76,6 +76,7 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     public boolean inventoryExists(String user, String itemName) {
 
         User target = users.get(user);
-        target.getInventory()
+        target.getInventory();
+        return false;
     }
 }
