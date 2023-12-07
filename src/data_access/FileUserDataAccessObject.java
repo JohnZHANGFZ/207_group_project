@@ -100,6 +100,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
         if (existsByName(username)) {
 
+            accounts.remove(username);
+
             try {
                 File tempFile = new File("myTempFile.txt"); // creates new file to rewrite data into
 
