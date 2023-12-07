@@ -8,6 +8,7 @@ import org.junit.Test;
 import use_case.add_dietary_restriction.*;
 import use_case.edit_restriction.EditRestrictionInputBoundary;
 import use_case.recipes_getter.GetRecipeOutputBoundary;
+import use_case.remove_dietary_restriction.RemoveRestrictionInputData;
 
 import static org.mockito.Mockito.*;
 
@@ -24,7 +25,7 @@ public class RestrictionTest {
         AddRestrictionOutputData addRestrictionOutputData = new AddRestrictionOutputData(new ArrayList<>(), false);
         addRestrictionOutputData.GetIngredient();
 
-        AddRestrictionUserDataAccessInterface addRestrictionUserDataAccessInterface = mock(AddRestrictionUserDataAccessInterface.class);
+        AddRestrictionDataAccessInterface addRestrictionUserDataAccessInterface = mock(AddRestrictionDataAccessInterface.class);
 
         AddRestrictionOutputBoundary addRestrictionOutputBoundary = mock(AddRestrictionOutputBoundary.class);
 
@@ -34,6 +35,11 @@ public class RestrictionTest {
 
         addRestrictionInteractor.execute(addRestrictionInputData);
     }
+
+//    @Test
+//    public void useCaseRemoveTest() {
+//        RemoveRestrictionInputData removeRestrictionInputData = new RemoveRestrictionInputData()
+//    }
     @Test
     public void presenterTest() {
         RestrictionState restrictionState = new RestrictionState();

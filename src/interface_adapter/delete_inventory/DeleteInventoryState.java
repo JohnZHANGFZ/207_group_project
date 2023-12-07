@@ -1,13 +1,12 @@
 package interface_adapter.delete_inventory;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DeleteInventoryState {
     private String username = "";
     private String deleteItemError = null;
 
-    private List<String> ingredients = new ArrayList<>();
+    private ArrayList<String> ingredients = new ArrayList<>();
 
     public DeleteInventoryState(DeleteInventoryState copy) {
         deleteItemError = copy.deleteItemError;
@@ -17,9 +16,9 @@ public class DeleteInventoryState {
 
     public DeleteInventoryState() {}
 
-    public List<String> getIngredients() { return ingredients; }
+    public ArrayList<String> getIngredients() { return ingredients; }
 
-    public void setIngredients(List<String> ingredients) { this.ingredients = ingredients; }
+    public void setIngredients(ArrayList<String> ingredients) { this.ingredients = ingredients; }
 
     public void setDeleteItemError(String error) {this.deleteItemError = error; }
     public String getDeleteItemError() {return deleteItemError;}

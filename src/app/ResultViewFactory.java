@@ -6,6 +6,7 @@ import interface_adapter.recipe_information_getter.RecipeInfoController;
 import interface_adapter.recipe_information_getter.RecipeInfoPresenter;
 import interface_adapter.recipe_information_getter.RecipeInfoViewModel;
 import interface_adapter.recipes_getter.GetRecipesViewModel;
+import interface_adapter.return_home.ReturnController;
 import search_recipe.QueryAPI;
 import use_case.recipe_information_getter.RecipeInfoDataAccessInterface;
 import use_case.recipe_information_getter.RecipeInfoInputBoundary;
@@ -22,11 +23,12 @@ public class ResultViewFactory {
     public static ResultView create(GetRecipesViewModel getRecipesViewModel,
                                     RecipeInfoViewModel recipeInfoViewModel,
                                     ResultInfoViewModel resultInfoViewModel,
-                                    ViewManagerModel viewManagerModel) {
+                                    ViewManagerModel viewManagerModel,
+                                    ReturnController returnController) {
         try {
             RecipeInfoController recipeInfoController = createRecipeInfoUseCase(recipeInfoViewModel,
                     resultInfoViewModel, viewManagerModel);
-            return new ResultView(getRecipesViewModel, recipeInfoViewModel, recipeInfoController);
+            return new ResultView(getRecipesViewModel, recipeInfoViewModel, recipeInfoController, returnController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open APIKey file.");
         }
