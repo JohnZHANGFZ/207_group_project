@@ -12,4 +12,8 @@ public class CommonIngredientList {
     public void addAll(ArrayList<CommonIngredient> s) {
         ingredients.addAll(s);
     }
+
+    public ArrayList<CommonIngredient> getIngredients() {
+        return ingredients;
+    }
 }
