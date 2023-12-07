@@ -5,7 +5,6 @@ import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.logout.LogoutController;
 import interface_adapter.recipes_getter.GetRecipesController;
-import interface_adapter.recipes_getter.GetRecipesState;
 import interface_adapter.restriction.RestrictionController;
 
 import javax.swing.*;
@@ -21,11 +20,11 @@ import java.util.Arrays;
 
 public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
 
-    public final String viewName = "logged in";
+    public final String viewName = "Logged In";
     private final LoggedInViewModel loggedInViewModel;
 
     final JTextField ingredientsInputField = new JTextField(15);
-    final JPasswordField numRecipesInputField = new JPasswordField(15);
+    final JTextField numRecipesInputField = new JTextField(15);
     private final JLabel deleteAccountErrorField = new JLabel();
 
     private final LogoutController logoutController;

@@ -45,6 +45,8 @@ public class Main {
 
         // This keeps track of and manages which view is currently showing.
         ViewManagerModel viewManagerModel = new ViewManagerModel();
+        new ViewManager(views, cardLayout, viewManagerModel);
+
 
 
         // The data for the views, such as username and password, are in the ViewModels.
@@ -75,33 +77,41 @@ public class Main {
         ReturnController returnController = ReturnUseCaseFactory.create(viewManagerModel, loggedInViewModel);
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject, returnController);
-        views.add(signupView, signupView.viewName);
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
                 loggedInViewModel, userDataAccessObject);
-        views.add(loginView, loginView.viewName);
+
 
         LoggedInView loggedInView = LoggedInViewFactory.create(viewManagerModel,loggedInViewModel, loginViewModel,
                 inventoryViewModel, restrictionViewModel, getRecipesViewModel, resultViewModel,
                 getRecipeDataAccessInterface);
-        views.add(loggedInView, loggedInView.viewName);
+
 
         InventoryView inventoryView = InventoryUseCaseFactory.create(inventoryViewModel, viewManagerModel,
                 addInventoryViewModel, loggedInViewModel, deleteInventoryViewModel, userDataAccessObject, returnController);
 
-        views.add(inventoryView, inventoryView.viewName);
 
         DetailsView detailsView = new DetailsView(resultInfoViewModel);
-        views.add(detailsView, detailsView.viewName);
+
 
         RestrictionView restrictionView = RestrictionUseCaseFactory.create(viewManagerModel,
                 addInventoryViewModel, loggedInViewModel, deleteInventoryViewModel, restrictionViewModel, userDataAccessObject, returnController);
 
-        views.add(restrictionView, restrictionView.viewName);
+
 
         ResultView resultView = ResultViewFactory.create(getRecipesViewModel, recipeInfoViewModel,
                 resultInfoViewModel, viewManagerModel,returnController);
+
+        views.add(loginView, loginView.viewName);
+
+        views.add(loggedInView, loggedInView.viewName);
+        views.add(inventoryView, inventoryView.viewName);
+        views.add(restrictionView, restrictionView.viewName);
+
+        views.add(signupView, signupView.viewName);
+
         views.add(resultView, resultView.viewName);
+        views.add(detailsView, detailsView.viewName);
 
         viewManagerModel.setActiveView(signupView.viewName);
         viewManagerModel.firePropertyChanged();
