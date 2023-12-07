@@ -1,10 +1,14 @@
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 import entity.CommonUser;
+import interface_adapter.logged_in.LoggedInState;
+import interface_adapter.logged_in.LoggedInViewModel;
 import org.junit.Test;
 import use_case.login.*;
-public class LoginTest {
+
+import java.beans.PropertyChangeListener;
+
+public class LoggedInTest {
     @Test
     public void testSuccessfulLogin() {
         LoginUserDataAccessInterface userDataAccess = mock(LoginUserDataAccessInterface.class);
@@ -41,6 +45,32 @@ public class LoginTest {
         loginInteractor.execute(new LoginInputData("nonExistentUser", "password123"));
 
         verify(outputBoundary).prepareFailView(contains("Account does not exist"));
+    }
+
+    @Test
+    public void loggedin() {
+        LoggedInState loggedInState = new LoggedInState();
+        loggedInState.getDeleteAccountError();
+        loggedInState.getIngredients();
+        loggedInState.getNumRecipes();
+        loggedInState.getUsername();
+        loggedInState.getUserInventory();
+        loggedInState.getUserRestrictions();
+        loggedInState.setIngredients("apple");
+        loggedInState.setUsername("mike");
+        loggedInState.setNumRecipes("10");
+        LoggedInState loggedInState1 = new LoggedInState(loggedInState);
+        loggedInState1.setUserInventory("bla");
+        loggedInState1.setUserRestrictions("ha");
+
+        LoggedInViewModel loggedInViewModel = new LoggedInViewModel("bla");
+        loggedInViewModel.setState(loggedInState1);
+
+        PropertyChangeListener propertyChangeListener = mock(PropertyChangeListener.class);
+        loggedInViewModel.addPropertyChangeListener(propertyChangeListener);
+
+        loggedInViewModel.getLoggedInUser();
+        loggedInViewModel.setLoggedInUser("mike");
     }
 
 }
