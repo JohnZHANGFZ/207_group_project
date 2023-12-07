@@ -1,8 +1,10 @@
 package view;
 
-import interface_adapter.add_item.AddItemController;
-import interface_adapter.add_item.AddItemState;
-import interface_adapter.add_item.AddItemViewModel;
+import interface_adapter.add_inventory.AddInventoryController;
+import interface_adapter.add_inventory.AddInventoryState;
+import interface_adapter.add_inventory.AddInventoryViewModel;
+
+
 import interface_adapter.delete_inventory.DeleteInventoryController;
 import interface_adapter.delete_inventory.DeleteInventoryState;
 import interface_adapter.delete_inventory.DeleteInventoryViewModel;
@@ -26,8 +28,10 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
     private final JTextField itemInputField = new JTextField(15);
 
     private final RestrictionViewModel restrictionViewModel;
-    private final AddItemViewModel addItemViewModel;
-    private final AddItemController addItemController;
+    private final AddInventoryViewModel addInventoryViewModel;
+    private final AddInventoryController addInventoryController;
+   
+
     private final DeleteInventoryViewModel deleteInventoryViewModel;
     private final DeleteInventoryController deleteInventoryController;
 
@@ -39,14 +43,14 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
     JTextArea restrictionInfo;
 
     public RestrictionView(RestrictionViewModel restrictionViewModel,
-                           AddItemViewModel addItemViewModel,
-                           AddItemController addItemController, 
+                           AddInventoryViewModel addInventoryViewModel,
+                           AddInventoryController addInventoryController,
                            DeleteInventoryViewModel deleteInventoryViewModel,
                            DeleteInventoryController deleteInventoryController,
                            ReturnController returnController) {
         this.restrictionViewModel = restrictionViewModel;
-        this.addItemViewModel = addItemViewModel;
-        this.addItemController = addItemController;
+        this.addInventoryViewModel = addInventoryViewModel;
+        this.addInventoryController = addInventoryController;
         this.deleteInventoryViewModel = deleteInventoryViewModel;
         this.deleteInventoryController = deleteInventoryController;        
         this.returnController = returnController;
@@ -74,9 +78,9 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(add)) {
-                            AddItemState currentState = addItemViewModel.getState();
+                            AddInventoryState currentState = addInventoryViewModel.getState();
 
-                            addItemController.execute(currentState.getIngredients());
+                            addInventoryController.execute(currentState.getIngredients());
                             //a popup window telling the user what has been added
                             JOptionPane.showMessageDialog(null, currentState.getIngredients());
                         }

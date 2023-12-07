@@ -5,7 +5,8 @@ import entity.CommonInventoryFactory;
 import entity.CommonRestrictionFactory;
 import entity.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.add_item.AddItemViewModel;
+import interface_adapter.add_inventory.AddInventoryViewModel;
+
 import interface_adapter.delete_inventory.DeleteInventoryViewModel;
 import interface_adapter.inventory.InventoryViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
@@ -53,7 +54,8 @@ public class Main {
         LoginViewModel loginViewModel = new LoginViewModel("Login");
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel("Logged In");
         SignupViewModel signupViewModel = new SignupViewModel();
-        AddItemViewModel addItemViewModel = new AddItemViewModel("Add Item");
+        AddInventoryViewModel addInventoryViewModel = new AddInventoryViewModel("Add Item");
+
         DeleteInventoryViewModel deleteInventoryViewModel = new DeleteInventoryViewModel("Delete Item");
         InventoryViewModel inventoryViewModel = new InventoryViewModel("Inventory");
         RecipeInfoViewModel recipeInfoViewModel = new RecipeInfoViewModel("Recipe Info");
@@ -85,15 +87,16 @@ public class Main {
         views.add(loggedInView, loggedInView.viewName);
 
         InventoryView inventoryView = InventoryUseCaseFactory.create(inventoryViewModel, viewManagerModel,
-                addItemViewModel, loggedInViewModel, deleteInventoryViewModel, userDataAccessObject, returnController);
+                addInventoryViewModel, loggedInViewModel, deleteInventoryViewModel, userDataAccessObject, returnController);
+
         views.add(inventoryView, inventoryView.viewName);
 
         DetailsView detailsView = new DetailsView(resultInfoViewModel);
         views.add(detailsView, detailsView.viewName);
 
         RestrictionView restrictionView = RestrictionUseCaseFactory.create(viewManagerModel,
-                addItemViewModel, loggedInViewModel, deleteInventoryViewModel, restrictionViewModel,
-                userDataAccessObject, returnController);
+                addInventoryViewModel, loggedInViewModel, deleteInventoryViewModel, restrictionViewModel, userDataAccessObject, returnController);
+
         views.add(restrictionView, restrictionView.viewName);
 
         ResultView resultView = ResultViewFactory.create(getRecipesViewModel, recipeInfoViewModel,

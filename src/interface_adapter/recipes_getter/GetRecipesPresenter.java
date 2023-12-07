@@ -1,9 +1,6 @@
 package interface_adapter.recipes_getter;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.add_item.AddItemViewModel;
-import interface_adapter.logged_in.LoggedInState;
-import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.recipe_result.ResultState;
 import interface_adapter.recipe_result.ResultViewModel;
 import use_case.recipes_getter.GetRecipeOutputBoundary;

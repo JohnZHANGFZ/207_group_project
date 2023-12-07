@@ -6,9 +6,10 @@ import entity.CommonRestriction;
 import entity.CommonRestrictionFactory;
 import entity.IngredientFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.add_item.AddItemController;
-import interface_adapter.add_item.AddItemPresenter;
-import interface_adapter.add_item.AddItemViewModel;
+import interface_adapter.add_inventory.AddInventoryController;
+import interface_adapter.add_inventory.AddInventoryPresenter;
+import interface_adapter.add_inventory.AddInventoryViewModel;
+
 import interface_adapter.delete_inventory.DeleteInventoryController;
 import interface_adapter.delete_inventory.DeleteInventoryPresenter;
 import interface_adapter.delete_inventory.DeleteInventoryViewModel;
@@ -33,7 +34,7 @@ public class RestrictionUseCaseFactory {
     private RestrictionUseCaseFactory() {}
 
     public static RestrictionView create(ViewManagerModel viewManagerModel,
-                                       AddItemViewModel addItemViewModel,
+                                       AddInventoryViewModel addInventoryViewModel,
                                        LoggedInViewModel loggedInViewModel,
                                        DeleteInventoryViewModel deleteInventoryViewModel,
                                        RestrictionViewModel restrictionViewModel,
@@ -45,14 +46,15 @@ public class RestrictionUseCaseFactory {
             // CollectionFactory inventoryFactory = new CommonInventoryFactory();
             CommonRestrictionFactory restrictionFactory = new CommonRestrictionFactory();
             CommonRestriction restriction = restrictionFactory.create(new ArrayList<String>());
-            AddItemController addItemController = createAddItemUseCase(viewManagerModel, addItemViewModel,
+            AddInventoryController addInventoryController = createAddItemUseCase(viewManagerModel, addInventoryViewModel,
                     loggedInViewModel, userDataAccessObject, ingredientFactory);
 
             DeleteInventoryController deleteInventoryController = createDeleteItemUseCase(viewManagerModel,
                     deleteInventoryViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
-            return new RestrictionView(restrictionViewModel, addItemViewModel,addItemController,
+            return new RestrictionView(restrictionViewModel, addInventoryViewModel, addInventoryController,
                     deleteInventoryViewModel, deleteInventoryController, returnController);
+
 
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open inventory data file.");
@@ -61,20 +63,20 @@ public class RestrictionUseCaseFactory {
         return null;
     }
 
-    private static AddItemController createAddItemUseCase(
+    private static AddInventoryController createAddItemUseCase(
             ViewManagerModel viewManagerModel,
-            AddItemViewModel addItemViewModel,
+            AddInventoryViewModel addInventoryViewModel,
             LoggedInViewModel loggedInViewModel,
             AddInventoryDataAccessInterface addItemDataAccessObject,
             IngredientFactory ingredientFactory) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
-        AddItemPresenter addItemPresenter = new AddItemPresenter(addItemViewModel, loggedInViewModel);
+        AddInventoryPresenter addInventoryPresenter = new AddInventoryPresenter(addInventoryViewModel, loggedInViewModel);
 
         AddInventoryInputBoundary addItemInteractor = new AddInventoryInteractor(
-                addItemDataAccessObject, addItemPresenter, ingredientFactory);
+                addItemDataAccessObject, addInventoryPresenter, ingredientFactory);
 
-        return new AddItemController(addItemInteractor);
+        return new AddInventoryController(addItemInteractor);
     }
 
     private static DeleteInventoryController createDeleteItemUseCase(

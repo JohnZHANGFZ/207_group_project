@@ -4,10 +4,13 @@ import java.util.List;
 
 public class AddInventoryInputData {
     final private List<String> items;
+    final private String user;
 
-    public AddInventoryInputData(List<String> items) {
+    public AddInventoryInputData(String user, List<String> items) {
         this.items = items;
+        this.user = user;
     }
 
     List<String> getItems() { return items; }
+    String getUser() { return user; }
 }
