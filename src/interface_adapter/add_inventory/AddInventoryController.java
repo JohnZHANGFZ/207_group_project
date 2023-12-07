@@ -12,8 +12,8 @@ public class AddInventoryController {
         this.addItemUseCaseInteractor = addItemUseCaseInteractor;
     }
 
-    public void execute(List<String> ingredients) {
-        AddInventoryInputData addInventoryInputData = new AddInventoryInputData(ingredients);
+    public void execute(String user, List<String> ingredients) {
+        AddInventoryInputData addInventoryInputData = new AddInventoryInputData(user, ingredients);
 
         addItemUseCaseInteractor.execute(addInventoryInputData);
     }
