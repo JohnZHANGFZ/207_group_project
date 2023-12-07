@@ -1,5 +1,6 @@
 package view;
 
+import interface_adapter.return_home.ReturnController;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupState;
 import interface_adapter.signup.SignupViewModel;
@@ -18,15 +19,18 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     public final String viewName = "sign up";
     private final SignupViewModel signupViewModel;
     private final SignupController signupController;
+    private final ReturnController returnController;
     private final JTextField usernameInputField = new JTextField(15);
     private final JPasswordField passwordInputField = new JPasswordField(15);
     private final JPasswordField repeatPasswordInputField = new JPasswordField(15);
     private final JButton signUp;
     private final JButton cancel;
 
-    public SignupView(SignupController signupController, SignupViewModel signupViewModel) {
+    public SignupView(SignupController signupController, SignupViewModel signupViewModel,
+                      ReturnController returnController) {
         this.signupController = signupController;
         this.signupViewModel = signupViewModel;
+        this.returnController = returnController;
         signupViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel(SignupViewModel.TITLE_LABEL);
@@ -61,8 +65,14 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 }
         );
 
-        //TODO implemented action listener method for 'cancel' buttons
-        cancel.addActionListener(this);
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(cancel)) {
+                    returnController.execute();
+                }
+            }
+        });
 
         usernameInputField.addKeyListener(
                 new KeyListener() {

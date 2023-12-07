@@ -1,14 +1,21 @@
 package data_access;
 
+import entity.Ingredient;
 import entity.User;
+import use_case.add_dietary_restriction.AddRestrictionDataAccessInterface;
+import use_case.add_inventory.AddInventoryDataAccessInterface;
 import use_case.delete_account.DeleteAccountDataAccessInterface;
+import use_case.delete_inventory.DeleteInventoryDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
+import use_case.remove_dietary_restriction.RemoveRestrictionDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface, DeleteAccountDataAccessInterface {
+public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterface, LoginUserDataAccessInterface,
+        DeleteAccountDataAccessInterface, AddRestrictionDataAccessInterface, RemoveRestrictionDataAccessInterface,
+        AddInventoryDataAccessInterface, DeleteInventoryDataAccessInterface {
 
     private final Map<String, User> users = new HashMap<>();
 
@@ -38,4 +45,37 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     }
 
     public boolean isEmpty() { return users.isEmpty(); }
+
+    @Override
+    public void addRestriction(Ingredient restriction) {
+
+    }
+
+    @Override
+    public boolean restrictionExists(String itemName) {
+        return false;
+    }
+
+    @Override
+    public String removeRestriction(Ingredient ingredient) {
+        return null;
+    }
+
+    @Override
+    public void addInventory(Ingredient ingredient) {
+
+    }
+
+    @Override
+    public String deleteInventory(String user, Ingredient ingredient) {
+
+        return null;
+    }
+
+    @Override
+    public boolean inventoryExists(String user, String itemName) {
+
+        User target = users.get(user);
+        target.getInventory()
+    }
 }

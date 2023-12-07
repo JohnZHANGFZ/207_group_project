@@ -1,20 +1,20 @@
 package interface_adapter.add_item;
 
-import use_case.collection.add_item.AddItemInputBoundary;
-import use_case.collection.add_item.AddItemInputData;
+import use_case.add_inventory.AddInventoryInputBoundary;
+import use_case.add_inventory.AddInventoryInputData;
 
 import java.util.List;
 
 public class AddItemController {
-    final AddItemInputBoundary addItemUseCaseInteractor;
+    final AddInventoryInputBoundary addItemUseCaseInteractor;
 
-    public AddItemController(AddItemInputBoundary addItemUseCaseInteractor) {
+    public AddItemController(AddInventoryInputBoundary addItemUseCaseInteractor) {
         this.addItemUseCaseInteractor = addItemUseCaseInteractor;
     }
 
     public void execute(List<String> ingredients) {
-        AddItemInputData addItemInputData = new AddItemInputData(ingredients);
+        AddInventoryInputData addInventoryInputData = new AddInventoryInputData(ingredients);
 
-        addItemUseCaseInteractor.execute(addItemInputData);
+        addItemUseCaseInteractor.execute(addInventoryInputData);
     }
 }

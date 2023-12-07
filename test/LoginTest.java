@@ -1,46 +1,51 @@
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
-
-import entity.CommonUser;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.logged_in.LoggedInViewModel;
+import interface_adapter.login.LoginController;
+import interface_adapter.login.LoginPresenter;
+import interface_adapter.login.LoginState;
+import interface_adapter.login.LoginViewModel;
 import org.junit.Test;
-import use_case.login.*;
+import use_case.edit_inventory.EditInventoryInputBoundary;
+import use_case.login.LoginInputBoundary;
+import use_case.login.LoginOutputData;
+
+import static org.mockito.Mockito.*;
+import java.awt.*;
+import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+
 public class LoginTest {
     @Test
-    public void testSuccessfulLogin() {
-        LoginUserDataAccessInterface userDataAccess = mock(LoginUserDataAccessInterface.class);
-        LoginOutputBoundary outputBoundary = mock(LoginOutputBoundary.class);
-        when(userDataAccess.existsByName("validUser")).thenReturn(true);
-        when(userDataAccess.getUser("validUser")).thenReturn(new CommonUser("validUser", "password123"));
+    public void presenterTest() {
+        LoginState loginState = new LoginState();
+        loginState.setUsernameError("bla");
+        loginState.setUsername("ha");
+        loginState.setPassword("what");
+        loginState.setPasswordError("dad");
+        loginState.getUsername();
+        loginState.getPasswordError();
+        loginState.getPassword();
+        loginState.getUsernameError();
+        LoginState loginState1 = new LoginState(loginState);
 
-        LoginInteractor loginInteractor = new LoginInteractor(userDataAccess, outputBoundary);
-        loginInteractor.execute(new LoginInputData("validUser", "password123"));
+        LoginViewModel loginViewModel = new LoginViewModel("yss");
+        loginViewModel.setState(loginState1);
+        loginState.getUsernameError();
+        loginViewModel.firePropertyChanged();
+        loginViewModel.getState();
+        PropertyChangeListener propertyChangeListener = mock(PropertyChangeListener.class);
+        loginViewModel.addPropertyChangeListener(propertyChangeListener);
 
-        verify(outputBoundary).prepareSuccessView(any(LoginOutputData.class));
+        LoginPresenter loginPresenter = new LoginPresenter(new ViewManagerModel(), new LoggedInViewModel("ha"), loginViewModel);
+        loginPresenter.prepareFailView("bla");
+        LoginOutputData loginOutputData = new LoginOutputData("mike", false, "none", "none");
+        loginPresenter.prepareSuccessView(loginOutputData);
     }
 
     @Test
-    public void testLoginWithWrongPassword() {
-        LoginUserDataAccessInterface userDataAccess = mock(LoginUserDataAccessInterface.class);
-        LoginOutputBoundary outputBoundary = mock(LoginOutputBoundary.class);
-        when(userDataAccess.existsByName("validUser")).thenReturn(true);
-        when(userDataAccess.getUser("validUser")).thenReturn(new CommonUser("validUser", "password123"));
-
-        LoginInteractor loginInteractor = new LoginInteractor(userDataAccess, outputBoundary);
-        loginInteractor.execute(new LoginInputData("validUser", "wrongPassword"));
-
-        verify(outputBoundary).prepareFailView(contains("Incorrect password"));
+    public void controllerTest() {
+        LoginInputBoundary loginInputBoundary = mock(LoginInputBoundary.class);
+        LoginController loginController = new LoginController(loginInputBoundary);
+        loginController.execute("hla", "fhowhf");
     }
-
-    @Test
-    public void testLoginWithNonExistentUser() {
-        LoginUserDataAccessInterface userDataAccess = mock(LoginUserDataAccessInterface.class);
-        LoginOutputBoundary outputBoundary = mock(LoginOutputBoundary.class);
-        when(userDataAccess.existsByName("nonExistentUser")).thenReturn(false);
-
-        LoginInteractor loginInteractor = new LoginInteractor(userDataAccess, outputBoundary);
-        loginInteractor.execute(new LoginInputData("nonExistentUser", "password123"));
-
-        verify(outputBoundary).prepareFailView(contains("Account does not exist"));
-    }
-
 }

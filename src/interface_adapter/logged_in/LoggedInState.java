@@ -10,7 +10,14 @@ public class LoggedInState {
     private String deleteAccountError = null;
 
     public LoggedInState(LoggedInState copy) {
+
         username = copy.username;
+        userInventory = copy.userInventory;
+        userRestrictions = copy.userRestrictions;
+        ingredients = copy.ingredients;
+        numRecipes = copy.numRecipes;
+        deleteAccountError = copy.deleteAccountError;
+
     }
 
     // Because of the previous copy constructor, the default constructor must be explicit.

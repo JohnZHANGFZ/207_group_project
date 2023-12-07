@@ -43,4 +43,15 @@ public class CommonInventory implements Collection {
             }
         }
     }
+
+    @Override
+    public boolean itemExists(String item) {
+        for (int i = 0; i< inventory.size(); i++) {
+            if (item.equalsIgnoreCase(inventory.get(i).getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
