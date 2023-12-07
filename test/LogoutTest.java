@@ -7,6 +7,7 @@ import use_case.edit_inventory.EditInventoryInputBoundary;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInputData;
 import use_case.logout.LogoutInputBoundary;
+import use_case.logout.LogoutInteractor;
 import use_case.logout.LogoutOutputBoundary;
 
 import static org.mockito.Mockito.*;
@@ -15,6 +16,13 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 public class LogoutTest {
+    @Test
+    public void logout() {
+        LogoutOutputBoundary logoutOutputBoundary = mock(LogoutOutputBoundary.class);
+        LogoutInteractor logoutInteractor = new LogoutInteractor(logoutOutputBoundary);
+        logoutInteractor.execute();
+    }
+
     @Test
     public void presenterTest() {
         LogoutPresenter logoutPresenter = new LogoutPresenter(new ViewManagerModel(), new LoginViewModel("hi"));
