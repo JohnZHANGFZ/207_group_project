@@ -86,7 +86,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
             @Override
             public void keyTyped(KeyEvent e) {
                 LoggedInState currentState = loggedInViewModel.getState();
-                currentState.setNumRecipes(ingredientsInputField.getText() + e.getKeyChar());
+                currentState.setNumRecipes(numRecipesInputField.getText() + e.getKeyChar());
                 loggedInViewModel.setState(currentState);
             }
 
