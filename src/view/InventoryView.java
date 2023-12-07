@@ -17,6 +17,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 
 public class InventoryView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "Inventory";
@@ -70,11 +71,12 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(add)) {
-                            AddInventoryState currentState = addInventoryViewModel.getState();
+                            InventoryState currentState = inventoryViewModel.getState();
+                            String stringIngredient = currentState.getInput();
+                            ArrayList<String> listIngredient = new ArrayList<>();
 
-                            addInventoryController.execute(currentState.getIngredients());
-                            //a popup window telling the user what has been added
-                            JOptionPane.showMessageDialog(null, currentState.getIngredients());
+
+                            addInventoryController.execute(currentState.getUser(), listIngredient);
                         }
                     }
                 }
