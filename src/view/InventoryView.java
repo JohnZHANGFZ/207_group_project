@@ -36,6 +36,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
     JTextArea inventoryInfo;
 
     private final JTextField itemInputField = new JTextField(15);
+    private final JLabel deleteErrorField = new JLabel();
 
     final JButton add;
     final JButton delete;
@@ -103,6 +104,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                             deleteInventoryController.execute(currentState.getUser(), currentInventory);
                             //a popup window telling the user what has been deleted
                             // JOptionPane.showMessageDialog(null, currentState.getIngredients());
+
                         }
                     }
                 }
@@ -144,6 +146,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
         this.add(inventoryInfo);
         this.add(itemInfo);
         this.add(buttons);
+        this.add(deleteErrorField);
     }
 
     @Override
@@ -158,5 +161,6 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
             JOptionPane.showMessageDialog(this, state.getInventoryError());
         }
         inventoryInfo.setText(state.getInventory()); // current inventory info
+        deleteErrorField.setText(state.getInventoryError());
     }
 }
