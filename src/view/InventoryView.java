@@ -71,7 +71,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(add)) {
-                            InventoryState currentState = inventoryViewModel.getState();
+                            AddInventoryState currentState = addInventoryViewModel.getState();
                             String stringIngredient = currentState.getInput();
                             ArrayList<String> listIngredient = new ArrayList<>();
 
