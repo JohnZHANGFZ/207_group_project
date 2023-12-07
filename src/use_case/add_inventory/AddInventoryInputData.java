@@ -10,7 +10,4 @@ public class AddInventoryInputData {
         this.items = items;
         this.user = user;
     }
-
-    List<String> getItems() { return items; }
-    String getUser() { return user; }
 }

@@ -5,6 +5,8 @@ import interface_adapter.inventory.InventoryState;
 import interface_adapter.inventory.InventoryViewModel;
 import org.junit.Test;
 import use_case.edit_inventory.EditInventoryInputBoundary;
+import use_case.edit_inventory.EditInventoryInteractor;
+import use_case.edit_inventory.EditInventoryOutputBoundary;
 
 import static org.mockito.Mockito.*;
 import java.awt.*;
@@ -31,6 +33,12 @@ public class InventoryTest {
         inventoryPresenter.prepareSuccessView();
     }
 
+    @Test
+    public void editInventory() {
+        EditInventoryOutputBoundary editInventoryOutputBoundary = mock(EditInventoryOutputBoundary.class);
+        EditInventoryInteractor editInventoryInteractor = new EditInventoryInteractor(editInventoryOutputBoundary);
+        editInventoryInteractor.execute();
+    }
     @Test
     public void controllerTest() {
         EditInventoryInputBoundary editInventoryInputBoundary = mock(EditInventoryInputBoundary.class);

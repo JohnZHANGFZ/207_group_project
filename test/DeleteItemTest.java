@@ -1,3 +1,4 @@
+import entity.IngredientFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.delete_inventory.DeleteInventoryController;
 import interface_adapter.delete_account.DeleteAccountPresenter;
@@ -8,9 +9,9 @@ import interface_adapter.delete_inventory.DeleteInventoryViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.login.LoginViewModel;
 import org.junit.Test;
-import use_case.delete_inventory.DeleteInventoryInputBoundary;
-import use_case.delete_inventory.DeleteInventoryInputData;
-import use_case.delete_inventory.DeleteInventoryOutputData;
+import use_case.delete_account.DeleteAccountDataAccessInterface;
+import use_case.delete_account.DeleteAccountInputData;
+import use_case.delete_inventory.*;
 import use_case.delete_account.DeleteAccountInputBoundary;
 
 import static org.mockito.Mockito.*;
@@ -35,6 +36,16 @@ public class DeleteItemTest {
 
         PropertyChangeListener propertyChangeListener = mock(PropertyChangeListener.class);
         deleteItemViewModel.addPropertyChangeListener(propertyChangeListener);
+
+        DeleteInventoryInputData deleteInventoryInputData = new DeleteInventoryInputData("qff", new ArrayList<>());
+        deleteInventoryInputData.getItems();
+        deleteInventoryInputData.getUser();
+
+        DeleteInventoryDataAccessInterface deleteAccountDataAccessInterface = mock(DeleteInventoryDataAccessInterface.class);
+        DeleteInventoryOutputBoundary deleteInventoryOutputBoundary = mock(DeleteInventoryOutputBoundary.class);
+        IngredientFactory ingredientFactory = mock(IngredientFactory.class);
+        DeleteInventoryInteractor deleteInventoryInteractor = new DeleteInventoryInteractor(deleteAccountDataAccessInterface, deleteInventoryOutputBoundary, ingredientFactory);
+        deleteInventoryInteractor.execute(deleteInventoryInputData);
     }
 
     @Test

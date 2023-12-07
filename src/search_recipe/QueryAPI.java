@@ -41,29 +41,6 @@ public class QueryAPI implements GetRecipeDataAccessInterface, RecipeInfoDataAcc
     }
 
     /*
-    This calls the API endpoint for recipe information for the recipe object specified
-     */
-    public JsonObject getRecipeInformation(JsonObject recipe){
-        String id = recipe.get("id").getAsString();
-        try {
-            // Spoonacular
-            String api_key = getAPIKey("APIKey.txt");
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(String.format("https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/%s/information", id)))
-                    .header("X-RapidAPI-Key", api_key)
-                    .header("X-RapidAPI-Host", "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com")
-                    .method("GET", HttpRequest.BodyPublishers.noBody())
-                    .build();
-            HttpResponse<String> response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-            return ParseStringToObject(response.body());
-        }
-        catch (Exception e) {
-            System.out.println("API query failed");
-            return new JsonObject();
-        }
-    }
-
-    /*
     overloading to make it easier to use
     This calls the API endpoint for recipe information for the string id specified
      */
@@ -127,7 +104,6 @@ public class QueryAPI implements GetRecipeDataAccessInterface, RecipeInfoDataAcc
         JsonObject jsonObject = (JsonObject) jsonParser.parse(response);
         //System.out.println(jsonArray);
         return jsonObject;
-
     }
 
     /*
