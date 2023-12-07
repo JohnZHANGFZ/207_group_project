@@ -1,4 +1,5 @@
 import com.google.gson.JsonArray;
+import entity.CommonRecipe;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.recipe_result.ResultState;
 import interface_adapter.recipe_result.ResultViewModel;
@@ -120,6 +121,13 @@ public class RecipesGetterTest {
         GetRecipeInputBoundary getRecipeInputBoundary = mock(GetRecipeInputBoundary.class);
         GetRecipesController getRecipesController = new GetRecipesController(getRecipeInputBoundary);
         getRecipesController.execute(new ArrayList<>(), 1);
+    }
+
+    @Test
+    public void recipes() {
+        CommonRecipe commonRecipe = new CommonRecipe(2,"fqw", new ArrayList<>());
+        commonRecipe.getRecipeName();
+        commonRecipe.getIngredients();
     }
 }
 

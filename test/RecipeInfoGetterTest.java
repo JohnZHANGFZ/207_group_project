@@ -86,5 +86,14 @@ public class RecipeInfoGetterTest {
         RecipeInfoController recipeInfoController = new RecipeInfoController(recipeInfoInputBoundary);
         recipeInfoController.execute("147");
     }
+
+    @Test
+    public void apiKeyTest() {
+        try {
+            QueryAPI.getAPIKey("hqpfpfq");
+        }
+        catch (IOException e) {
+        }
+    }
 }
 

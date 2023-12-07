@@ -9,5 +9,5 @@ public class AddInventoryInputData {
         this.items = items;
     }
 
-    List<String> getItems() { return items; }
+    public List<String> getItems() { return items; }
 }
