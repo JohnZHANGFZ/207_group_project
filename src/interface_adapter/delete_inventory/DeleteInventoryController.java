@@ -1,14 +1,14 @@
-package interface_adapter.delete_item;
+package interface_adapter.delete_inventory;
 
 import use_case.delete_inventory.DeleteInventoryInputBoundary;
 import use_case.delete_inventory.DeleteInventoryInputData;
 
 import java.util.List;
 
-public class DeleteItemController {
+public class DeleteInventoryController {
     final DeleteInventoryInputBoundary deleteItemUseCaseInteractor;
 
-    public DeleteItemController(DeleteInventoryInputBoundary deleteItemUseCaseInteractor) {
+    public DeleteInventoryController(DeleteInventoryInputBoundary deleteItemUseCaseInteractor) {
         this.deleteItemUseCaseInteractor = deleteItemUseCaseInteractor;
     }
 
