@@ -21,6 +21,7 @@ public class DeleteInventoryState {
     public void setIngredients(ArrayList<String> ingredients) { this.ingredients = ingredients; }
 
     public void setDeleteItemError(String error) {this.deleteItemError = error; }
+    public String getDeleteItemError() {return deleteItemError;}
 
     public void setUsername(String username) {this.username = username;}
 

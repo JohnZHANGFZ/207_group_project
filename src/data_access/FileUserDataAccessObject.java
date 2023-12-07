@@ -144,7 +144,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     @Override
     public boolean inventoryExists(String user, String itemName) {
-        return false;
+        User target = accounts.get(user);
+        return target.getInventory().itemExists(itemName);
     }
 
     @Override
@@ -166,7 +167,15 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     @Override
     public String deleteInventory(String user, Ingredient ingredient) {
-        return null;
+        User target = accounts.get(user);
+        Collection targetInventory = target.getInventory();
+        ArrayList deleteList = new ArrayList();
+        deleteList.add(ingredient);
+        targetInventory.deleteItems(deleteList);
+
+        accounts.put(user, target);
+        this.save();
+        return ingredient.getName();
     }
 
     @Override
