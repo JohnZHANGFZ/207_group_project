@@ -3,9 +3,9 @@ package view;
 import interface_adapter.add_item.AddItemController;
 import interface_adapter.add_item.AddItemState;
 import interface_adapter.add_item.AddItemViewModel;
-import interface_adapter.delete_item.DeleteItemController;
-import interface_adapter.delete_item.DeleteItemState;
-import interface_adapter.delete_item.DeleteItemViewModel;
+import interface_adapter.delete_inventory.DeleteInventoryController;
+import interface_adapter.delete_inventory.DeleteInventoryState;
+import interface_adapter.delete_inventory.DeleteInventoryViewModel;
 import interface_adapter.inventory.InventoryViewModel;
 import interface_adapter.restriction.RestrictionState;
 import interface_adapter.restriction.RestrictionViewModel;
@@ -28,8 +28,9 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
     private final RestrictionViewModel restrictionViewModel;
     private final AddItemViewModel addItemViewModel;
     private final AddItemController addItemController;
-    private final DeleteItemViewModel deleteItemViewModel;
-    private final DeleteItemController deleteItemController;
+    private final DeleteInventoryViewModel deleteInventoryViewModel;
+    private final DeleteInventoryController deleteInventoryController;
+
     private final ReturnController returnController;
 
     final JButton add;
@@ -39,15 +40,15 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
 
     public RestrictionView(RestrictionViewModel restrictionViewModel,
                            AddItemViewModel addItemViewModel,
-                           AddItemController addItemController,
-                           DeleteItemViewModel deleteItemViewModel,
-                           DeleteItemController deleteItemController,
+                           AddItemController addItemController, 
+                           DeleteInventoryViewModel deleteInventoryViewModel,
+                           DeleteInventoryController deleteInventoryController,
                            ReturnController returnController) {
         this.restrictionViewModel = restrictionViewModel;
         this.addItemViewModel = addItemViewModel;
         this.addItemController = addItemController;
-        this.deleteItemViewModel = deleteItemViewModel;
-        this.deleteItemController = deleteItemController;
+        this.deleteInventoryViewModel = deleteInventoryViewModel;
+        this.deleteInventoryController = deleteInventoryController;        
         this.returnController = returnController;
 
         JLabel title = new JLabel("Restriction Screen");
@@ -88,9 +89,9 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(delete)) {
-                            DeleteItemState currentState = deleteItemViewModel.getState();
+                            DeleteInventoryState currentState = deleteInventoryViewModel.getState();
 
-                            deleteItemController.execute(currentState.getIngredients());
+                            deleteInventoryController.execute(currentState.getIngredients());
                             //a popup window telling the user what has been deleted
                             JOptionPane.showMessageDialog(null, currentState.getIngredients());
                         }

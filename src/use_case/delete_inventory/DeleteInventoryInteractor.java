@@ -25,31 +25,32 @@ public class DeleteInventoryInteractor implements DeleteInventoryInputBoundary {
     // This is about when to have success or fail views
     @Override
     public void execute(DeleteInventoryInputData deleteInventoryInputData) {
-        List<String> itemList = deleteInventoryInputData.getItems();
-        List<String> deletedItemList = new ArrayList<>();
-        List<String> itemDNE = new ArrayList<>();
+        ArrayList<String> itemList = deleteInventoryInputData.getItems();
+        String user = deleteInventoryInputData.getUser();
+        ArrayList<String> successDelete = new ArrayList<>();
+        ArrayList<String> failedDelete = new ArrayList<>();
 
         if(itemList.isEmpty()) {
             // If user does not type anything--> FailView: 'no input, try again'
             deletePresenter.prepareFailView("No input. Try again.");
-        } else{
+        } else {
             for (String s : itemList) {
-                if (deleteItemDataAccessObject.existsByName(s)) {
+                if (deleteItemDataAccessObject.inventoryExists(user, s)) {
                     Ingredient ingredient = ingredientFactory.create(s);
-                    String deletedItem = deleteItemDataAccessObject.delete(ingredient);
-                    deletedItemList.add(deletedItem);
+                    String deletedItem = deleteItemDataAccessObject.deleteInventory(user, ingredient);
+                    successDelete.add(deletedItem);
                 } else {
-                    itemDNE.add(s);
+                    failedDelete.add(s);
                 }
             }
-            if (deletedItemList.isEmpty()) {
+            if (successDelete.isEmpty()) {
                 // If none of user's input exists --> FailView: 'Input does not exist. Check spelling'
                 deletePresenter.prepareFailView("Input does not exist. Check spelling");
 
             } else {
                 // If some or all user's input exists --> SuccessView: show the user what was just deleted
                 // successfully and what was not
-                DeleteInventoryOutputData deleteInventoryOutputData = new DeleteInventoryOutputData(deletedItemList, itemDNE);
+                DeleteInventoryOutputData deleteInventoryOutputData = new DeleteInventoryOutputData(successDelete, failedDelete);
                 deletePresenter.prepareSuccessView(deleteInventoryOutputData);
             }
         }

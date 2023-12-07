@@ -6,9 +6,9 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.add_item.AddItemController;
 import interface_adapter.add_item.AddItemPresenter;
 import interface_adapter.add_item.AddItemViewModel;
-import interface_adapter.delete_item.DeleteItemController;
-import interface_adapter.delete_item.DeleteInventoryPresenter;
-import interface_adapter.delete_item.DeleteItemViewModel;
+import interface_adapter.delete_inventory.DeleteInventoryController;
+import interface_adapter.delete_inventory.DeleteInventoryPresenter;
+import interface_adapter.delete_inventory.DeleteInventoryViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.restriction.RestrictionViewModel;
 import use_case.add_inventory.AddInventoryDataAccessInterface;
@@ -31,7 +31,7 @@ public class RestrictionUseCaseFactory {
     public static RestrictionView create(ViewManagerModel viewManagerModel,
                                        AddItemViewModel addItemViewModel,
                                        LoggedInViewModel loggedInViewModel,
-                                       DeleteItemViewModel deleteItemViewModel,
+                                       DeleteInventoryViewModel deleteInventoryViewModel,
                                        RestrictionViewModel restrictionViewModel,
                                        FileUserDataAccessObject userDataAccessObject) {
 
@@ -43,11 +43,11 @@ public class RestrictionUseCaseFactory {
             AddItemController addItemController = createAddItemUseCase(viewManagerModel, addItemViewModel,
                     loggedInViewModel, userDataAccessObject, ingredientFactory);
 
-            DeleteItemController deleteItemController = createDeleteItemUseCase(viewManagerModel,
-                    deleteItemViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
+            DeleteInventoryController deleteInventoryController = createDeleteItemUseCase(viewManagerModel,
+                    deleteInventoryViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
             return new RestrictionView(restrictionViewModel, addItemViewModel,addItemController,
-                    deleteItemViewModel, deleteItemController);
+                    deleteInventoryViewModel, deleteInventoryController);
 
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open inventory data file.");
@@ -72,19 +72,19 @@ public class RestrictionUseCaseFactory {
         return new AddItemController(addItemInteractor);
     }
 
-    private static DeleteItemController createDeleteItemUseCase(
+    private static DeleteInventoryController createDeleteItemUseCase(
             ViewManagerModel viewManagerModel,
-            DeleteItemViewModel deleteItemViewModel,
+            DeleteInventoryViewModel deleteInventoryViewModel,
             LoggedInViewModel loggedInViewModel,
             DeleteInventoryDataAccessInterface deleteItemDataAccessObject,
             IngredientFactory ingredientFactory) throws IOException {
 
-        DeleteInventoryPresenter deleteItemPresenter = new DeleteInventoryPresenter(deleteItemViewModel,
+        DeleteInventoryPresenter deleteItemPresenter = new DeleteInventoryPresenter(deleteInventoryViewModel,
                 loggedInViewModel, viewManagerModel);
 
         DeleteInventoryInputBoundary deleteItemInteractor = new DeleteInventoryInteractor(
                 deleteItemDataAccessObject, deleteItemPresenter, ingredientFactory);
 
-        return new DeleteItemController(deleteItemInteractor);
+        return new DeleteInventoryController(deleteItemInteractor);
     }
 }
