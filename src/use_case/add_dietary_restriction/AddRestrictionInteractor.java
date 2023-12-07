@@ -26,7 +26,7 @@ public class AddRestrictionInteractor implements AddRestrictionInputBoundary{
 
                 String item = addRestrictionInputData.getItems().get(i);
                 Ingredient ingredient = ingredientFactory.create(item);
-                addRestrictionDataAccessObject.save(ingredient);
+                addRestrictionDataAccessObject.addRestriction(ingredient);
             }
             addRestrictionPresenter.prepareSuccessView();
         }
