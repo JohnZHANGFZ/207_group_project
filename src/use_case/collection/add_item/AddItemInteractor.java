@@ -26,6 +26,7 @@ public class AddItemInteractor implements AddItemInputBoundary {
         } else {
             for(int i = 0; i < addItemInputData.getItems().size();) {
 
+
                 String item = addItemInputData.getItems().get(i);
                 Ingredient ingredient = ingredientFactory.create(item);
                 addItemDataAccessObject.add(ingredient);

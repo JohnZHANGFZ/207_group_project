@@ -5,6 +5,6 @@ import entity.Ingredient;
 public interface AddItemDataAccessInterface {
     boolean existsByName(String itemName);
 
-    void add(Ingredient ingredient);
+    void add(String entity, Ingredient ingredient);
 
 }

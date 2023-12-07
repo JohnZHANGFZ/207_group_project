@@ -5,5 +5,5 @@ import entity.Ingredient;
 public interface DeleteItemDataAccessInterface {
     boolean existsByName(String itemName);
 
-    String delete(Ingredient ingredient);
+    String delete(String entity, Ingredient ingredient);
 }
