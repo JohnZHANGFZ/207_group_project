@@ -3,7 +3,7 @@ package use_case.delete_inventory;
 import entity.Ingredient;
 
 public interface DeleteInventoryDataAccessInterface {
-    String deleteInventory(Ingredient ingredient);
+    String deleteInventory(String user, Ingredient ingredient);
 
-    boolean inventoryExists(String itemName);
+    boolean inventoryExists(String user, String itemName);
 }

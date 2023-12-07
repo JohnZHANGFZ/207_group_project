@@ -3,6 +3,7 @@ import com.google.gson.JsonObject;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.recipe_info_result.ResultInfoState;
 import interface_adapter.recipe_info_result.ResultInfoViewModel;
+import interface_adapter.recipe_information_getter.RecipeInfoController;
 import interface_adapter.recipe_information_getter.RecipeInfoPresenter;
 import interface_adapter.recipe_information_getter.RecipeInfoState;
 import interface_adapter.recipe_information_getter.RecipeInfoViewModel;
@@ -14,11 +15,14 @@ import interface_adapter.recipes_getter.GetRecipesViewModel;
 import org.junit.Test;
 import search_recipe.DeprecatedQueryAPI;
 import search_recipe.QueryAPI;
+import static org.mockito.Mockito.*;
 
+import java.beans.PropertyChangeListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import use_case.recipe_information_getter.RecipeInfoInputBoundary;
 import use_case.recipe_information_getter.RecipeInfoInputData;
 import use_case.recipe_information_getter.RecipeInfoInteractor;
 import use_case.recipes_getter.*;
@@ -54,6 +58,7 @@ public class RecipeInfoGetterTest {
         RecipeInfoState recipeInfoState1 = new RecipeInfoState(recipeInfoState);
         assertNull(recipeInfoState1.getRecipe());
         recipeInfoState1.setRecipe(new JsonObject());
+        recipeInfoState1.getID();
         assertEquals(new JsonObject(), recipeInfoState1.getRecipe());
         recipeInfoViewModel.setState(recipeInfoState1);
     }
@@ -66,6 +71,20 @@ public class RecipeInfoGetterTest {
         resultInfoState1.setRecipe(new JsonObject());
         assertEquals(new JsonObject(), resultInfoState1.getRecipe());
         resultInfoState1.setResultError("this error is a test");
+    }
+
+    @Test
+    public void propertychange() {
+        PropertyChangeListener propertyChangeListener = mock(PropertyChangeListener.class);
+        resultViewModel.addPropertyChangeListener(propertyChangeListener);
+        recipeInfoViewModel.addPropertyChangeListener(propertyChangeListener);
+    }
+
+    @Test
+    public void controller() {
+        RecipeInfoInputBoundary recipeInfoInputBoundary = mock(RecipeInfoInputBoundary.class);
+        RecipeInfoController recipeInfoController = new RecipeInfoController(recipeInfoInputBoundary);
+        recipeInfoController.execute("147");
     }
 }
 

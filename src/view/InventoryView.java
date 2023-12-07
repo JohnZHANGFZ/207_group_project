@@ -3,11 +3,13 @@ package view;
 import interface_adapter.add_inventory.AddInventoryController;
 import interface_adapter.add_inventory.AddInventoryState;
 import interface_adapter.add_inventory.AddInventoryViewModel;
-import interface_adapter.delete_item.DeleteItemController;
-import interface_adapter.delete_item.DeleteItemState;
-import interface_adapter.delete_item.DeleteItemViewModel;
+
+import interface_adapter.delete_inventory.DeleteInventoryController;
+import interface_adapter.delete_inventory.DeleteInventoryState;
+import interface_adapter.delete_inventory.DeleteInventoryViewModel;
 import interface_adapter.inventory.InventoryState;
 import interface_adapter.inventory.InventoryViewModel;
+import interface_adapter.return_home.ReturnController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,8 +26,13 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
     private final InventoryViewModel inventoryViewModel;
     private final AddInventoryViewModel addInventoryViewModel;
     private final AddInventoryController addInventoryController;
-    private final DeleteItemViewModel deleteItemViewModel;
-    private final DeleteItemController deleteItemController;
+   
+    private final DeleteInventoryViewModel deleteInventoryViewModel;
+    private final DeleteInventoryController deleteInventoryController;
+
+
+    private final ReturnController returnController;
+
 
     JTextArea inventoryInfo;
 
@@ -39,13 +46,16 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
     public InventoryView(InventoryViewModel inventoryViewModel,
                          AddInventoryViewModel addInventoryViewModel,
                          AddInventoryController addInventoryController,
-                         DeleteItemViewModel deleteItemViewModel,
-                         DeleteItemController deleteItemController) {
+                         DeleteInventoryViewModel deleteInventoryViewModel,
+                         DeleteInventoryController deleteInventoryController,
+                         ReturnController returnController) {
         this.inventoryViewModel = inventoryViewModel;
         this.addInventoryViewModel = addInventoryViewModel;
         this.addInventoryController = addInventoryController;
-        this.deleteItemViewModel = deleteItemViewModel;
-        this.deleteItemController = deleteItemController;
+        this.deleteInventoryViewModel = deleteInventoryViewModel;
+        this.deleteInventoryController = deleteInventoryController;
+        this.returnController = returnController;
+
 
         JLabel title = new JLabel("Inventory Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -87,9 +97,9 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(delete)) {
-                            DeleteItemState currentState = deleteItemViewModel.getState();
+                            DeleteInventoryState currentState = deleteInventoryViewModel.getState();
 
-                            deleteItemController.execute(currentState.getIngredients());
+                            deleteInventoryController.execute(currentState.getUsername(), currentState.getIngredients());
                             //a popup window telling the user what has been deleted
                             JOptionPane.showMessageDialog(null, currentState.getIngredients());
                         }
@@ -97,8 +107,14 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                 }
         );
 
-        //TODO: implemented action listener method for 'cancel' buttons
-        cancel.addActionListener(this);
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(cancel)) {
+                    returnController.execute();
+                }
+            }
+        });
 
 
         //a typing box for users to type what they want to add or delete

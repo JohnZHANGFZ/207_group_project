@@ -9,11 +9,13 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.add_inventory.AddInventoryController;
 import interface_adapter.add_inventory.AddInventoryPresenter;
 import interface_adapter.add_inventory.AddInventoryViewModel;
-import interface_adapter.delete_item.DeleteItemController;
-import interface_adapter.delete_item.DeleteInventoryPresenter;
-import interface_adapter.delete_item.DeleteItemViewModel;
+
+import interface_adapter.delete_inventory.DeleteInventoryController;
+import interface_adapter.delete_inventory.DeleteInventoryPresenter;
+import interface_adapter.delete_inventory.DeleteInventoryViewModel;
 import interface_adapter.inventory.InventoryViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
+import interface_adapter.return_home.ReturnController;
 import use_case.add_inventory.AddInventoryDataAccessInterface;
 import use_case.add_inventory.AddInventoryInputBoundary;
 import use_case.add_inventory.AddInventoryInteractor;
@@ -36,8 +38,9 @@ public class InventoryUseCaseFactory {
                                        ViewManagerModel viewManagerModel,
                                        AddInventoryViewModel addInventoryViewModel,
                                        LoggedInViewModel loggedInViewModel,
-                                       DeleteItemViewModel deleteItemViewModel,
-                                       FileUserDataAccessObject userDataAccessObject) {
+                                       DeleteInventoryViewModel deleteInventoryViewModel,
+                                       FileUserDataAccessObject userDataAccessObject,
+                                       ReturnController returnController) {
 
             try {
                 IngredientFactory ingredientFactory = new CommonIngredientFactory();
@@ -45,11 +48,12 @@ public class InventoryUseCaseFactory {
                 AddInventoryController addInventoryController = createAddItemUseCase(viewManagerModel, addInventoryViewModel,
                         loggedInViewModel, userDataAccessObject, ingredientFactory);
 
-                DeleteItemController deleteItemController = createDeleteItemUseCase(viewManagerModel,
-                        deleteItemViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
+                DeleteInventoryController deleteInventoryController = createDeleteItemUseCase(viewManagerModel,
+                        deleteInventoryViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
-                return new InventoryView(inventoryViewModel, addInventoryViewModel, addInventoryController,
-                        deleteItemViewModel, deleteItemController);
+
+                return new InventoryView(inventoryViewModel, addItemViewModel,addItemController,
+                        deleteInventoryViewModel, deleteInventoryController, returnController);
 
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "Could not open inventory data file.");
@@ -74,19 +78,19 @@ public class InventoryUseCaseFactory {
         return new AddInventoryController(addItemInteractor);
     }
 
-    public static DeleteItemController createDeleteItemUseCase(
+    public static DeleteInventoryController createDeleteItemUseCase(
             ViewManagerModel viewManagerModel,
-            DeleteItemViewModel deleteItemViewModel,
+            DeleteInventoryViewModel deleteInventoryViewModel,
             LoggedInViewModel loggedInViewModel,
             DeleteInventoryDataAccessInterface deleteItemDataAccessObject,
             IngredientFactory ingredientFactory) throws IOException {
 
-        DeleteInventoryPresenter deleteItemPresenter = new DeleteInventoryPresenter(deleteItemViewModel,
+        DeleteInventoryPresenter deleteItemPresenter = new DeleteInventoryPresenter(deleteInventoryViewModel,
                 loggedInViewModel, viewManagerModel);
 
         DeleteInventoryInputBoundary deleteItemInteractor = new DeleteInventoryInteractor(
                 deleteItemDataAccessObject, deleteItemPresenter, ingredientFactory);
 
-        return new DeleteItemController(deleteItemInteractor);
+        return new DeleteInventoryController(deleteItemInteractor);
     }
 }

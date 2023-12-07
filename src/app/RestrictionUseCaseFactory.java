@@ -1,16 +1,21 @@
 package app;
 
 import data_access.FileUserDataAccessObject;
-import entity.*;
+import entity.CommonIngredientFactory;
+import entity.CommonRestriction;
+import entity.CommonRestrictionFactory;
+import entity.IngredientFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.add_inventory.AddInventoryController;
 import interface_adapter.add_inventory.AddInventoryPresenter;
 import interface_adapter.add_inventory.AddInventoryViewModel;
-import interface_adapter.delete_item.DeleteItemController;
-import interface_adapter.delete_item.DeleteInventoryPresenter;
-import interface_adapter.delete_item.DeleteItemViewModel;
+
+import interface_adapter.delete_inventory.DeleteInventoryController;
+import interface_adapter.delete_inventory.DeleteInventoryPresenter;
+import interface_adapter.delete_inventory.DeleteInventoryViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
 import interface_adapter.restriction.RestrictionViewModel;
+import interface_adapter.return_home.ReturnController;
 import use_case.add_inventory.AddInventoryDataAccessInterface;
 import use_case.add_inventory.AddInventoryInputBoundary;
 import use_case.add_inventory.AddInventoryInteractor;
@@ -31,9 +36,10 @@ public class RestrictionUseCaseFactory {
     public static RestrictionView create(ViewManagerModel viewManagerModel,
                                        AddInventoryViewModel addInventoryViewModel,
                                        LoggedInViewModel loggedInViewModel,
-                                       DeleteItemViewModel deleteItemViewModel,
+                                       DeleteInventoryViewModel deleteInventoryViewModel,
                                        RestrictionViewModel restrictionViewModel,
-                                       FileUserDataAccessObject userDataAccessObject) {
+                                       FileUserDataAccessObject userDataAccessObject,
+                                         ReturnController returnController) {
 
         try {
             IngredientFactory ingredientFactory = new CommonIngredientFactory();
@@ -43,11 +49,12 @@ public class RestrictionUseCaseFactory {
             AddInventoryController addInventoryController = createAddItemUseCase(viewManagerModel, addInventoryViewModel,
                     loggedInViewModel, userDataAccessObject, ingredientFactory);
 
-            DeleteItemController deleteItemController = createDeleteItemUseCase(viewManagerModel,
-                    deleteItemViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
+            DeleteInventoryController deleteInventoryController = createDeleteItemUseCase(viewManagerModel,
+                    deleteInventoryViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
             return new RestrictionView(restrictionViewModel, addInventoryViewModel, addInventoryController,
-                    deleteItemViewModel, deleteItemController);
+                    deleteInventoryViewModel, deleteInventoryController, returnController);
+
 
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open inventory data file.");
@@ -72,19 +79,19 @@ public class RestrictionUseCaseFactory {
         return new AddInventoryController(addItemInteractor);
     }
 
-    private static DeleteItemController createDeleteItemUseCase(
+    private static DeleteInventoryController createDeleteItemUseCase(
             ViewManagerModel viewManagerModel,
-            DeleteItemViewModel deleteItemViewModel,
+            DeleteInventoryViewModel deleteInventoryViewModel,
             LoggedInViewModel loggedInViewModel,
             DeleteInventoryDataAccessInterface deleteItemDataAccessObject,
             IngredientFactory ingredientFactory) throws IOException {
 
-        DeleteInventoryPresenter deleteItemPresenter = new DeleteInventoryPresenter(deleteItemViewModel,
+        DeleteInventoryPresenter deleteItemPresenter = new DeleteInventoryPresenter(deleteInventoryViewModel,
                 loggedInViewModel, viewManagerModel);
 
         DeleteInventoryInputBoundary deleteItemInteractor = new DeleteInventoryInteractor(
                 deleteItemDataAccessObject, deleteItemPresenter, ingredientFactory);
 
-        return new DeleteItemController(deleteItemInteractor);
+        return new DeleteInventoryController(deleteItemInteractor);
     }
 }

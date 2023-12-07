@@ -1,24 +1,23 @@
-package interface_adapter.delete_item;
+package interface_adapter.add_dietary_restriction;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class DeleteItemViewModel extends ViewModel {
+public class AddRestrictionViewModel extends ViewModel {
 
-    private DeleteItemState state = new DeleteItemState();
+    private AddRestrictionState state = new AddRestrictionState();
 
-    public DeleteItemViewModel(String viewName) {
+    public AddRestrictionViewModel(String viewName) {
         super(viewName);
     }
 
-    public void setState(DeleteItemState state) { this.state = state;}
+    public void setState(AddRestrictionState state) { this.state = state;}
 
-    public DeleteItemState getState() { return state; }
+    public AddRestrictionState getState() { return state; }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-
 
     @Override
     public void firePropertyChanged() {
