@@ -4,10 +4,14 @@ import entity.CommonUserFactory;
 import entity.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.logout.LogoutController;
+import interface_adapter.logout.LogoutPresenter;
 import interface_adapter.return_home.ReturnController;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupPresenter;
 import interface_adapter.signup.SignupViewModel;
+import net.bytebuddy.asm.Advice;
+import use_case.logout.LogoutInteractor;
 import use_case.signup.SignupInputBoundary;
 import use_case.signup.SignupInteractor;
 import use_case.signup.SignupOutputBoundary;
@@ -25,12 +29,13 @@ public class SignupUseCaseFactory {
     public static SignupView create(ViewManagerModel viewManagerModel,
                                     LoginViewModel loginViewModel,
                                     SignupViewModel signupViewModel,
-                                    SignupUserDataAccessInterface userDataAccessObject,
-                                    ReturnController returnController) {
+                                    SignupUserDataAccessInterface userDataAccessObject) {
 
         try {
-            SignupController signupController = createUserSignupUseCase(viewManagerModel, signupViewModel, loginViewModel, userDataAccessObject);
-            return new SignupView(signupController, signupViewModel, returnController);
+            SignupController signupController = createUserSignupUseCase(viewManagerModel, signupViewModel,
+                    loginViewModel, userDataAccessObject);
+            LogoutController logoutController = createLogoutUseCase(viewManagerModel, loginViewModel);
+            return new SignupView(signupController, signupViewModel, logoutController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }
@@ -38,7 +43,10 @@ public class SignupUseCaseFactory {
         return null;
     }
 
-    private static SignupController createUserSignupUseCase(ViewManagerModel viewManagerModel, SignupViewModel signupViewModel, LoginViewModel loginViewModel, SignupUserDataAccessInterface userDataAccessObject) throws IOException {
+    private static SignupController createUserSignupUseCase(ViewManagerModel viewManagerModel,
+                                                            SignupViewModel signupViewModel,
+                                                            LoginViewModel loginViewModel,
+                                                            SignupUserDataAccessInterface userDataAccessObject) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
         SignupOutputBoundary signupOutputBoundary = new SignupPresenter(viewManagerModel, signupViewModel, loginViewModel);
@@ -49,5 +57,13 @@ public class SignupUseCaseFactory {
                 userDataAccessObject, signupOutputBoundary, userFactory);
 
         return new SignupController(userSignupInteractor);
+    }
+    private static LogoutController createLogoutUseCase(ViewManagerModel viewManagerModel,
+                                                        LoginViewModel loginViewModel){
+        LogoutPresenter logoutPresenter = new LogoutPresenter(viewManagerModel, loginViewModel);
+
+        LogoutInteractor logoutInteractor = new LogoutInteractor(logoutPresenter);
+
+        return new LogoutController(logoutInteractor);
     }
 }
