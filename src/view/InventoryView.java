@@ -1,9 +1,7 @@
 package view;
 
 import interface_adapter.add_inventory.AddInventoryController;
-import interface_adapter.add_inventory.AddInventoryState;
 import interface_adapter.add_inventory.AddInventoryViewModel;
-
 import interface_adapter.delete_inventory.DeleteInventoryController;
 import interface_adapter.delete_inventory.DeleteInventoryState;
 import interface_adapter.delete_inventory.DeleteInventoryViewModel;
@@ -83,11 +81,10 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(add)) {
-                            AddInventoryState currentState = addInventoryViewModel.getState();
+                            InventoryState currentState = inventoryViewModel.getState();
                             String stringIngredient = currentState.getInput();
                             ArrayList<String> listIngredient = new ArrayList<>();
-
-
+                            listIngredient.addAll(Arrays.asList(stringIngredient.split(",")));
                             addInventoryController.execute(currentState.getUser(), listIngredient);
                         }
                     }
