@@ -1,21 +1,21 @@
-package interface_adapter.add_item;
+package interface_adapter.add_inventory;
 
 import interface_adapter.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class AddItemViewModel extends ViewModel {
+public class AddInventoryViewModel extends ViewModel {
 
-    private AddItemState state = new AddItemState();
+    private AddInventoryState state = new AddInventoryState();
 
-    public AddItemViewModel(String viewName) {
+    public AddInventoryViewModel(String viewName) {
         super(viewName);
     }
 
-    public void setState(AddItemState state) { this.state = state;}
+    public void setState(AddInventoryState state) { this.state = state;}
 
-    public AddItemState getState() { return state; }
+    public AddInventoryState getState() { return state; }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 

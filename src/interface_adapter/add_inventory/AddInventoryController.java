@@ -1,14 +1,14 @@
-package interface_adapter.add_item;
+package interface_adapter.add_inventory;
 
 import use_case.add_inventory.AddInventoryInputBoundary;
 import use_case.add_inventory.AddInventoryInputData;
 
 import java.util.List;
 
-public class AddItemController {
+public class AddInventoryController {
     final AddInventoryInputBoundary addItemUseCaseInteractor;
 
-    public AddItemController(AddInventoryInputBoundary addItemUseCaseInteractor) {
+    public AddInventoryController(AddInventoryInputBoundary addItemUseCaseInteractor) {
         this.addItemUseCaseInteractor = addItemUseCaseInteractor;
     }
 
