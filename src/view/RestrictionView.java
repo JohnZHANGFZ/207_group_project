@@ -1,12 +1,8 @@
 package view;
 
 import interface_adapter.add_inventory.AddInventoryController;
-import interface_adapter.add_inventory.AddInventoryState;
 import interface_adapter.add_inventory.AddInventoryViewModel;
-
-
 import interface_adapter.delete_inventory.DeleteInventoryController;
-import interface_adapter.delete_inventory.DeleteInventoryState;
 import interface_adapter.delete_inventory.DeleteInventoryViewModel;
 import interface_adapter.inventory.InventoryViewModel;
 import interface_adapter.restriction.RestrictionState;
@@ -73,35 +69,9 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
         cancel = new JButton(InventoryViewModel.CANCEL_BUTTON_LABEL);
         buttons.add(cancel);
 
-        add.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(add)) {
-                            AddInventoryState currentState = addInventoryViewModel.getState();
+        add.addActionListener(this);
 
-                            addInventoryController.execute(currentState.getIngredients());
-                            //a popup window telling the user what has been added
-                            JOptionPane.showMessageDialog(null, currentState.getIngredients());
-                        }
-                    }
-                }
-        );
-
-        delete.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(delete)) {
-                            DeleteInventoryState currentState = deleteInventoryViewModel.getState();
-
-                            deleteInventoryController.execute(currentState.getUsername(), currentState.getIngredients());
-                            //a popup window telling the user what has been deleted
-                            JOptionPane.showMessageDialog(null, currentState.getIngredients());
-                        }
-                    }
-                }
-        );
+        delete.addActionListener(this);
 
         cancel.addActionListener(new ActionListener() {
             @Override

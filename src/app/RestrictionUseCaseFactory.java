@@ -50,7 +50,7 @@ public class RestrictionUseCaseFactory {
                     loggedInViewModel, userDataAccessObject, ingredientFactory);
 
             DeleteInventoryController deleteInventoryController = createDeleteItemUseCase(viewManagerModel,
-                    deleteInventoryViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
+                    deleteInventoryViewModel, userDataAccessObject, ingredientFactory);
 
             return new RestrictionView(restrictionViewModel, addInventoryViewModel, addInventoryController,
                     deleteInventoryViewModel, deleteInventoryController, returnController);
@@ -82,12 +82,11 @@ public class RestrictionUseCaseFactory {
     private static DeleteInventoryController createDeleteItemUseCase(
             ViewManagerModel viewManagerModel,
             DeleteInventoryViewModel deleteInventoryViewModel,
-            LoggedInViewModel loggedInViewModel,
             DeleteInventoryDataAccessInterface deleteItemDataAccessObject,
             IngredientFactory ingredientFactory) throws IOException {
 
         DeleteInventoryPresenter deleteItemPresenter = new DeleteInventoryPresenter(deleteInventoryViewModel,
-                loggedInViewModel, viewManagerModel);
+                viewManagerModel);
 
         DeleteInventoryInputBoundary deleteItemInteractor = new DeleteInventoryInteractor(
                 deleteItemDataAccessObject, deleteItemPresenter, ingredientFactory);

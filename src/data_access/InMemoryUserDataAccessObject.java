@@ -61,10 +61,6 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
         return null;
     }
 
-    @Override
-    public void addInventory(Ingredient ingredient) {
-
-    }
 
     // does not check if exists here bc it is already checked before deleteInventory method is called in interactor
     @Override
@@ -75,6 +71,11 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
         deleteList.add(ingredient);
         targetInventory.deleteItems(deleteList);
         return ingredient.getName();
+    }
+
+    @Override
+    public void addInventory(String user, Ingredient ingredient) {
+
     }
 
     @Override

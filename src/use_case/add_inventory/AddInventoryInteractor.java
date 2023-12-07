@@ -7,12 +7,12 @@ public class AddInventoryInteractor implements AddInventoryInputBoundary {
 
     final AddInventoryDataAccessInterface addItemDataAccessObject;
 
-    final AddItemOutputBoundary addItemPresenter;
+    final AddInventoryOutputBoundary addItemPresenter;
 
     final IngredientFactory ingredientFactory;
 
     public AddInventoryInteractor(AddInventoryDataAccessInterface addItemDataAccessObject,
-                                  AddItemOutputBoundary addItemPresenter,
+                                  AddInventoryOutputBoundary addItemPresenter,
                                   IngredientFactory ingredientFactory) {
         this.addItemDataAccessObject = addItemDataAccessObject;
         this.addItemPresenter = addItemPresenter;

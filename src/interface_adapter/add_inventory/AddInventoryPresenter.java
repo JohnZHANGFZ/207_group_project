@@ -2,9 +2,9 @@ package interface_adapter.add_inventory;
 
 import interface_adapter.ViewManagerModel;
 import interface_adapter.logged_in.LoggedInViewModel;
-import use_case.add_inventory.AddItemOutputBoundary;
+import use_case.add_inventory.AddInventoryOutputBoundary;
 
-public class AddInventoryPresenter implements AddItemOutputBoundary {
+public class AddInventoryPresenter implements AddInventoryOutputBoundary {
 
     private final AddInventoryViewModel addInventoryViewModel;
 

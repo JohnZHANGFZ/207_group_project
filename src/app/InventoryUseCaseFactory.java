@@ -52,7 +52,7 @@ public class InventoryUseCaseFactory {
                         deleteInventoryViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
 
-                return new InventoryView(inventoryViewModel, addItemViewModel,addItemController,
+                return new InventoryView(inventoryViewModel, addInventoryViewModel, addInventoryController,
                         deleteInventoryViewModel, deleteInventoryController, returnController);
 
             } catch (IOException e) {
@@ -86,7 +86,7 @@ public class InventoryUseCaseFactory {
             IngredientFactory ingredientFactory) throws IOException {
 
         DeleteInventoryPresenter deleteItemPresenter = new DeleteInventoryPresenter(deleteInventoryViewModel,
-                loggedInViewModel, viewManagerModel);
+                viewManagerModel);
 
         DeleteInventoryInputBoundary deleteItemInteractor = new DeleteInventoryInteractor(
                 deleteItemDataAccessObject, deleteItemPresenter, ingredientFactory);
