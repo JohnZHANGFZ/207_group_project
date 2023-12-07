@@ -155,63 +155,15 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     @Override
     public String deleteInventory(String user, Ingredient ingredient) {
-        // update hashmap accounts first
         User target = accounts.get(user);
         Collection targetInventory = target.getInventory();
         ArrayList deleteList = new ArrayList();
         deleteList.add(ingredient);
         targetInventory.deleteItems(deleteList);
 
-        // updates file
-        try {
-            File tempFile = new File("myTempFile.txt"); // creates new file to rewrite data into
-
-            BufferedReader reader = new BufferedReader(new FileReader(csvFile));
-            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
-
-            String targetUser = user;
-            int nameLength = user.length();
-            String currentLine;
-
-            // checkes if first nameLength of each length matches username to remove
-            while((currentLine = reader.readLine()) != null) {
-
-                String currentUser = currentLine.trim().substring(0, nameLength);
-
-                if(currentUser.equals(targetUser)) {
-                    String[] userInfo = currentLine.split(";");
-                    String[] inventoryInfo = userInfo[headers.get("inventory")].split(",");
-
-                    // checks each item in inventory, adds item if NOT a match
-                    String newInventory = "";
-                    for (String s : inventoryInfo) {
-                        if (!s.equalsIgnoreCase(ingredient.getName())) {
-                            newInventory += s + ",";
-                        }
-                    }
-
-                    userInfo[headers.get("inventory")] = newInventory;
-                    String newLine = userInfo.toString();
-                    writer.write(newLine + "/n");
-
-                } else {
-                    writer.write(currentLine + "/n");
-                }
-
-            }
-
-            writer.close();
-            reader.close();
-
-            csvFile.delete();
-            tempFile.renameTo(csvFile); // renames new file to replace original
-
-            return ingredient.getName();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        accounts.put(user, target);
+        this.save();
+        return ingredient.getName();
     }
 
     @Override
