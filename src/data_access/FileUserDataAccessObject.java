@@ -144,17 +144,38 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface, 
 
     @Override
     public boolean inventoryExists(String user, String itemName) {
-        return false;
+        User target = accounts.get(user);
+        return target.getInventory().itemExists(itemName);
     }
 
     @Override
-    public void addInventory(Ingredient ingredient) {
+    public void addInventory(String user, Ingredient ingredient) {
+        User theUser = accounts.get(user);
+        Collection userInventory = theUser.getInventory();
 
+        ArrayList<Ingredient> addedIngredient = new ArrayList<>();
+        if (!inventoryExists(user, String.valueOf(ingredient))) {
+            addedIngredient.add(ingredient);
+            userInventory.addItems(addedIngredient);
+            theUser.setInventory(userInventory);
+            accounts.put(user, theUser);
+            this.save();
+        } else {
+            System.out.println("Input exists");
+        }
     }
 
     @Override
     public String deleteInventory(String user, Ingredient ingredient) {
-        return null;
+        User target = accounts.get(user);
+        Collection targetInventory = target.getInventory();
+        ArrayList deleteList = new ArrayList();
+        deleteList.add(ingredient);
+        targetInventory.deleteItems(deleteList);
+
+        accounts.put(user, target);
+        this.save();
+        return ingredient.getName();
     }
 
     @Override

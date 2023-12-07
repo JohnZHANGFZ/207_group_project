@@ -35,10 +35,12 @@ public class DeleteInventoryInteractor implements DeleteInventoryInputBoundary {
             deletePresenter.prepareFailView("No input. Try again.");
         } else {
             for (String s : itemList) {
+
                 if (deleteItemDataAccessObject.inventoryExists(user, s)) {
                     Ingredient ingredient = ingredientFactory.create(s);
                     String deletedItem = deleteItemDataAccessObject.deleteInventory(user, ingredient);
                     successDelete.add(deletedItem);
+
                 } else {
                     failedDelete.add(s);
                 }

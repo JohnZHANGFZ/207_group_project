@@ -1,7 +1,6 @@
 package data_access;
 
-import entity.Ingredient;
-import entity.User;
+import entity.*;
 import use_case.add_dietary_restriction.AddRestrictionDataAccessInterface;
 import use_case.add_inventory.AddInventoryDataAccessInterface;
 import use_case.delete_account.DeleteAccountDataAccessInterface;
@@ -10,6 +9,7 @@ import use_case.login.LoginUserDataAccessInterface;
 import use_case.remove_dietary_restriction.RemoveRestrictionDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,21 +61,27 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
         return null;
     }
 
-    @Override
-    public void addInventory(Ingredient ingredient) {
 
+    // does not check if exists here bc it is already checked before deleteInventory method is called in interactor
+    @Override
+    public String deleteInventory(String user, Ingredient ingredient) {
+        User target = users.get(user);
+        Collection targetInventory = target.getInventory();
+        ArrayList deleteList = new ArrayList();
+        deleteList.add(ingredient);
+        targetInventory.deleteItems(deleteList);
+        return ingredient.getName();
     }
 
     @Override
-    public String deleteInventory(String user, Ingredient ingredient) {
+    public void addInventory(String user, Ingredient ingredient) {
 
-        return null;
     }
 
     @Override
     public boolean inventoryExists(String user, String itemName) {
-
         User target = users.get(user);
-        target.getInventory()
+        return target.getInventory().itemExists(itemName);
+
     }
 }

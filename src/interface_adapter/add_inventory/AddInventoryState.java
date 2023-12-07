@@ -1,20 +1,20 @@
-package interface_adapter.add_item;
+package interface_adapter.add_inventory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddItemState {
+public class AddInventoryState {
 
     private String addItemError = null;
 
     private List<String> ingredients = new ArrayList<>();
 
-    public AddItemState(AddItemState copy) {
+    public AddInventoryState(AddInventoryState copy) {
         addItemError = copy.addItemError;
         ingredients = copy.ingredients;
     }
 
-    public AddItemState() {}
+    public AddInventoryState() {}
 
     public List<String> getIngredients() { return ingredients; }
 

@@ -7,12 +7,12 @@ public class AddInventoryInteractor implements AddInventoryInputBoundary {
 
     final AddInventoryDataAccessInterface addItemDataAccessObject;
 
-    final AddItemOutputBoundary addItemPresenter;
+    final AddInventoryOutputBoundary addItemPresenter;
 
     final IngredientFactory ingredientFactory;
 
     public AddInventoryInteractor(AddInventoryDataAccessInterface addItemDataAccessObject,
-                                  AddItemOutputBoundary addItemPresenter,
+                                  AddInventoryOutputBoundary addItemPresenter,
                                   IngredientFactory ingredientFactory) {
         this.addItemDataAccessObject = addItemDataAccessObject;
         this.addItemPresenter = addItemPresenter;
@@ -27,8 +27,9 @@ public class AddInventoryInteractor implements AddInventoryInputBoundary {
             for(int i = 0; i < addInventoryInputData.getItems().size();) {
 
                 String item = addInventoryInputData.getItems().get(i);
+                String user = addInventoryInputData.getUser();
                 Ingredient ingredient = ingredientFactory.create(item);
-                addItemDataAccessObject.save(ingredient);
+                addItemDataAccessObject.addInventory(user, ingredient);
             }
             addItemPresenter.prepareSuccessView();
         }
