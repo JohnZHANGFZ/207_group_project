@@ -6,9 +6,9 @@ import entity.CommonInventory;
 import entity.CommonInventoryFactory;
 import entity.IngredientFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.add_item.AddItemController;
-import interface_adapter.add_item.AddItemPresenter;
-import interface_adapter.add_item.AddItemViewModel;
+import interface_adapter.add_inventory.AddInventoryController;
+import interface_adapter.add_inventory.AddInventoryPresenter;
+import interface_adapter.add_inventory.AddInventoryViewModel;
 import interface_adapter.delete_item.DeleteItemController;
 import interface_adapter.delete_item.DeleteInventoryPresenter;
 import interface_adapter.delete_item.DeleteItemViewModel;
@@ -34,7 +34,7 @@ public class InventoryUseCaseFactory {
     //TODO: InventoryDataAccessInterface need to be implemented later
     public static InventoryView create(InventoryViewModel inventoryViewModel,
                                        ViewManagerModel viewManagerModel,
-                                       AddItemViewModel addItemViewModel,
+                                       AddInventoryViewModel addInventoryViewModel,
                                        LoggedInViewModel loggedInViewModel,
                                        DeleteItemViewModel deleteItemViewModel,
                                        FileUserDataAccessObject userDataAccessObject) {
@@ -42,13 +42,13 @@ public class InventoryUseCaseFactory {
             try {
                 IngredientFactory ingredientFactory = new CommonIngredientFactory();
                 CommonInventory inventoryFactory = new CommonInventoryFactory().create(new ArrayList<String>());
-                AddItemController addItemController = createAddItemUseCase(viewManagerModel, addItemViewModel,
+                AddInventoryController addInventoryController = createAddItemUseCase(viewManagerModel, addInventoryViewModel,
                         loggedInViewModel, userDataAccessObject, ingredientFactory);
 
                 DeleteItemController deleteItemController = createDeleteItemUseCase(viewManagerModel,
                         deleteItemViewModel, loggedInViewModel, userDataAccessObject, ingredientFactory);
 
-                return new InventoryView(inventoryViewModel, addItemViewModel,addItemController,
+                return new InventoryView(inventoryViewModel, addInventoryViewModel, addInventoryController,
                         deleteItemViewModel, deleteItemController);
 
             } catch (IOException e) {
@@ -58,20 +58,20 @@ public class InventoryUseCaseFactory {
             return null;
     }
 
-    public static AddItemController createAddItemUseCase(
+    public static AddInventoryController createAddItemUseCase(
             ViewManagerModel viewManagerModel,
-            AddItemViewModel addItemViewModel,
+            AddInventoryViewModel addInventoryViewModel,
             LoggedInViewModel loggedInViewModel,
             AddInventoryDataAccessInterface addItemDataAccessObject,
             IngredientFactory ingredientFactory) throws IOException {
 
         // Notice how we pass this method's parameters to the Presenter.
-        AddItemPresenter addItemPresenter = new AddItemPresenter(addItemViewModel, loggedInViewModel);
+        AddInventoryPresenter addInventoryPresenter = new AddInventoryPresenter(addInventoryViewModel, loggedInViewModel);
 
         AddInventoryInputBoundary addItemInteractor = new AddInventoryInteractor(
-                addItemDataAccessObject, addItemPresenter, ingredientFactory);
+                addItemDataAccessObject, addInventoryPresenter, ingredientFactory);
 
-        return new AddItemController(addItemInteractor);
+        return new AddInventoryController(addItemInteractor);
     }
 
     public static DeleteItemController createDeleteItemUseCase(

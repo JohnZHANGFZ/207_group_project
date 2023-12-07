@@ -6,7 +6,7 @@ import entity.CommonRestrictionFactory;
 import entity.CommonUserFactory;
 import interface_adapter.ReturnToPreviousView.ReturnState;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.add_item.AddItemViewModel;
+import interface_adapter.add_inventory.AddInventoryViewModel;
 import interface_adapter.delete_item.DeleteItemViewModel;
 import interface_adapter.inventory.InventoryViewModel;
 import interface_adapter.logged_in.LoggedInViewModel;
@@ -55,7 +55,7 @@ public class Main {
         LoginViewModel loginViewModel = new LoginViewModel("Login");
         LoggedInViewModel loggedInViewModel = new LoggedInViewModel("Logged In");
         SignupViewModel signupViewModel = new SignupViewModel();
-        AddItemViewModel addItemViewModel = new AddItemViewModel("Add Item");
+        AddInventoryViewModel addInventoryViewModel = new AddInventoryViewModel("Add Item");
         DeleteItemViewModel deleteItemViewModel = new DeleteItemViewModel("Delete Item");
         InventoryViewModel inventoryViewModel = new InventoryViewModel("Inventory");
         RecipeInfoViewModel recipeInfoViewModel = new RecipeInfoViewModel("Recipe Info");
@@ -87,7 +87,7 @@ public class Main {
         views.add(loggedInView, loggedInView.viewName);
 
         InventoryView inventoryView = InventoryUseCaseFactory.create(inventoryViewModel, viewManagerModel,
-                addItemViewModel, loggedInViewModel, deleteItemViewModel, userDataAccessObject);
+                addInventoryViewModel, loggedInViewModel, deleteItemViewModel, userDataAccessObject);
         views.add(inventoryView, inventoryView.viewName);
 
         // TODO: detailsView waited to implement
@@ -95,7 +95,7 @@ public class Main {
 //        views.add(detailsView, detailsView.viewName);
 
         RestrictionView restrictionView = RestrictionUseCaseFactory.create(viewManagerModel,
-                addItemViewModel, loggedInViewModel, deleteItemViewModel, restrictionViewModel, userDataAccessObject);
+                addInventoryViewModel, loggedInViewModel, deleteItemViewModel, restrictionViewModel, userDataAccessObject);
         views.add(restrictionView, restrictionView.viewName);
 
         ResultView resultView = ResultViewFactory.create(getRecipesViewModel, recipeInfoViewModel,

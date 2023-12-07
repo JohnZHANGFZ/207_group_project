@@ -1,8 +1,8 @@
 package view;
 
-import interface_adapter.add_item.AddItemController;
-import interface_adapter.add_item.AddItemState;
-import interface_adapter.add_item.AddItemViewModel;
+import interface_adapter.add_inventory.AddInventoryController;
+import interface_adapter.add_inventory.AddInventoryState;
+import interface_adapter.add_inventory.AddInventoryViewModel;
 import interface_adapter.delete_item.DeleteItemController;
 import interface_adapter.delete_item.DeleteItemState;
 import interface_adapter.delete_item.DeleteItemViewModel;
@@ -21,8 +21,8 @@ import java.beans.PropertyChangeListener;
 public class InventoryView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "Inventory";
     private final InventoryViewModel inventoryViewModel;
-    private final AddItemViewModel addItemViewModel;
-    private final AddItemController addItemController;
+    private final AddInventoryViewModel addInventoryViewModel;
+    private final AddInventoryController addInventoryController;
     private final DeleteItemViewModel deleteItemViewModel;
     private final DeleteItemController deleteItemController;
 
@@ -36,13 +36,13 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
 
 
     public InventoryView(InventoryViewModel inventoryViewModel,
-                         AddItemViewModel addItemViewModel,
-                         AddItemController addItemController,
+                         AddInventoryViewModel addInventoryViewModel,
+                         AddInventoryController addInventoryController,
                          DeleteItemViewModel deleteItemViewModel,
                          DeleteItemController deleteItemController) {
         this.inventoryViewModel = inventoryViewModel;
-        this.addItemViewModel = addItemViewModel;
-        this.addItemController = addItemController;
+        this.addInventoryViewModel = addInventoryViewModel;
+        this.addInventoryController = addInventoryController;
         this.deleteItemViewModel = deleteItemViewModel;
         this.deleteItemController = deleteItemController;
 
@@ -70,9 +70,9 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(add)) {
-                            AddItemState currentState = addItemViewModel.getState();
+                            AddInventoryState currentState = addInventoryViewModel.getState();
 
-                            addItemController.execute(currentState.getIngredients());
+                            addInventoryController.execute(currentState.getIngredients());
                             //a popup window telling the user what has been added
                             JOptionPane.showMessageDialog(null, currentState.getIngredients());
                         }
