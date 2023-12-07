@@ -8,6 +8,7 @@ import interface_adapter.delete_item.DeleteItemState;
 import interface_adapter.delete_item.DeleteItemViewModel;
 import interface_adapter.inventory.InventoryState;
 import interface_adapter.inventory.InventoryViewModel;
+import interface_adapter.return_home.ReturnController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +26,7 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
     private final AddItemController addItemController;
     private final DeleteItemViewModel deleteItemViewModel;
     private final DeleteItemController deleteItemController;
+    private final ReturnController returnController;
 
     JTextArea inventoryInfo;
 
@@ -39,12 +41,14 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                          AddItemViewModel addItemViewModel,
                          AddItemController addItemController,
                          DeleteItemViewModel deleteItemViewModel,
-                         DeleteItemController deleteItemController) {
+                         DeleteItemController deleteItemController,
+                         ReturnController returnController) {
         this.inventoryViewModel = inventoryViewModel;
         this.addItemViewModel = addItemViewModel;
         this.addItemController = addItemController;
         this.deleteItemViewModel = deleteItemViewModel;
         this.deleteItemController = deleteItemController;
+        this.returnController = returnController;
 
         JLabel title = new JLabel("Inventory Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -95,8 +99,14 @@ public class InventoryView extends JPanel implements ActionListener, PropertyCha
                 }
         );
 
-        //TODO: implemented action listener method for 'cancel' buttons
-        cancel.addActionListener(this);
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(cancel)) {
+                    returnController.execute();
+                }
+            }
+        });
 
 
         //a typing box for users to type what they want to add or delete

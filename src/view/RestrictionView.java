@@ -9,6 +9,7 @@ import interface_adapter.delete_item.DeleteItemViewModel;
 import interface_adapter.inventory.InventoryViewModel;
 import interface_adapter.restriction.RestrictionState;
 import interface_adapter.restriction.RestrictionViewModel;
+import interface_adapter.return_home.ReturnController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +30,7 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
     private final AddItemController addItemController;
     private final DeleteItemViewModel deleteItemViewModel;
     private final DeleteItemController deleteItemController;
+    private final ReturnController returnController;
 
     final JButton add;
     final JButton delete;
@@ -39,12 +41,14 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
                            AddItemViewModel addItemViewModel,
                            AddItemController addItemController,
                            DeleteItemViewModel deleteItemViewModel,
-                           DeleteItemController deleteItemController) {
+                           DeleteItemController deleteItemController,
+                           ReturnController returnController) {
         this.restrictionViewModel = restrictionViewModel;
         this.addItemViewModel = addItemViewModel;
         this.addItemController = addItemController;
         this.deleteItemViewModel = deleteItemViewModel;
         this.deleteItemController = deleteItemController;
+        this.returnController = returnController;
 
         JLabel title = new JLabel("Restriction Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -94,8 +98,14 @@ public class RestrictionView extends JPanel implements ActionListener, PropertyC
                 }
         );
 
-        //TODO: implemented action listener method for 'cancel' buttons
-        cancel.addActionListener(this);
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource().equals(cancel)) {
+                    returnController.execute();
+                }
+            }
+        });
 
 
         //a typing box for user to enter items
