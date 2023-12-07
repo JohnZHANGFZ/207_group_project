@@ -1,9 +1,8 @@
 package interface_adapter.add_item;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.logged_in.LoggedInState;
 import interface_adapter.logged_in.LoggedInViewModel;
-import use_case.collection.add_item.AddItemOutputBoundary;
+import use_case.add_inventory.AddItemOutputBoundary;
 
 public class AddItemPresenter implements AddItemOutputBoundary {
 
